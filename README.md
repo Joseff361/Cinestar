@@ -1,1 +1,2 @@
 # Cinestar
+Spring Boot Project
