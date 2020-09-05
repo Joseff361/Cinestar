@@ -55,10 +55,10 @@ public class User implements Serializable{
 	)
 	private Set<Role> roles; /*Con el Set se obliga a que no se repita ningun valor*/
 
-	public User(Long id) {
+	/*public User(Long id) {
 		super();
 		this.id = id;
-	}
+	}*/
 
 	public Long getId() {
 		return id;
