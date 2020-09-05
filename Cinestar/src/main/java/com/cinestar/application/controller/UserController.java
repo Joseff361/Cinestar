@@ -25,10 +25,11 @@ public class UserController {
 	
 	@GetMapping("/userForm")
 	public String userForm(Model model) {
-		model.addAttribute("userForm", new User());
+		//model.addAttribute("userForm", new User());
 		model.addAttribute("userList", userService.getAllUsers());
-		model.addAttribute("roles",roleRepository.findAll());
-		model.addAttribute("listTab","active");
-		return "user-form/user-view";
+		//model.addAttribute("roles",roleRepository.findAll());
+		//model.addAttribute("listTab","active");
+		//return "user-form/user-view";
+		return "user-list";//html
 	}
 }
