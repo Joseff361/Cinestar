@@ -3,6 +3,7 @@ package com.cinestar.application.entity;
 import java.io.Serializable;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -55,6 +57,15 @@ public class User implements Serializable{
 	)
 	private Set<Role> roles; /*Con el Set se obliga a que no se repita ningun valor*/
 
+	
+	@OneToMany(
+	        mappedBy = "user",
+	        cascade = CascadeType.PERSIST,
+	        fetch = FetchType.LAZY
+	    )
+	private Set<Pago> pagos;
+
+	
 	/*public User(Long id) {
 		super();
 		this.id = id;
