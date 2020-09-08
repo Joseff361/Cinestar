@@ -28,13 +28,13 @@ public class Pelicula implements Serializable {
 	
 	
 	@Column
-	private Long nombre;
+	private String nombre;
 	@Column
-	private Long descripcion;
+	private String descripcion;
 	@Column
-	private Long imagen;
+	private String imagen;
 	@Column
-	private Long genero;
+	private String genero;
 	@OneToMany(
 	        mappedBy = "pelicula",
 	        cascade = CascadeType.PERSIST,
@@ -47,28 +47,28 @@ public class Pelicula implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Long getNombre() {
+	public String getNombre() {
 		return nombre;
 	}
-	public void setNombre(Long nombre) {
+	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public Long getDescripcion() {
+	public String getDescripcion() {
 		return descripcion;
 	}
-	public void setDescripcion(Long descripcion) {
+	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	public Long getImagen() {
+	public String getImagen() {
 		return imagen;
 	}
-	public void setImagen(Long imagen) {
+	public void setImagen(String imagen) {
 		this.imagen = imagen;
 	}
-	public Long getGenero() {
+	public String getGenero() {
 		return genero;
 	}
-	public void setGenero(Long genero) {
+	public void setGenero(String genero) {
 		this.genero = genero;
 	}
 	public Set<Funcion> getFunciones() {
@@ -77,7 +77,7 @@ public class Pelicula implements Serializable {
 	public void setFunciones(Set<Funcion> funciones) {
 		this.funciones = funciones;
 	}
-	
+
 	
 
 }

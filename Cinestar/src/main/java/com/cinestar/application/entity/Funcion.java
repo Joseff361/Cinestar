@@ -36,7 +36,7 @@ public class Funcion implements Serializable {
 	@Column
 	private String dia;
 	@Column
-	private Long precio;
+	private Float precio;
 	
 	@OneToMany(
 	        mappedBy = "funcion",
@@ -85,11 +85,11 @@ public class Funcion implements Serializable {
 		this.dia = dia;
 	}
 
-	public Long getPrecio() {
+	public Float getPrecio() {
 		return precio;
 	}
 
-	public void setPrecio(Long precio) {
+	public void setPrecio(Float precio) {
 		this.precio = precio;
 	}
 

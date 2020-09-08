@@ -33,9 +33,9 @@ public class Pago implements Serializable {
 	@Column
 	private Long monto;
 	@Column
-	private Long dni ;
+	private String dni ;
 	@Column
-	private Long hora  ;
+	private String hora  ;
 	
 	@OneToMany(
 	        mappedBy = "pago",
@@ -64,19 +64,19 @@ public class Pago implements Serializable {
 		this.monto = monto;
 	}
 
-	public Long getDni() {
+	public String getDni() {
 		return dni;
 	}
 
-	public void setDni(Long dni) {
+	public void setDni(String dni) {
 		this.dni = dni;
 	}
 
-	public Long getHora() {
+	public String getHora() {
 		return hora;
 	}
 
-	public void setHora(Long hora) {
+	public void setHora(String hora) {
 		this.hora = hora;
 	}
 
@@ -95,6 +95,8 @@ public class Pago implements Serializable {
 	public void setUser(User user) {
 		this.user = user;
 	}
+
+
 	
 	
 }

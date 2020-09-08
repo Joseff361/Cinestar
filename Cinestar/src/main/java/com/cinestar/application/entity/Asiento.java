@@ -25,9 +25,9 @@ public class Asiento implements Serializable {
 	@GenericGenerator(name = "native", strategy = "native")
 	private Long id;
 	@Column
-	private Long idFila;
+	private Integer idFila;
 	@Column
-	private Long idColumna;
+	private String idColumna;
 	
 	
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -46,19 +46,19 @@ public class Asiento implements Serializable {
 		this.id = id;
 	}
 
-	public Long getIdFila() {
+	public Integer getIdFila() {
 		return idFila;
 	}
 
-	public void setIdFila(Long idFila) {
+	public void setIdFila(Integer idFila) {
 		this.idFila = idFila;
 	}
 
-	public Long getIdColumna() {
+	public String getIdColumna() {
 		return idColumna;
 	}
 
-	public void setIdColumna(Long idColumna) {
+	public void setIdColumna(String idColumna) {
 		this.idColumna = idColumna;
 	}
 
@@ -77,6 +77,7 @@ public class Asiento implements Serializable {
 	public void setPago(Pago pago) {
 		this.pago = pago;
 	}
+
 	
 	
 }
