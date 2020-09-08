@@ -30,6 +30,10 @@ public class Sede implements Serializable{
 	
 	@Column
 	private String nombre;
+	@Column
+	private String direccion;
+	@Column
+	private String imagen;
 	@OneToMany(
 	        mappedBy = "sede",
 	        cascade = CascadeType.PERSIST,
@@ -53,6 +57,30 @@ public class Sede implements Serializable{
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	public String getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
+	public String getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
+	}
+
+	public Set<Sala> getSalas() {
+		return salas;
+	}
+
+	public void setSalas(Set<Sala> salas) {
+		this.salas = salas;
 	}
 	
 

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cinestar.application.service.PeliculaService;
 
@@ -21,7 +22,17 @@ public class PeliculaController {
 	@GetMapping("/peliculas")
 	public String peliculas(Model model) {
 		model.addAttribute("peliculaList", peliculaService.getPeliculas());
-
-		return "peliculas";//html
+		return "index";//html
+	}
+	
+	/**
+	 * Retorna lista de Peliculas
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/peliculas/categoria")
+	public String peliculas_categoria(@RequestParam String genero, Model model) {
+		model.addAttribute("peliculaList", peliculaService.getPeliculasByGenero(genero));
+		return "index";//html
 	}
 }

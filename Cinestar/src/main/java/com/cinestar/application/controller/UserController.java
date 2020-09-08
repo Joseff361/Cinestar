@@ -16,9 +16,9 @@ public class UserController {
 	@Autowired
 	UserService userService;
 	
-	@GetMapping("/")
-	public String index() {
-		return "index"; //automaticamente buscara en la carpeta templates
+	@GetMapping("/login")
+	public String login() {
+		return "login"; //automaticamente buscara en la carpeta templates
 	}
 	
 	@GetMapping("/userForm")
