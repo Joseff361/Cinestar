@@ -38,6 +38,9 @@ public class User implements Serializable{
 	private String lastName;
 	
 	@Column
+	private String status;
+	
+	@Column
 	private String email;
 	
 	@Column
@@ -50,14 +53,7 @@ public class User implements Serializable{
 	@Transient
 	private String confirmPassword;
 	
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "user_roles", 
-		joinColumns = @JoinColumn(name = "user_id"),
-		inverseJoinColumns = @JoinColumn(name = "role_id")
-	)
-	private Set<Role> roles; /*Con el Set se obliga a que no se repita ningun valor*/
 
-	
 	@OneToMany(
 	        mappedBy = "user",
 	        cascade = CascadeType.PERSIST,
@@ -126,20 +122,31 @@ public class User implements Serializable{
 	public void setConfirmPassword(String confirmPassword) {
 		this.confirmPassword = confirmPassword;
 	}
+	
+	
+	
 
-	public Set<Role> getRoles() {
-		return roles;
+	public String getStatus() {
+		return status;
 	}
 
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public Set<Pago> getPagos() {
+		return pagos;
+	}
+
+	public void setPagos(Set<Pago> pagos) {
+		this.pagos = pagos;
 	}
 
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
 				+ ", username=" + username + ", password=" + password + ", confirmPassword=" + confirmPassword
-				+ ", roles=" + roles + "]";
+				+ ", pagos=" + pagos + "]";
 	}
 
 	@Override
@@ -151,8 +158,8 @@ public class User implements Serializable{
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
+		result = prime * result + ((pagos == null) ? 0 : pagos.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + ((roles == null) ? 0 : roles.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
@@ -191,15 +198,15 @@ public class User implements Serializable{
 				return false;
 		} else if (!lastName.equals(other.lastName))
 			return false;
+		if (pagos == null) {
+			if (other.pagos != null)
+				return false;
+		} else if (!pagos.equals(other.pagos))
+			return false;
 		if (password == null) {
 			if (other.password != null)
 				return false;
 		} else if (!password.equals(other.password))
-			return false;
-		if (roles == null) {
-			if (other.roles != null)
-				return false;
-		} else if (!roles.equals(other.roles))
 			return false;
 		if (username == null) {
 			if (other.username != null)
@@ -209,6 +216,11 @@ public class User implements Serializable{
 		return true;
 	}
 	
+	
+
+
+
+
 	
 	
 	

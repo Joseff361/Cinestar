@@ -47,4 +47,54 @@ public class Pago implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idUser", referencedColumnName = "id")
     private User user;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Long getMonto() {
+		return monto;
+	}
+
+	public void setMonto(Long monto) {
+		this.monto = monto;
+	}
+
+	public Long getDni() {
+		return dni;
+	}
+
+	public void setDni(Long dni) {
+		this.dni = dni;
+	}
+
+	public Long getHora() {
+		return hora;
+	}
+
+	public void setHora(Long hora) {
+		this.hora = hora;
+	}
+
+	public Set<Asiento> getAsientos() {
+		return asientos;
+	}
+
+	public void setAsientos(Set<Asiento> asientos) {
+		this.asientos = asientos;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
+	
 }

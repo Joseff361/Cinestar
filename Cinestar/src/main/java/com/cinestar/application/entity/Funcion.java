@@ -53,4 +53,70 @@ public class Funcion implements Serializable {
     @JoinColumn(name = "idPelicula", referencedColumnName = "id")
     private Pelicula pelicula;
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+	public String getHora() {
+		return hora;
+	}
+
+	public void setHora(String hora) {
+		this.hora = hora;
+	}
+
+	public String getDia() {
+		return dia;
+	}
+
+	public void setDia(String dia) {
+		this.dia = dia;
+	}
+
+	public Long getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(Long precio) {
+		this.precio = precio;
+	}
+
+	public Set<Asiento> getAsientos() {
+		return asientos;
+	}
+
+	public void setAsientos(Set<Asiento> asientos) {
+		this.asientos = asientos;
+	}
+
+	public Sala getSala() {
+		return sala;
+	}
+
+	public void setSala(Sala sala) {
+		this.sala = sala;
+	}
+
+	public Pelicula getPelicula() {
+		return pelicula;
+	}
+
+	public void setPelicula(Pelicula pelicula) {
+		this.pelicula = pelicula;
+	}
+	
+	
+
 }

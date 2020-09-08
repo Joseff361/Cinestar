@@ -7,5 +7,7 @@ import com.cinestar.application.entity.User;
 
 @Repository
 public interface UserRepository extends CrudRepository<User, Long>{
-	//public Iterable<User> findAllByStatus(String status);
+	public Iterable<User> findAllByStatus(String status);
+	
+	
 }

@@ -6,14 +6,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.cinestar.application.entity.User;
-import com.cinestar.application.repository.RoleRepository;
 import com.cinestar.application.service.UserService;
 
 @Controller
 public class UserController {
 	
-	@Autowired
-	RoleRepository roleRepository;
+
 	
 	@Autowired
 	UserService userService;

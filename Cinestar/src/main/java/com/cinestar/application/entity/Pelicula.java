@@ -41,5 +41,43 @@ public class Pelicula implements Serializable {
 	        fetch = FetchType.LAZY
 	    )
 	private Set<Funcion> funciones;
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public Long getNombre() {
+		return nombre;
+	}
+	public void setNombre(Long nombre) {
+		this.nombre = nombre;
+	}
+	public Long getDescripcion() {
+		return descripcion;
+	}
+	public void setDescripcion(Long descripcion) {
+		this.descripcion = descripcion;
+	}
+	public Long getImagen() {
+		return imagen;
+	}
+	public void setImagen(Long imagen) {
+		this.imagen = imagen;
+	}
+	public Long getGenero() {
+		return genero;
+	}
+	public void setGenero(Long genero) {
+		this.genero = genero;
+	}
+	public Set<Funcion> getFunciones() {
+		return funciones;
+	}
+	public void setFunciones(Set<Funcion> funciones) {
+		this.funciones = funciones;
+	}
+	
+	
 
 }

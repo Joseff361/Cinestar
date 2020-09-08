@@ -51,6 +51,7 @@
 						<th>#</th>
 						<th>FirstName</th>
 						<th>LastName</th>
+						<th>Estado</th>
 						<th>UserName</th>
 						<th>Email</th>
 					</tr>
@@ -60,6 +61,7 @@
 						<td th:text="${user.id}"></td>
 						<td th:text="${user.firstName}"></td>
 						<td th:text="${user.lastName}"></td>
+						<td th:text="${user.status}"></td>
 						<td th:text="${user.username}"></td>
 						<td th:text="${user.email}"></td>
 						<td><a href="#" th:href="@{'/editUser/'+ ${user.id}}"><i

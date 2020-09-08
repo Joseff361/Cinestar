@@ -28,8 +28,6 @@ public class Asiento implements Serializable {
 	private Long idFila;
 	@Column
 	private Long idColumna;
-
-
 	
 	
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -39,4 +37,46 @@ public class Asiento implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idPago", referencedColumnName = "id")
     private Pago pago;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Long getIdFila() {
+		return idFila;
+	}
+
+	public void setIdFila(Long idFila) {
+		this.idFila = idFila;
+	}
+
+	public Long getIdColumna() {
+		return idColumna;
+	}
+
+	public void setIdColumna(Long idColumna) {
+		this.idColumna = idColumna;
+	}
+
+	public Funcion getFuncion() {
+		return funcion;
+	}
+
+	public void setFuncion(Funcion funcion) {
+		this.funcion = funcion;
+	}
+
+	public Pago getPago() {
+		return pago;
+	}
+
+	public void setPago(Pago pago) {
+		this.pago = pago;
+	}
+	
+	
 }
