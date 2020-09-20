@@ -24,10 +24,10 @@ public class Asiento implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
 	@GenericGenerator(name = "native", strategy = "native")
 	private Long id;
-	@Column
-	private Integer idFila;
-	@Column
-	private String idColumna;
+	@Column (length=1,nullable=false)
+	private String idFila;
+	@Column(nullable=false)
+	private Integer idColumna;
 	
 	
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -46,19 +46,19 @@ public class Asiento implements Serializable {
 		this.id = id;
 	}
 
-	public Integer getIdFila() {
+	public String getIdFila() {
 		return idFila;
 	}
 
-	public void setIdFila(Integer idFila) {
+	public void setIdFila(String idFila) {
 		this.idFila = idFila;
 	}
 
-	public String getIdColumna() {
+	public Integer getIdColumna() {
 		return idColumna;
 	}
 
-	public void setIdColumna(String idColumna) {
+	public void setIdColumna(Integer idColumna) {
 		this.idColumna = idColumna;
 	}
 

@@ -29,13 +29,13 @@ public class Funcion implements Serializable {
 	private Long id;
 	
 
-	@Column
+	@Column (nullable=false)
 	private String tipo;
-	@Column
+	@Column(nullable=false)
 	private String hora;
-	@Column
+	@Column(length=1, nullable=false)
 	private String dia;
-	@Column
+	@Column(nullable=false)
 	private Float precio;
 	
 	@OneToMany(

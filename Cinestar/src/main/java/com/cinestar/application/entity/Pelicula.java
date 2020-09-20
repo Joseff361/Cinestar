@@ -27,13 +27,13 @@ public class Pelicula implements Serializable {
 	private Long id;
 	
 	
-	@Column
+	@Column (unique=true,nullable=false)
 	private String nombre;
-	@Column
+	@Column(unique=true,nullable=false,length=512)
 	private String descripcion;
-	@Column
+	@Column (unique=true,nullable=false)
 	private String imagen;
-	@Column
+	@Column(nullable=false)
 	private String genero;
 	@OneToMany(
 	        mappedBy = "pelicula",

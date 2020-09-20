@@ -1,5 +1,7 @@
 package com.cinestar.application.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.cinestar.application.entity.Sede;
@@ -14,5 +16,8 @@ public class SedeService {
 		return repository.findAll();
 	}
 
-	
+	public Optional<Sede> getSede(Long id) {
+		return repository.findById(id);
+	}
+
 }

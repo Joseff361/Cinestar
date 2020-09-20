@@ -38,9 +38,6 @@ public class User implements Serializable{
 	private String lastName;
 	
 	@Column
-	private String status;
-	
-	@Column
 	private String email;
 	
 	@Column
@@ -126,13 +123,6 @@ public class User implements Serializable{
 	
 	
 
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
 
 	public Set<Pago> getPagos() {
 		return pagos;

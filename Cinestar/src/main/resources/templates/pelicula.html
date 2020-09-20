@@ -49,18 +49,40 @@
 				<thead>
 					<tr>
 						<th>#</th>
-						<th>Descripcion</th>
+						<th>DescripcionF</th>
 						<th>Nombre</th>
 						<th>Genero</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="p: ${peliculaList}">
-						<td th:text="${p.id}"></td>
-						<td th:text="${p.descripcion}"></td>
-						<td th:text="${p.nombre}"></td>
-						<td th:text="${p.genero}"></td>
-
+					<tr th:each="pelicula: ${peliculaList}">
+						<td th:text="${pelicula.id}"></td>
+						<td th:text="${pelicula.descripcion}"></td>
+						<td th:text="${pelicula.nombre}"></td>
+						<td th:text="${pelicula.genero}"></td>					
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="bg-danger border-primary shadow login-clean"
+		style="height: 900px; margin: 0; padding: 150px 150px;">
+		<div class="table-responsive">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>DireccionF</th>
+						<th>Image</th>
+						<th>Nombre</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="se: ${sedeList}">
+						<td th:text="${se.id}"></td>
+						<td th:text="${se.direccion}"></td>
+						<td th:text="${se.imagen}"></td>
+						<td th:text="${se.nombre}"></td>					
 					</tr>
 				</tbody>
 			</table>

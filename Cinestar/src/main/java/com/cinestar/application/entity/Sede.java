@@ -28,11 +28,11 @@ public class Sede implements Serializable{
 	@GenericGenerator(name = "native", strategy = "native")
 	private Long id;
 	
-	@Column
+	@Column(unique=true,nullable=false)
 	private String nombre;
-	@Column
+	@Column(unique=true,nullable=false)
 	private String direccion;
-	@Column
+	@Column(unique=true,nullable=false)
 	private String imagen;
 	@OneToMany(
 	        mappedBy = "sede",

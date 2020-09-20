@@ -1,6 +1,7 @@
 package com.cinestar.application.entity;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -30,12 +31,12 @@ public class Pago implements Serializable {
 	
 	
 
-	@Column
-	private Long monto;
-	@Column
+	@Column(nullable= true)
+	private Float monto;
+	@Column (unique=true,nullable=false)
 	private String dni ;
-	@Column
-	private String hora  ;
+	@Column (nullable= true)
+	private java.sql.Timestamp hora  ;
 	
 	@OneToMany(
 	        mappedBy = "pago",
@@ -56,11 +57,11 @@ public class Pago implements Serializable {
 		this.id = id;
 	}
 
-	public Long getMonto() {
+	public Float getMonto() {
 		return monto;
 	}
 
-	public void setMonto(Long monto) {
+	public void setMonto(Float monto) {
 		this.monto = monto;
 	}
 
@@ -72,11 +73,11 @@ public class Pago implements Serializable {
 		this.dni = dni;
 	}
 
-	public String getHora() {
+	public Timestamp getHora() {
 		return hora;
 	}
 
-	public void setHora(String hora) {
+	public void setHora(Timestamp hora) {
 		this.hora = hora;
 	}
 
