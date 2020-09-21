@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Cinestar1</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cookie">
+    <link rel="stylesheet" href="fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="css/Pretty-Footer.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-light navbar-expand-md">
+        <div class="container-fluid"><a class="navbar-brand" href="#"><img id="logo" src="img/logo.jpeg"></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div
+                class="collapse navbar-collapse" id="navcol-1">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" href="#">Cartelera</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Sedes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Tarifario</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Registrarse</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Ingresar</a></li>
+                </ul>
+        </div>
+        </div>
+    </nav>
+    <div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-xl-3">
+                    <h2>Compra</h2>
+                    <div class="form-group"><label>Película:&nbsp;</label>
+                        <div><input type="text" id="nombrePelicula" readonly=""></div>
+                    </div>
+                    <div class="form-group"><label>Horario:&nbsp;</label>
+                        <div><input type="text" id="nombrePelicula-2" readonly=""></div>
+                    </div>
+                    <div class="form-group"><label>Sala:&nbsp;</label>
+                        <div><input type="text" id="nombrePelicula-3" readonly=""></div>
+                    </div>
+                    <div class="form-group"><label>Asiento (s):&nbsp;</label>
+                        <div><input type="text" id="nombrePelicula-1" readonly=""></div>
+                    </div>
+                </div>
+                <div class="col">
+                    <h2>Total Carrito</h2>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="text-center">
+                                <tr>
+                                    <th>Detalle</th>
+                                    <th>Precio</th>
+                                    <th>Cantidad</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Adulto(s)</td>
+                                    <td><input class="form-control-sm justify-content-center" type="text" readonly=""></td>
+                                    <td><input class="form-control-sm justify-content-center" type="text" readonly=""></td>
+                                    <td><input class="form-control-sm justify-content-center" type="text" readonly=""></td>
+                                </tr>
+                                <tr>
+                                    <td>Niño(s)</td>
+                                    <td><input class="form-control-sm justify-content-center" type="text" readonly=""></td>
+                                    <td><input class="form-control-sm justify-content-center" type="text"></td>
+                                    <td><input class="form-control-sm justify-content-center" type="text" readonly=""></td>
+                                </tr>
+                                <tr>
+                                    <td>+60</td>
+                                    <td><input class="form-control-sm justify-content-center" type="text" readonly=""></td>
+                                    <td><input class="form-control-sm justify-content-center" type="text" readonly=""></td>
+                                    <td><input class="form-control-sm justify-content-center" type="text" readonly=""></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row" id="total">
+                        <div class="col-4 col-sm-2 col-xl-1 text-center"><label class="col-form-label text-right">Total:</label></div>
+                        <div class="col text-left d-flex"><input type="text" readonly=""></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="modoPago">
+        <div class="container" id="tarjeta">
+            <h2 class="text-center">Medio de Pago</h2>
+            <div class="row">
+                <div class="col text-center">
+                    <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-1" required=""><label class="form-check-label" for="formCheck-1">Visa</label></div>
+                </div>
+                <div class="col text-center">
+                    <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-2" required=""><label class="form-check-label" for="formCheck-2">MasterCard</label></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="opcion">
+        <div class="container" id="botones">
+            <div class="row">
+                <div class="col text-center" id="botcan"><button class="btn btn-secondary" id="cancelar" type="button">Cancelar</button></div>
+                <div class="col text-center" id="botsig"><button class="btn btn-secondary" id="siguiente" type="button">Siguiente</button></div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="row">
+            <div class="col-sm-6 col-md-5 text-center footer-navigation">
+                <h3 class="display-4 text-dark"><a href="#">Cine<span>Star</span></a></h3>
+                <p class="text-dark links"><a class="text-dark" href="index.html">Cartelera</a><strong> · </strong><a class="text-dark" href="#">Sedes</a><strong> · </strong><a class="text-dark" href="Tarifario.html">Tarifario</a><strong>&nbsp;</strong></p>
+                <p class="company-name">CineStar © 2020</p>
+            </div>
+            <div class="col-sm-6 col-md-4 text-justify footer-contacts">
+                <div><span class="fa fa-map-marker footer-contacts-icon"> </span>
+                    <p class="text-dark">Lima, Perú</p>
+                </div>
+                <div><i class="fa fa-mobile-phone footer-contacts-icon"></i>
+                    <p class="text-dark footer-center-info email text-left"> +51 999 867 654</p>
+                </div>
+                <div><i class="fa fa-envelope footer-contacts-icon"></i>
+                    <p> <a href="#" target="_blank">cinestar@company.com</a></p>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-md-3 text-center footer-about">
+                <h4 class="text-danger">About us...</h4>
+                <div class="social-links social-icons"><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
+            </div>
+        </div>
+    </footer>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>
