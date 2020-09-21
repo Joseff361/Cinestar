@@ -27,37 +27,37 @@ INSERT INTO `cinestar`.`sala`  VALUES ('9', '3', '3');
 
 
 
-INSERT INTO `cinestar`.`funcion`  VALUES ('1', '22/09/2020', '14:15','6','Normal','1','1');
-INSERT INTO `cinestar`.`funcion`  VALUES ('2', '22/09/2020', '17:15','6','Normal','2','1');
-INSERT INTO `cinestar`.`funcion`  VALUES ('3', '22/09/2020', '20:15','6','Normal','3','1');
-INSERT INTO `cinestar`.`funcion`  VALUES ('4', '22/09/2020', '17:15','6','3D','1','2');
-INSERT INTO `cinestar`.`funcion`  VALUES ('5', '22/09/2020', '20:15','6','Normal','2','2');
-INSERT INTO `cinestar`.`funcion`  VALUES ('6', '22/09/2020', '18:15','6','Normal','3','3');
-INSERT INTO `cinestar`.`funcion`  VALUES ('7', '23/09/2020', '14:15','5','3D','7','3');
-INSERT INTO `cinestar`.`funcion`  VALUES ('8', '23/09/2020', '14:15','5','Normal','1','3');
-INSERT INTO `cinestar`.`funcion`  VALUES ('9', '23/09/2020', '14:15','5','Normal','1','1');
-INSERT INTO `cinestar`.`funcion`  VALUES ('10', '23/09/2020', '14:15','5','3D','2','1');
-INSERT INTO `cinestar`.`funcion`  VALUES ('11', '23/09/2020', '14:15','5','Normal','3','1');
+INSERT INTO `cinestar`.`funcion`  VALUES ('1', '2020-09-22', '14:15','6','Normal','1','1');
+INSERT INTO `cinestar`.`funcion`  VALUES ('2', '2020-09-22', '17:15','6','Normal','2','1');
+INSERT INTO `cinestar`.`funcion`  VALUES ('3', '2020-09-22', '20:15','6','Normal','3','1');
+INSERT INTO `cinestar`.`funcion`  VALUES ('4', '2020-09-22', '17:15','6','3D','1','2');
+INSERT INTO `cinestar`.`funcion`  VALUES ('5', '2020-09-22', '20:15','6','Normal','2','2');
+INSERT INTO `cinestar`.`funcion`  VALUES ('6', '2020-09-22', '18:15','6','Normal','3','3');
+INSERT INTO `cinestar`.`funcion`  VALUES ('7', '2020-09-23', '14:15','5','3D','7','3');
+INSERT INTO `cinestar`.`funcion`  VALUES ('8', '2020-09-23', '14:15','5','Normal','1','3');
+INSERT INTO `cinestar`.`funcion`  VALUES ('9', '2020-09-23', '14:15','5','Normal','1','1');
+INSERT INTO `cinestar`.`funcion`  VALUES ('10', '2020-09-23', '14:15','5','3D','2','1');
+INSERT INTO `cinestar`.`funcion`  VALUES ('11', '2020-09-23', '14:15','5','Normal','3','1');
 
 
-INSERT INTO `cinestar`.`funcion`  VALUES ('12', '22/09/2020', '14:15','6','3D','3','4');
-INSERT INTO `cinestar`.`funcion`  VALUES ('13', '22/09/2020', '18:15','6','3D','4','4');
-INSERT INTO `cinestar`.`funcion`  VALUES ('14', '22/09/2020', '21:15','6','Normal','5','5');
-INSERT INTO `cinestar`.`funcion`  VALUES ('15', '22/09/2020', '15:15','5','Normal','4','5');
-INSERT INTO `cinestar`.`funcion`  VALUES ('16', '23/09/2020', '18:15','5','Normal','1','5');
-INSERT INTO `cinestar`.`funcion`  VALUES ('17', '24/09/2020', '16:15','6','Normal','2','6');
-INSERT INTO `cinestar`.`funcion`  VALUES ('18', '24/09/2020', '20:15','6','Normal','3','6');
-INSERT INTO `cinestar`.`funcion`  VALUES ('19', '25/09/2020', '18:45','8','3D','3','6');
-INSERT INTO `cinestar`.`funcion`  VALUES ('20', '26/09/2020', '18:45','10','3D','5','6');
+INSERT INTO `cinestar`.`funcion`  VALUES ('12', '2020-09-22', '14:15','6','3D','3','4');
+INSERT INTO `cinestar`.`funcion`  VALUES ('13', '2020-09-22', '18:15','6','3D','4','4');
+INSERT INTO `cinestar`.`funcion`  VALUES ('14', '2020-09-22', '21:15','6','Normal','5','5');
+INSERT INTO `cinestar`.`funcion`  VALUES ('15', '2020-09-22', '15:15','5','Normal','4','5');
+INSERT INTO `cinestar`.`funcion`  VALUES ('16', '2020-09-23', '18:15','5','Normal','1','5');
+INSERT INTO `cinestar`.`funcion`  VALUES ('17', '2020-09-24', '16:15','6','Normal','2','6');
+INSERT INTO `cinestar`.`funcion`  VALUES ('18', '2020-09-24', '20:15','6','Normal','3','6');
+INSERT INTO `cinestar`.`funcion`  VALUES ('19', '2020-09-25', '18:45','8','3D','3','6');
+INSERT INTO `cinestar`.`funcion`  VALUES ('20', '2020-09-26', '18:45','10','3D','5','6');
 
-INSERT INTO `cinestar`.`funcion`  VALUES ('21', '22/09/2020', '14:15','6','Normal','1','7');
-INSERT INTO `cinestar`.`funcion`  VALUES ('22', '23/09/2020', '15:15','5','Normal','2','7');
-INSERT INTO `cinestar`.`funcion`  VALUES ('23', '24/09/2020', '14:15','6','3D','3','7');
-INSERT INTO `cinestar`.`funcion`  VALUES ('24', '25/09/2020', '16:15','8','Normal','3','8');
-INSERT INTO `cinestar`.`funcion`  VALUES ('25', '26/09/2020', '14:45','10','3D','4','8');
-INSERT INTO `cinestar`.`funcion`  VALUES ('26', '27/09/2020', '14:15','10','Normal','10','9');
-INSERT INTO `cinestar`.`funcion`  VALUES ('27', '28/09/2020', '14:15','10','3D','9','9');
-INSERT INTO `cinestar`.`funcion`  VALUES ('28', '28/09/2020', '20:15','10','Normal','10','9');
+INSERT INTO `cinestar`.`funcion`  VALUES ('21', '2020-09-22', '14:15','6','Normal','1','7');
+INSERT INTO `cinestar`.`funcion`  VALUES ('22', '2020-09-23', '15:15','5','Normal','2','7');
+INSERT INTO `cinestar`.`funcion`  VALUES ('23', '2020-09-24', '14:15','6','3D','3','7');
+INSERT INTO `cinestar`.`funcion`  VALUES ('24', '2020-09-25', '16:15','8','Normal','3','8');
+INSERT INTO `cinestar`.`funcion`  VALUES ('25', '2020-09-26', '14:45','10','3D','4','8');
+INSERT INTO `cinestar`.`funcion`  VALUES ('26', '2020-09-26', '14:15','10','Normal','10','9');
+INSERT INTO `cinestar`.`funcion`  VALUES ('27', '2020-09-26', '14:15','10','3D','9','9');
+INSERT INTO `cinestar`.`funcion`  VALUES ('28', '2020-09-26', '20:15','10','Normal','10','9');
 
 INSERT INTO `cinestar`.`asiento`(id,id_columna,id_fila,id_funcion,id_pago) VALUES (1,1,'A',1,NULL);
 INSERT INTO `cinestar`.`asiento`(id,id_columna,id_fila,id_funcion,id_pago) VALUES (2,1,'B',1,NULL);
@@ -900,7 +900,7 @@ INSERT INTO `cinestar`.`asiento`(id,id_columna,id_fila,id_funcion,id_pago) VALUE
 INSERT INTO `cinestar`.`asiento`(id,id_columna,id_fila,id_funcion,id_pago) VALUES (840,5,'F',28,NULL);
 
 
-insert into `cinestar`.`usuario` (id, enabled, password, username) values (1, 1, 'VEx2GFHaY', 'gmcphilemy0');
+insert into `cinestar`.`usuario` (id, enabled, password, username) values (1, 1, '$2a$10$/1B9LVyuq5Jg0IumjK41fON.I6Kf00GVusdSoWR.GBQzHgltOK4eO', 'rosa00');
 insert into `cinestar`.`usuario` (id, enabled, password, username) values (2, 1, 'tKEB90', 'jbraney1');
 insert into `cinestar`.`usuario` (id, enabled, password, username) values (3, 1, 'e2URul8pF', 'kpriscott2');
 insert into `cinestar`.`usuario` (id, enabled, password, username) values (4, 1, 'ofaVwfMsT', 'mcolquite3');
