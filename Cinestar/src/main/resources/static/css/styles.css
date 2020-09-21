@@ -1,0 +1,29 @@
+#logo {
+  max-height: 100px;
+}
+
+#claqueta {
+  max-height: 80px;
+}
+
+.bg-light {
+  background-color: #f2f1ef!important;
+}
+
+.col-md-4 {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+#fach_aviacion {
+  max-height: 200px;
+}
+
+#logo_film {
+  font-size: 40px;
+}
+
+#tam_peli {
+  max-height: 200px;
+}
+
