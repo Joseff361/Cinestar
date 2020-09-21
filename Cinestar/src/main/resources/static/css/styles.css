@@ -2,28 +2,74 @@
   max-height: 100px;
 }
 
-#claqueta {
-  max-height: 80px;
+#tarifa .container {
+  background: rgba(255,255,255,0.80);
+  padding: initial;
 }
 
-.bg-light {
-  background-color: #f2f1ef!important;
+#title-cont {
+  padding-left: 100px;
 }
 
-.col-md-4 {
+#total {
+  margin-top: 15px;
+}
+
+#modoPago {
+  margin-top: 20px;
+}
+
+#tarjeta {
+  padding-left: 100px;
+  padding-right: 100px;
+}
+
+#opcion {
+  margin-top: 30px;
+}
+
+#botones {
+  padding-left: 150px;
+  padding-right: 150px;
+}
+
+#botsig {
   padding-top: 15px;
+}
+
+#botcan {
+  padding-top: 15px;
+}
+
+#filaF {
+  padding-top: 50px;
+}
+
+#PieRow {
+  padding-bottom: 30px;
+}
+
+#pantalla {
+  padding-top: 20px;
+}
+
+#pago {
+  padding: 50px;
+  text-align: center;
+  background: url(../../assets/img/tarjeta.jpg);
+  background-size: cover;
+}
+
+#pago .container {
+  background: rgba(255,255,255,0.80);
+  padding: initial;
+}
+
+#cancelar {
   padding-bottom: 15px;
 }
 
-#fach_aviacion {
-  max-height: 200px;
-}
-
-#logo_film {
-  font-size: 40px;
-}
-
-#tam_peli {
-  max-height: 200px;
+#comprar {
+  padding-bottom: 15px;
 }
 
