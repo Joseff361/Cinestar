@@ -24,7 +24,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 		.antMatchers(resources).permitAll()
 		.antMatchers("/", "/login","/peliculas","/peliculas/categoria","/peliculas/{id}","/sedes","/sedes/{id}", 
-				"/sedes/{id}/categoria","/peliculas/{id}/sedes/{id}/funciones").permitAll()
+				"/sedes/{id}/categoria","/peliculas/{id}/sedes/{id}/funciones","/compra/{id}").permitAll()
 		.anyRequest().authenticated()
 		.and().formLogin().loginPage("/login").permitAll().defaultSuccessUrl("/peliculas")
 				.failureUrl("/login?error=true").usernameParameter("username").passwordParameter("password")

@@ -2,6 +2,9 @@ package com.cinestar.application.service;
 
 
 import static java.util.Collections.emptyList;
+
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -39,6 +42,9 @@ public class UsuarioService implements UserDetailsService{
 		return userRepository.findAll();
 	}
 
+	public Optional<Usuario> getUser(Long id) {
+		return userRepository.findById( id);
+	}
 
 
 

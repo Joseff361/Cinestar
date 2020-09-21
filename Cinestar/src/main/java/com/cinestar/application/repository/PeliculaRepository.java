@@ -9,4 +9,10 @@ import com.cinestar.application.entity.Pelicula;
 public interface PeliculaRepository extends CrudRepository<Pelicula, Long> {
 	public Iterable<Pelicula> findAllByGenero(String genero);
 
+	public Iterable<Pelicula> findAllByOrderByNombreAsc();
+
+	public Iterable<Pelicula> findAllByGeneroOrderByNombreAsc(String genero);
+
+	
+
 }

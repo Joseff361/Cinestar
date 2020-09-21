@@ -14,11 +14,12 @@ public class PeliculaService {
 	PeliculaRepository repository;
 
 	public Iterable<Pelicula> getPeliculas() {
-		return repository.findAll();
+		return repository.findAllByOrderByNombreAsc();
+		
 	}
 
 	public Iterable<Pelicula> getPeliculasByGenero(String genero) {
-		return repository.findAllByGenero(genero);
+		return repository.findAllByGeneroOrderByNombreAsc(genero);
 	}
 
 	public Optional<Pelicula> getPelicula(Long id) {
