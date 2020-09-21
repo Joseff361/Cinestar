@@ -17,9 +17,6 @@ public class PagoService {
 	@Autowired
 	PagoRepository repository;
 
-	public Iterable<Pago> getPagosFuncion(Funcion funcion) {
-		return repository.findAllByFuncion(funcion);
-	}
 
 	public void realizarPago(Funcion funcion, Usuario user, Set<Asiento> asientos) {
 		Pago P = new Pago();

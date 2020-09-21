@@ -9,7 +9,7 @@ import com.cinestar.application.entity.Pago;
 @Repository
 public interface PagoRepository extends CrudRepository<Pago, Long>{
 
-	Iterable<Pago> findAllByFuncion(Funcion funcion);
+
 	
 	
 	
