@@ -45,6 +45,9 @@ public class UsuarioService implements UserDetailsService{
 	public Optional<Usuario> getUser(Long id) {
 		return userRepository.findById( id);
 	}
+	public Usuario getUserByUsername(String username){
+		return (userRepository.findByUsername(username));
+	}
 
 
 

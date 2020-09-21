@@ -7,6 +7,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cinestar.application.controller.PagoStrategy;
 import com.cinestar.application.entity.Asiento;
 import com.cinestar.application.entity.Funcion;
 import com.cinestar.application.entity.Pago;
@@ -45,9 +46,15 @@ public class PagoService {
 		}
 		repository.delete(P);
 	}
-	public void confirmarPago(long id) {
+	public Pago realizarPagoOficial(long id ,PagoStrategy estrategiaPago) {
 		Pago P=repository.findById(id).get();
-		P.setEstado("1"); //Completo  el pago
+		estrategiaPago.RealizarPago(P);
+		return P;
+		
+		
+	}
+	public void confirmarPago(long id ) {
+		Pago P=repository.findById(id).get();
 		P=repository.save(P);
 	}
 
