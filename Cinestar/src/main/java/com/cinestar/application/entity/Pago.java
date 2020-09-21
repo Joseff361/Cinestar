@@ -47,7 +47,7 @@ public class Pago implements Serializable {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idUser", referencedColumnName = "id")
-    private User user;
+    private Usuario user;
 
 	public Long getId() {
 		return id;
@@ -89,11 +89,11 @@ public class Pago implements Serializable {
 		this.asientos = asientos;
 	}
 
-	public User getUser() {
+	public Usuario getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(Usuario user) {
 		this.user = user;
 	}
 

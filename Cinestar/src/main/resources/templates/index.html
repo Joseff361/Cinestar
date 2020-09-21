@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
 <head>
 <meta charset="utf-8">
@@ -16,6 +17,7 @@
 </head>
 
 <body class="text-danger" id="page-top">
+
 	<nav
 		class="navbar navbar-light navbar-expand-lg fixed-top bg-secondary text-uppercase"
 		id="mainNav" style="background-color: #2980ef;">
@@ -39,6 +41,10 @@
 						class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
 						href="#contact">Contact</a></li>
 				</ul>
+				<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+				<form th:action="@{/logout}" method="post">
+            <input type="submit" value="Cerrar Sesion"/>
+        </form>
 			</div>
 		</div>
 	</nav>
