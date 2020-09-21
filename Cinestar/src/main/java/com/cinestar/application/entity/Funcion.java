@@ -1,6 +1,7 @@
 package com.cinestar.application.entity;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -34,7 +35,7 @@ public class Funcion implements Serializable {
 	@Column(nullable=false)
 	private String hora;
 	@Column(length=1, nullable=false)
-	private String dia;
+	private java.sql.Date dia;
 	@Column(nullable=false)
 	private Float precio;
 	
@@ -77,11 +78,11 @@ public class Funcion implements Serializable {
 		this.hora = hora;
 	}
 
-	public String getDia() {
+	public Date getDia() {
 		return dia;
 	}
 
-	public void setDia(String dia) {
+	public void setDia(Date dia) {
 		this.dia = dia;
 	}
 

@@ -33,10 +33,16 @@ public class Pago implements Serializable {
 
 	@Column(nullable= true)
 	private Float monto;
-	@Column (unique=true,nullable=false)
-	private String dni ;
+
 	@Column (nullable= true)
 	private java.sql.Timestamp hora  ;
+	
+	@Column (nullable=true)
+	private String descripcion;
+	
+	@Column (nullable=false,length=1)
+	private String estado;
+	
 	
 	@OneToMany(
 	        mappedBy = "pago",
@@ -65,13 +71,7 @@ public class Pago implements Serializable {
 		this.monto = monto;
 	}
 
-	public String getDni() {
-		return dni;
-	}
 
-	public void setDni(String dni) {
-		this.dni = dni;
-	}
 
 	public Timestamp getHora() {
 		return hora;

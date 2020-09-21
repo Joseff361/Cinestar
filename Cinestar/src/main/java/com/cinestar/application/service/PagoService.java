@@ -23,7 +23,7 @@ public class PagoService {
 		P.setAsientos(asientos);
 		P.setHora(new Timestamp(System.currentTimeMillis()));
 		P.setId(ConteoPagos());
-		P.setMonto(funcion.getPrecio() * asientos.size());// Ver costo si es variable por niños o no? La tarjeta y esa
+		P.setMonto(calculoCostoTotal());// Ver costo si es variable por niños o no? La tarjeta y esa
 															// mamada
 		P.setUser(user);
 		P = repository.save(P);
@@ -33,5 +33,8 @@ public class PagoService {
 	public long ConteoPagos() {
 		return repository.count();
 
+	}
+	public float calculoCostoTotal() {
+		return (float) 0.0;
 	}
 }
