@@ -30,7 +30,7 @@ public class PeliculaController {
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("/peliculas")
+	@GetMapping({"/peliculas","/","/index"})
 	public String peliculas(Model model) {
 		model.addAttribute("peliculaList", peliculaService.getPeliculas());
 		return "index";// html

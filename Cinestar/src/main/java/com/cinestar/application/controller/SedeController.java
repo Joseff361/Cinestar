@@ -55,9 +55,11 @@ public class SedeController {
 			}
 
 		}
+		
+		model.addAttribute("sede", sedeService.getSede(id).get());
 		model.addAttribute("peliculaList", peliculas);
 
-		return "sedes-pelicula";// html
+		return "sede-peliculas";// html
 	}
 
 	/**

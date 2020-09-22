@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Service;
 
 import com.cinestar.application.controller.PagoStrategy;
@@ -22,13 +23,13 @@ public class PagoService {
 	@Autowired
 	AsientoRepository arepository;
 
-	public void realizarPago(Funcion funcion, Usuario user, Set<Asiento> asientos, String descripcion) {
+	public Pago realizarPago(Funcion funcion, Usuario user, Set<Asiento> asientos, String descripcion) {
 		Pago P = new Pago();
 		
 		P.setHora(new Timestamp(System.currentTimeMillis()));
 
 		P.setDescripcion(descripcion);
-		P.setMonto(calculoCostoTotal(descripcion));// Ver costo si es variable por niños o no? La tarjeta y es mamada
+		P.setMonto(calculoCostoTotal(funcion,descripcion));// Ver costo si es variable por niños o no? La tarjeta y es mamada
 		P.setUser(user);
 		P.setEstado("0");//Estado 0 =  Incompleto el pago
 		P = repository.save(P);
@@ -36,6 +37,7 @@ public class PagoService {
 			a.setPago(P);
 			arepository.save(a);
 		}
+		return P;
 	}
 
 	public void cancelarPago(long id) {
@@ -58,26 +60,26 @@ public class PagoService {
 		P=repository.save(P);
 	}
 
-	public float calculoCostoTotal(String descripcion) {
+	public float calculoCostoTotal(Funcion funcion,String descripcion) {
 		String [] valores= descripcion.split("-");
-		float monto=(float) 0.0;
-		String diaSemana= ""+LocalDateTime.now().getDayOfWeek();
+		float monto=(float) 20.0;
+		 int diaSemana=funcion.getDia().getDate();
 
 		//Adulto
 		
-		if(diaSemana=="MONDAY"|| diaSemana=="TUESDAY") {
+		if(diaSemana==1|| diaSemana==2) {
 			monto+=Integer.parseInt(valores[0])*9;
 			monto+=Integer.parseInt(valores[1])*6;
 			monto+=Integer.parseInt(valores[2])*7.5;
 		}
 		//Niño
-		else if (diaSemana=="WENESDAY") {
+		else if (diaSemana==3) {
 			monto+=Integer.parseInt(valores[0])*10;
 			monto+=Integer.parseInt(valores[1])*6.5;
 			monto+=Integer.parseInt(valores[2])*8;			
 		}
 		//Adulto Mayor +60
-		else {//THURSDAY SUNDAY
+		else {//THURSDAY -SUNDAY
 			monto+=Integer.parseInt(valores[0])*15;
 			monto+=Integer.parseInt(valores[1])*10;
 			monto+=Integer.parseInt(valores[2])*11.5;			

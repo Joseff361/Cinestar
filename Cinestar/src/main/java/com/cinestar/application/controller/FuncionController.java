@@ -49,6 +49,9 @@ public class FuncionController {
 							sala));
 					
 		}
+		
+		model.addAttribute("pelicula",peliculaService.getPelicula(id1).get());
+		
 		model.addAttribute("funcionList",funcionesDeSede );
 
 		return "funciones";//Html;

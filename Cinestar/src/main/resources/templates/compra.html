@@ -1,140 +1,272 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Cinestar1</title>
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cookie">
-    <link rel="stylesheet" href="fonts/font-awesome.min.css">
-    <link rel="stylesheet" href="css/Pretty-Footer1.css">
-    <link rel="stylesheet" href="css/styles1.css">
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+<title>Cinestar1</title>
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Cookie">
+<link rel="stylesheet" href="/fonts/font-awesome.min.css">
+<link rel="stylesheet" href="/css/Pretty-Footer1.css">
+<link rel="stylesheet" href="/css/styles1.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 </head>
 
 <body>
-    <nav class="navbar navbar-light navbar-expand-md">
-        <div class="container-fluid"><a class="navbar-brand" href="#"><img id="logo" src="img/logo.jpeg"></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-            <div
-                class="collapse navbar-collapse" id="navcol-1">
-                <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item"><a class="nav-link" href="#">Cartelera</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Sedes</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Tarifario</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Registrarse</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Ingresar</a></li>
-                </ul>
-        </div>
-        </div>
-    </nav>
-    <div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4 col-xl-3">
-                    <h2>Compra</h2>
-                    <div class="form-group"><label>Película:&nbsp;</label>
-                        <div><input type="text" id="nombrePelicula" readonly=""></div>
-                    </div>
-                    <div class="form-group"><label>Horario:&nbsp;</label>
-                        <div><input type="text" id="nombrePelicula-2" readonly=""></div>
-                    </div>
-                    <div class="form-group"><label>Sala:&nbsp;</label>
-                        <div><input type="text" id="nombrePelicula-3" readonly=""></div>
-                    </div>
-                    <div class="form-group"><label>Asiento (s):&nbsp;</label>
-                        <div><input type="text" id="nombrePelicula-1" readonly=""></div>
-                    </div>
-                </div>
-                <div class="col">
-                    <h2>Total Carrito</h2>
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead class="text-center">
-                                <tr>
-                                    <th>Detalle</th>
-                                    <th>Precio</th>
-                                    <th>Cantidad</th>
-                                    <th>Total</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Adulto(s)</td>
-                                    <td><input class="form-control-sm justify-content-center" type="text" readonly=""></td>
-                                    <td><input class="form-control-sm justify-content-center" type="text" readonly=""></td>
-                                    <td><input class="form-control-sm justify-content-center" type="text" readonly=""></td>
-                                </tr>
-                                <tr>
-                                    <td>Niño(s)</td>
-                                    <td><input class="form-control-sm justify-content-center" type="text" readonly=""></td>
-                                    <td><input class="form-control-sm justify-content-center" type="text"></td>
-                                    <td><input class="form-control-sm justify-content-center" type="text" readonly=""></td>
-                                </tr>
-                                <tr>
-                                    <td>+60</td>
-                                    <td><input class="form-control-sm justify-content-center" type="text" readonly=""></td>
-                                    <td><input class="form-control-sm justify-content-center" type="text" readonly=""></td>
-                                    <td><input class="form-control-sm justify-content-center" type="text" readonly=""></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="row" id="total">
-                        <div class="col-4 col-sm-2 col-xl-1 text-center"><label class="col-form-label text-right">Total:</label></div>
-                        <div class="col text-left d-flex"><input type="text" readonly=""></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div id="modoPago">
-        <div class="container" id="tarjeta">
-            <h2 class="text-center">Medio de Pago</h2>
-            <div class="row">
-                <div class="col text-center">
-                    <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-1" required=""><label class="form-check-label" for="formCheck-1">Visa</label></div>
-                </div>
-                <div class="col text-center">
-                    <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-2" required=""><label class="form-check-label" for="formCheck-2">MasterCard</label></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div id="opcion">
-        <div class="container" id="botones">
-            <div class="row">
-                <div class="col text-center" id="botcan"><button class="btn btn-secondary" id="cancelar" type="button">Cancelar</button></div>
-                <div class="col text-center" id="botsig"><button class="btn btn-secondary" id="siguiente" type="button">Siguiente</button></div>
-            </div>
-        </div>
-    </div>
-    <footer>
-        <div class="row">
-            <div class="col-sm-6 col-md-5 text-center footer-navigation">
-                <h3 class="display-4 text-dark"><a href="#">Cine<span>Star</span></a></h3>
-                <p class="text-dark links"><a class="text-dark" href="index.html">Cartelera</a><strong> · </strong><a class="text-dark" href="#">Sedes</a><strong> · </strong><a class="text-dark" href="Tarifario.html">Tarifario</a><strong>&nbsp;</strong></p>
-                <p class="company-name">CineStar © 2020</p>
-            </div>
-            <div class="col-sm-6 col-md-4 text-justify footer-contacts">
-                <div><span class="fa fa-map-marker footer-contacts-icon"> </span>
-                    <p class="text-dark">Lima, Perú</p>
-                </div>
-                <div><i class="fa fa-mobile-phone footer-contacts-icon"></i>
-                    <p class="text-dark footer-center-info email text-left"> +51 999 867 654</p>
-                </div>
-                <div><i class="fa fa-envelope footer-contacts-icon"></i>
-                    <p> <a href="#" target="_blank">cinestar@company.com</a></p>
-                </div>
-            </div>
-            <div class="clearfix"></div>
-            <div class="col-md-3 text-center footer-about">
-                <h4 class="text-danger">About us...</h4>
-                <div class="social-links social-icons"><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
-            </div>
-        </div>
-    </footer>
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+	<nav class="navbar navbar-light navbar-expand-md">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#"><img id="logo"
+				src="/img/logo.jpeg"></a>
+			<button data-toggle="collapse" class="navbar-toggler"
+				data-target="#navcol-1">
+				<span class="sr-only">Toggle navigation</span><span
+					class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navcol-1">
+				<ul class="nav navbar-nav ml-auto">
+					<li class="nav-item"><a class="nav-link" href="#">Cartelera</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">Sedes</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">Tarifario</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">Registrarse</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">Ingresar</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+
+	<form th:action="@{/compra/{id}(id = ${id})}" method="post">
+		<div>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4 col-xl-3">
+						<h2>Compra</h2>
+						<div class="form-group">
+							<label>Película:&nbsp;</label>
+							<h1 th:text="${funcionList.asientos[0].funcion.pelicula.nombre}"></h1>
+							<div>
+								<input type="text" id="nombrePelicula"
+									th:field="${funcionList.asientos[0].funcion.pelicula.nombre}"
+									readonly="">
+							</div>
+						</div>
+						<div class="form-group">
+							<label>Horario:&nbsp;</label>
+							<div>
+								<input type="text" id="nombrePelicula-2"
+									th:field="${funcionList.asientos[0].funcion.hora}" readonly="">
+							</div>
+						</div>
+						<div class="form-group">
+							<label>Sala:&nbsp;</label>
+							<div>
+								<input type="text" id="nombrePelicula-3"
+									th:field="${funcionList.asientos[0].funcion.sala.num}"
+									readonly="">
+							</div>
+						</div>
+						<div class="form-group">
+							<label>Asiento (s):&nbsp;</label>
+							<div>
+								<input type="text" id="nombrePelicula-1" th:field="${asientos}" readonly="">
+							</div>
+						</div>
+					</div>
+					<div class="col">
+						<h2>Total Carrito</h2>
+						<div class="table-responsive">
+							<table class="table">
+								<thead class="text-center">
+									<tr>
+										<th>Detalle</th>
+										<th>Precio</th>
+										<th>Cantidad</th>
+										<th>Total</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>Adulto(s)</td>
+										<td><input class="form-control-sm justify-content-center"
+											type="text" id="precio1" readonly=""></td>
+										<td><input class="form-control-sm justify-content-center"
+											type="text" id="cantidad1" readonly=""></td>
+										<td><input class="form-control-sm justify-content-center"
+											type="text" id="total1" readonly=""></td>
+									</tr>
+									<tr>
+										<td>Niño(s)</td>
+										<td><input class="form-control-sm justify-content-center"
+											type="text" id="precio2" readonly=""></td>
+										<td><input class="form-control-sm justify-content-center"
+											type="text" id="cantidad2" readonly=""></td>
+										<td><input class="form-control-sm justify-content-center"
+											type="text" id="total2" readonly=""></td>
+									</tr>
+									<tr>
+										<td>+60</td>
+										<td><input class="form-control-sm justify-content-center"
+											type="text" id="precio3" readonly=""></td>
+										<td><input class="form-control-sm justify-content-center"
+											type="text" id="cantidad3" readonly=""></td>
+										<td><input class="form-control-sm justify-content-center"
+											type="text" id="total3" readonly=""></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="row" id="total">
+							<div class="col-4 col-sm-2 col-xl-1 text-center">
+								<label class="col-form-label text-right">Total:</label>
+							</div>
+							<div class="col text-left d-flex">
+								<input type="text"  th:field="${funcionList.monto}" readonly="">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div id="modoPago">
+			<div class="container" id="tarjeta">
+				<h2 class="text-center">Medio de Pago</h2>
+				<div class="row">
+					<div class="col text-center">
+						<div class="form-check">
+							<input class="form-check-input" type="radio" id="formCheck-1"
+								name="medioPago" value="0" required=""><label
+								class="form-check-label" for="formCheck-1">Visa</label>
+						</div>
+					</div>
+					<div class="col text-center">
+						<div class="form-check">
+							<input class="form-check-input" type="radio" id="formCheck-2"
+								name="medioPago" value="1" required=""><label
+								class="form-check-label" for="formCheck-2">MasterCard</label>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="opcion">
+			<div class="container" id="botones">
+				<div class="row">
+					<div class="col text-center" id="botcan">
+						<button class="btn btn-secondary" id="cancelar" type="button">Cancelar</button>
+					</div>
+					<div class="col text-center" id="botsig">
+						<button class="btn btn-secondary" id="siguiente" type="submit">Siguiente</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</form>
+	<footer>
+		<div class="row">
+			<div class="col-sm-6 col-md-5 text-center footer-navigation">
+				<h3 class="display-4 text-dark">
+					<a href="#">Cine<span>Star</span></a>
+				</h3>
+				<p class="text-dark links">
+					<a class="text-dark" href="index.html">Cartelera</a><strong>
+						· </strong><a class="text-dark" href="#">Sedes</a><strong> · </strong><a
+						class="text-dark" href="Tarifario.html">Tarifario</a><strong>&nbsp;</strong>
+				</p>
+				<p class="company-name">CineStar © 2020</p>
+			</div>
+			<div class="col-sm-6 col-md-4 text-justify footer-contacts">
+				<div>
+					<span class="fa fa-map-marker footer-contacts-icon"> </span>
+					<p class="text-dark">Lima, Perú</p>
+				</div>
+				<div>
+					<i class="fa fa-mobile-phone footer-contacts-icon"></i>
+					<p class="text-dark footer-center-info email text-left">+51 999
+						867 654</p>
+				</div>
+				<div>
+					<i class="fa fa-envelope footer-contacts-icon"></i>
+					<p>
+						<a href="#" target="_blank">cinestar@company.com</a>
+					</p>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+			<div class="col-md-3 text-center footer-about">
+				<h4 class="text-danger">About us...</h4>
+				<div class="social-links social-icons">
+					<a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i
+						class="fa fa-twitter"></i></a><a href="#"><i
+						class="fa fa-instagram"></i></a>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<script src="/js/jquery.min.js"></script>
+	<script src="/bootstrap/js/bootstrap.min.js"></script>
+	<script th:inline="javascript">
+    var cantidad = /[[${funcionList.descripcion}]]/;
+    var dia = /[[${diaSemana}]]/;
+ 
+    var array = cantidad.split('-');
+    </script>
+	<script type="text/javascript">
+    $("form #cantidad1").val(array[0].toString());
+    $("form #cantidad2").val(array[1].toString());
+    $("form #cantidad3").val(array[2].toString());
+
+    if(dia==1|| dia==2) {
+    	$("form #precio1").val("9");
+        $("form #precio2").val("6");
+        $("form #precio3").val("7.5");
+        var total = 9*array[0];
+        $("form #total1").val(total);
+        var total = 6*array[0];
+        $("form #total2").val(total);
+        var total = 7.5*array[0];
+        $("form #total3").val(total);
+	}
+	//Niño
+	else if (dia==3) {
+		$("form #precio1").val("10");
+        $("form #precio2").val("6.5");
+        $("form #precio3").val("8");
+        var total = 10*array[0];
+        $("form #total1").val(total);
+        var total = 6.5*array[0];
+        $("form #total2").val(total);
+        var total = 8*array[0];
+        $("form #total3").val(total);
+		
+	}
+	//Adulto Mayor +60
+	else {//THURSDAY SUNDAY
+		$("form #precio1").val("15");
+        $("form #precio2").val("10");
+        $("form #precio3").val("11.5");
+        var total = 15*array[0];
+        $("form #total1").val(total);
+        var total = 10*array[0];
+        $("form #total2").val(total);
+        var total = 11.5*array[0];
+        $("form #total3").val(total);			
+	}
+    
+    
+    
+    
+    
+    
+
+</script>
 </body>
 
 </html>

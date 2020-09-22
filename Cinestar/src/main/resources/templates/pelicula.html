@@ -5,14 +5,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Cinestar</title>
-    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" th:href="@{/bootstrap/css/bootstrap.min.css}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cookie">
-    <link rel="stylesheet" href="/fonts/font-awesome.min.css">
-    <link rel="stylesheet" href="/fonts/ionicons.min.css">
-    <link rel="stylesheet" href="/css/Highlight-Phone.css">
-    <link rel="stylesheet" href="/css/Login-Form-Dark.css">
-    <link rel="stylesheet" href="/css/Pretty-Footer.css">
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/fonts/font-awesome.min.css" th:href="@{/fonts/font-awesome.min.css}">
+    <link rel="stylesheet" href="/fonts/ionicons.min.css" th:href="@{/fonts/ionicons.min.css}">
+    <link rel="stylesheet" href="/css/Highlight-Phone.css" th:href="@{/css/Highlight-Phone.css}">
+    <link rel="stylesheet" href="/css/Login-Form-Dark.css" th:href="@{/css/Login-Form-Dark.css}">
+    <link rel="stylesheet" href="/css/Pretty-Footer.css" th:href="@{/css/Pretty-Footer.css}">
+    <link rel="stylesheet" href="/css/styles.css" th:href="@{/css/styles.css}">
 </head>
 
 <body>
@@ -21,11 +21,11 @@
             <div
                 class="collapse navbar-collapse" id="navcol-1">
                 <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item"><a class="nav-link active" href="/pelicula.html">Cartelera</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/sedes.html">Sedes</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Tarifario</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/index">Cartelera</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/sedes">Sedes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/tarifario">Tarifario</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Registrarse</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/login.html">Ingresar</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/login">Ingresar</a></li>
                 </ul>
         </div>
         </div>
@@ -35,23 +35,18 @@
             <div class="col-md-5 offset-0">
                 <h1>Películas<img id="claqueta" src="/img/claqueta.jpg"></h1>
             </div>
-            <div class="col-md-auto d-inline float-right ml-auto">
-                <div class="dropdown bg-light border rounded-0 shadow-sm d-inline-flex flex-shrink-0"><button class="btn btn-primary dropdown-toggle bg-secondary border-primary shadow-sm" data-toggle="dropdown" aria-expanded="false" type="button">Géneros</button>
-                    <div class="dropdown-menu"><a class="dropdown-item" href="#">Acción</a><a class="dropdown-item" href="#">Comedia</a><a class="dropdown-item" href="#">Terror</a></div>
-                </div>
-            </div>
         </div>
     </div>
     <div class="highlight-phone">
         <div class="container">
-            <div class="row Aviacion">
+            <div class="row Aviacion" th:each="pelicula: ${peliculaList}">
                 <div class="col-md-8 offset-md-0">
                     <div class="intro">
-                        <h2>NombrePelícula</h2>
-                        <p>DescripcionDeLaPeliculaaaaaa</p>
+                        <h2 th:text="${pelicula.nombre}"></h2>
+                        <p th:text="${pelicula.descripcion}"></p>
                     </div>
                 </div>
-                <div class="col text-center"><img src="/img/Buscando_a_Dory.jpg" style="height: 200px;"></div>
+                <div class="col text-center"><img th:src="@{'/img/'+ ${pelicula.imagen}}" style="height: 300px;"></div>
             </div>
         </div>
     </div>
@@ -61,11 +56,8 @@
     <div>
         <div class="container">
             <div class="row">
-                <div class="col-md-6 offset-md-0 text-center"><img src="/img/fachada_aviacion.jpg">
-                    <h3><a class="text-secondary" href="#">Aviación</a></h3>
-                </div>
-                <div class="col-md-6 offset-md-0 text-center"><img src="/img/fachada_aviacion.jpg">
-                    <h3><a class="text-secondary" href="#">Chorrillos</a></h3>
+                <div class="col-md-6 offset-md-0 text-center" th:each="sede: ${sedeList}"><img th:src="@{'/img/'+ ${sede.imagen}}">
+                    <h3><a class="text-secondary" th:href="@{'/peliculas/'+${peliculaList.id}+'/sedes/'+${sede.id}+'/funciones'}" th:text="${sede.nombre}"></a></h3>
                 </div>
             </div>
         </div>

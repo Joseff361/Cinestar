@@ -1,15 +1,15 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Cinestar1</title>
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cookie">
-    <link rel="stylesheet" href="fonts/font-awesome.min.css">
-    <link rel="stylesheet" href="css/Pretty-Footer1.css">
-    <link rel="stylesheet" href="css/styles1.css">
+    <link rel="stylesheet" href="/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/Pretty-Footer1.css">
+    <link rel="stylesheet" href="/css/styles1.css">
 </head>
 
 <body>
@@ -18,16 +18,19 @@
             <div
                 class="collapse navbar-collapse" id="navcol-1">
                 <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item"><a class="nav-link" href="#">Cartelera</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Sedes</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Tarifario</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/index">Cartelera</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/sedes">Sedes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/tarifario">Tarifario</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Registrarse</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Ingresar</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/login">Ingresar</a></li>
                 </ul>
         </div>
         </div>
     </nav>
-    <div id="pago">
+    
+    <form th:action="@{'/pago/'+ ${id} + '/' + ${id1}}" method="post">
+    
+    <div id="pago" >
         <h2 class="text-center text-white bg-danger border-danger">Tu Compra</h2>
         <div class="container">
             <div class="table-responsive border-danger shadow" id="tarjeta">
@@ -38,15 +41,15 @@
                     <tbody>
                         <tr>
                             <td class="text-center">Número de Tarjeta:</td>
-                            <td><input class="form-control-sm" type="text"></td>
+                            <td><input class="form-control-sm" type="text"  name="numeroTarjeta"></td>
                         </tr>
                         <tr>
                             <td class="text-center">Fecha de Vencimiento:</td>
-                            <td><input class="form-control-sm" type="text"></td>
+                            <td><input class="form-control-sm" type="text" name="fechaVenc"></td>
                         </tr>
                         <tr>
                             <td class="text-center">CVC:</td>
-                            <td><input class="form-control-sm" type="text"></td>
+                            <td><input class="form-control-sm" type="text" name="cvc"></td>
                         </tr>
                         <tr></tr>
                         <tr></tr>
@@ -60,10 +63,14 @@
         <div class="container" id="botones">
             <div class="row">
                 <div class="col text-center" id="cancelar"><button class="btn btn-secondary" id="bcancelar" type="button">Cancelar</button></div>
-                <div class="col text-center" id="comprar"><button class="btn btn-secondary" id="bcomprar" type="button">Comprar</button></div>
+                <div class="col text-center" id="comprar"><button class="btn btn-secondary" id="bcomprar" type="submit">Comprar</button></div>
             </div>
         </div>
     </div>
+    
+    
+   </form>
+    
     <footer>
         <div class="row">
             <div class="col-sm-6 col-md-5 text-center footer-navigation">
@@ -89,8 +96,8 @@
             </div>
         </div>
     </footer>
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
 </body>
 
 </html>
