@@ -19,25 +19,21 @@
 
 <body>
 	<nav class="navbar navbar-light navbar-expand-md">
-		<div class="container-fluid">
-			<a class="navbar-brand" href="#"><img id="logo"
-				src="/img/logo.jpeg"></a>
-			<button data-toggle="collapse" class="navbar-toggler"
-				data-target="#navcol-1">
-				<span class="sr-only">Toggle navigation</span><span
-					class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navcol-1">
-				<ul class="nav navbar-nav ml-auto">
-					<li class="nav-item"><a class="nav-link" href="#">Cartelera</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Sedes</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Tarifario</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Registrarse</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Ingresar</a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
+        <div class="container-fluid"><a class="navbar-brand" href="#"><img id="logo" src="/img/logo.jpeg"></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div
+                class="collapse navbar-collapse" id="navcol-1">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" href="/index">Cartelera</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/sedes">Sedes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/tarifario">Tarifario</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/index">Nosotros</a></li>
+                </ul>
+        </div>
+        <div class="dropdown"><a class="dropdown-toggle text-info" data-toggle="dropdown" aria-expanded="false" href="#" id="username"><i class="fa fa-user-circle-o"></i>&nbsp;</a>
+            <form th:action="@{/logout}" method="post"><div class="dropdown-menu"><button class="dropdown-item" type="submit">Cerrar Sesión</button></div></form>
+        </div>
+        </div>
+    </nav>
 
 
 	<form th:action="@{/compra/{id}(id = ${id})}" method="post">
@@ -73,7 +69,7 @@
 						<div class="form-group">
 							<label>Asiento (s):&nbsp;</label>
 							<div>
-								<input type="text" id="nombrePelicula-1" th:field="${asientos}" readonly="">
+								<input type="text" id="nombrePelicula-1" readonly="">
 							</div>
 						</div>
 					</div>
@@ -213,56 +209,64 @@
 	<script src="/js/jquery.min.js"></script>
 	<script src="/bootstrap/js/bootstrap.min.js"></script>
 	<script th:inline="javascript">
-    var cantidad = /[[${funcionList.descripcion}]]/;
-    var dia = /[[${diaSemana}]]/;
- 
+	$("#nombrePelicula-1").val([[${asientos}]]);
+    var cantidad = [[${funcionList.descripcion}]];
+    var dia = parseInt([[${diaSemana}]]);
+	console.log(dia);
+
+
+	
     var array = cantidad.split('-');
     </script>
 	<script type="text/javascript">
-    $("form #cantidad1").val(array[0].toString());
-    $("form #cantidad2").val(array[1].toString());
-    $("form #cantidad3").val(array[2].toString());
+    $("#cantidad1").val(array[0].toString());
+    $("#cantidad2").val(array[1].toString());
+    $("#cantidad3").val(array[2].toString());
 
     if(dia==1|| dia==2) {
-    	$("form #precio1").val("9");
-        $("form #precio2").val("6");
-        $("form #precio3").val("7.5");
+    	$("#precio1").val("9");
+        $("#precio2").val("6");
+        $("#precio3").val("7.5");
         var total = 9*array[0];
-        $("form #total1").val(total);
-        var total = 6*array[0];
-        $("form #total2").val(total);
-        var total = 7.5*array[0];
-        $("form #total3").val(total);
+        $("#total1").val(total);
+        var total = 6*array[1];
+        $("#total2").val(total);
+        var total = 7.5*array[2];
+        $("#total3").val(total);
 	}
 	//Niño
 	else if (dia==3) {
-		$("form #precio1").val("10");
-        $("form #precio2").val("6.5");
-        $("form #precio3").val("8");
+		$("#precio1").val("10");
+        $("#precio2").val("6.5");
+        $("#precio3").val("8");
         var total = 10*array[0];
-        $("form #total1").val(total);
-        var total = 6.5*array[0];
-        $("form #total2").val(total);
-        var total = 8*array[0];
-        $("form #total3").val(total);
+        $("#total1").val(total);
+        var total = 6.5*array[1];
+        $("#total2").val(total);
+        var total = 8*array[2];
+        $("#total3").val(total);
 		
 	}
 	//Adulto Mayor +60
 	else {//THURSDAY SUNDAY
-		$("form #precio1").val("15");
-        $("form #precio2").val("10");
-        $("form #precio3").val("11.5");
+		$("#precio1").val("15");
+        $("#precio2").val("10");
+        $("#precio3").val("11.5");
         var total = 15*array[0];
-        $("form #total1").val(total);
-        var total = 10*array[0];
-        $("form #total2").val(total);
-        var total = 11.5*array[0];
-        $("form #total3").val(total);			
+        $("#total1").val(total);
+        var total = 10*array[1];
+        $("#total2").val(total);
+        var total = 11.5*array[2];
+        $("#total3").val(total);			
 	}
     
     
     
-    
+    var user = "[[${#httpServletRequest.remoteUser}]]";
+    if (user == ""){
+    	user = "Iniciar Sesión";
+    }
+    document.getElementById("username").innerHTML=user;
     
     
 
