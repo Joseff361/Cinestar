@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-<title>Cinestar1</title>
+<title>Seleccionar Asientos</title>
 <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" th:href="@{/bootstrap/css/bootstrap.min.css}">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cookie">
 <link rel="stylesheet" href="/fonts/font-awesome.min.css" th:href="@{/fonts/font-awesome.min.css}">
@@ -20,17 +20,17 @@
 
 <body>
 	<nav class="navbar navbar-light navbar-expand-md">
-        <div class="container-fluid"><a class="navbar-brand" href="#"><img id="logo" src="/img/logo.jpeg"></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-            <div
+        <div class="container-fluid"><a class="navbar-brand" href="/index"><img id="logo" src="/img/logo.jpeg"></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+              <div
                 class="collapse navbar-collapse" id="navcol-1">
                 <ul class="nav navbar-nav ml-auto">
                     <li class="nav-item"><a class="nav-link" href="/index">Cartelera</a></li>
                     <li class="nav-item"><a class="nav-link" href="/sedes">Sedes</a></li>
                     <li class="nav-item"><a class="nav-link" href="/tarifario">Tarifario</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/index">Nosotros</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/cine">Nosotros</a></li>
                 </ul>
         </div>
-        <div class="dropdown"><a class="dropdown-toggle text-info" data-toggle="dropdown" aria-expanded="false" href="#" id="username"><i class="fa fa-user-circle-o"></i>&nbsp;</a>
+        <div class="dropdown"><a class="dropdown-toggle text-info"  data-toggle="dropdown" aria-expanded="false" id="username"><i class="fa fa-user-circle-o"></i>&nbsp;</a>
             <form th:action="@{/logout}" method="post"><div class="dropdown-menu"><button class="dropdown-item" type="submit">Cerrar Sesión</button></div></form>
         </div>
         </div>
@@ -192,7 +192,7 @@
 														class="btn btn-primary border-dark"
 														type="button"
 														th:style="${asientoList[15].pago} == null ? 'background-color: green ' : 'background-color: red '"
-														name="53" onclick='toggle(17)' id=17>D3</button></td>
+														name="D3" onclick='toggle(17)' id=17>D3</button></td>
 												<td class="text-center"><button
 														class="btn btn-primary border-dark"
 														type="button"
@@ -403,12 +403,14 @@
 				document.getElementById("label").innerHTML="";
 	});
 	
-    var user = "[[${#httpServletRequest.remoteUser}]]";
+	var user = "[[${#httpServletRequest.remoteUser}]]";
     if (user == ""){
     	user = "Iniciar Sesión";
+    	$("#username").attr('data-toggle','');
+    	document.getElementById("username").href="/login";
     }
     document.getElementById("username").innerHTML=user;
-
+    
 	
 	
 	

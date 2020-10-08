@@ -8,4 +8,6 @@ import com.cinestar.application.entity.Sede;
 @Repository
 public interface SedeRepository extends CrudRepository<Sede, Long> {
 
+	Iterable<Sede> findAllByOrderByNombreAsc();
+
 }

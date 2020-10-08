@@ -1,6 +1,7 @@
 package com.cinestar.application.controller;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +46,7 @@ public class SedeController {
 	@GetMapping("/sedes/{id}")
 	public String peliculas_id(@PathVariable Long id, Model model) {
 
-		Set<Pelicula> peliculas = new HashSet<>();
+		Set<Pelicula> peliculas = new LinkedHashSet<>();
 
 		for (Funcion func : funcionService.getFunciones()) {
 
@@ -71,7 +72,7 @@ public class SedeController {
 	@GetMapping("/sedes/{id}/categoria")
 	public String peliculas_id_categoria(@PathVariable Long id, @RequestParam String genero, Model model) {
 
-		Set<Pelicula> peliculas = new HashSet<>();
+		Set<Pelicula> peliculas = new LinkedHashSet<>();
 
 		for (Funcion func : funcionService.getFunciones()) {
 

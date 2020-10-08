@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaft.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Cinestar</title>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cookie">
+    <link rel="stylesheet" href="/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="/fonts/ionicons.min.css">
+    <link rel="stylesheet" href="/css/Highlight-Phone.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.2.0/aos.css">
+    <link rel="stylesheet" href="/css/Login-Form-Dark.css">
+    <link rel="stylesheet" href="/css/Pretty-Footer.css">
+    <link rel="stylesheet" href="/css/styles.css"> 
+</head>
+
+
+<body>
+<nav class="navbar navbar-light navbar-expand-md">
+       <div class="container-fluid"><a class="navbar-brand" href="/index"><img id="logo" src="/img/logo.jpeg"></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+              <div
+                class="collapse navbar-collapse" id="navcol-1">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" href="/index">Cartelera</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/sedes">Sedes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/tarifario">Tarifario</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/cine">Nosotros</a></li>
+                </ul>
+        </div>
+        <div class="dropdown"><a class="dropdown-toggle text-info"  data-toggle="dropdown" aria-expanded="false" id="username"><i class="fa fa-user-circle-o"></i>&nbsp;</a>
+            <form th:action="@{/logout}" method="post"><div class="dropdown-menu"><button class="dropdown-item" type="submit">Cerrar Sesión</button></div></form>
+        </div>
+        </div>
+    </nav>
+    <div>
+        <div class="carousel slide" data-ride="carousel" id="carousel-1">
+            <div class="carousel-inner d-inline-flex" id="carrusel">
+                <div class="carousel-item active">
+                <img class="w-100 d-block" src="img/cine.jpg" alt="...">
+		        <div class="carousel-caption">
+		           <h1 id="somos" class="text-center text-dark"><strong>¿Quiénes Somos?</strong></h1>
+		           <p id="texto" class="text-justify text-dark"><br />La cadena de CINES STAR es pionera en el nuevo formato de multicines en el Perú, la idea surgió hace 30 años con un inversionista proveniente de La India, quien optó por apostar por el Perú y revolucionar el mercado a fuerza de constancia y trabajo,
+    			    con nuevas tendencias, tanto en construcción como en atención al cliente. Así fue como en 1990, logró comprar su primera sala de cine, el Cine Excelsior, ubicado en el corazón del Centro de Lima (el Jirón de la Unión). Más tarde, adquiriría los cines
+    				Aviación (San Borja), Benavides (Surco), Las Américas (Jesús María), Porteño (El Callao) y La Victoria, conformando así la Cadena de CINES STAR<br /><br /></p>
+		        </div>
+                </div>
+                <div class="carousel-item">
+                <img class="w-100 d-block" src="img/cine2.jpg" alt="...">
+                <div class="carousel-caption">
+		           <h1 id="somos" class="text-center text-dark"><strong>¿Quiénes Somos?</strong></h1>
+		           <p id="texto" class="text-justify text-dark"><br />La cadena de CINES STAR es pionera en el nuevo formato de multicines en el Perú, la idea surgió hace 30 años con un inversionista proveniente de La India, quien optó por apostar por el Perú y revolucionar el mercado a fuerza de constancia y trabajo,
+    			    con nuevas tendencias, tanto en construcción como en atención al cliente. Así fue como en 1990, logró comprar su primera sala de cine, el Cine Excelsior, ubicado en el corazón del Centro de Lima (el Jirón de la Unión). Más tarde, adquiriría los cines
+    				Aviación (San Borja), Benavides (Surco), Las Américas (Jesús María), Porteño (El Callao) y La Victoria, conformando así la Cadena de CINES STAR<br /><br /></p>
+		        </div>
+                </div>
+                <div class="carousel-item">
+                <img class="w-100 d-block" src="img/cine3.jpg" alt="...">
+                <div class="carousel-caption">
+		           <h1 id="somos" class="text-center text-dark"><strong>¿Quiénes Somos?</strong></h1>
+		           <p id="texto" class="text-justify text-dark"><br />La cadena de CINES STAR es pionera en el nuevo formato de multicines en el Perú, la idea surgió hace 30 años con un inversionista proveniente de La India, quien optó por apostar por el Perú y revolucionar el mercado a fuerza de constancia y trabajo,
+    			    con nuevas tendencias, tanto en construcción como en atención al cliente. Así fue como en 1990, logró comprar su primera sala de cine, el Cine Excelsior, ubicado en el corazón del Centro de Lima (el Jirón de la Unión). Más tarde, adquiriría los cines
+    				Aviación (San Borja), Benavides (Surco), Las Américas (Jesús María), Porteño (El Callao) y La Victoria, conformando así la Cadena de CINES STAR<br /><br /></p>
+		        </div>
+                </div>
+            </div>
+            <div><a class="carousel-control-prev" href="#carousel-1" role="button" data-slide="prev"><span class="carousel-control-prev-icon"></span><span class="sr-only">Previous</span></a><a class="carousel-control-next" href="#carousel-1" role="button"
+                    data-slide="next"><span class="carousel-control-next-icon"></span><span class="sr-only">Next</span></a></div>
+            <ol class="carousel-indicators">
+                <li data-target="#carousel-1" data-slide-to="0" class="active"></li>
+                <li data-target="#carousel-1" data-slide-to="1"></li>
+                <li data-target="#carousel-1" data-slide-to="2"></li>
+            </ol>
+        </div>
+    </div>
+	<footer>
+		<div class="row">
+			<div class="col-sm-6 col-md-5 text-center footer-navigation">
+				<h3 class="display-4 text-dark">
+					<a href="#">Cine<span>Star</span></a>
+				</h3>
+				<p class="text-dark links">
+					<a class="text-dark" href="index.html">Cartelera</a><strong>
+						· </strong><a class="text-dark" href="#">Sedes</a><strong> · </strong><a
+						class="text-dark" href="Tarifario.html">Tarifario</a><strong>&nbsp;</strong>
+				</p>
+				<p class="company-name">CineStar © 2020</p>
+			</div>
+			<div class="col-sm-6 col-md-4 text-justify footer-contacts">
+				<div>
+					<span class="fa fa-map-marker footer-contacts-icon"> </span>
+					<p class="text-dark">Lima, Perú</p>
+				</div>
+				<div>
+					<i class="fa fa-mobile-phone footer-contacts-icon"></i>
+					<p class="text-dark footer-center-info email text-left">+51 999
+						867 654</p>
+				</div>
+				<div>
+					<i class="fa fa-envelope footer-contacts-icon"></i>
+					<p>
+						<a href="#" target="_blank">cinestar@company.com</a>
+					</p>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+			<div class="col-md-3 text-center footer-about">
+				<h4 class="text-danger">Encuentranos en...</h4>
+				<div class="social-links social-icons">
+					<a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i
+						class="fa fa-twitter"></i></a><a href="#"><i
+						class="fa fa-instagram"></i></a>
+				</div>
+			</div>
+		</div>
+	</footer>
+    <script src="js/jquery.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+    var user = "[[${#httpServletRequest.remoteUser}]]";
+    if (user == ""){
+    	user = "Iniciar Sesión";
+    	$("#username").attr('data-toggle','');
+    	document.getElementById("username").href="/login";
+    }
+    document.getElementById("username").innerHTML=user;
+    </script>
+</body>
+
+</html>

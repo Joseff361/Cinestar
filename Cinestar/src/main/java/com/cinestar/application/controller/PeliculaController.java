@@ -1,6 +1,8 @@
 package com.cinestar.application.controller;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,8 +59,8 @@ public class PeliculaController {
 	@GetMapping("/peliculas/{id}")
 	public String peliculas_id(@PathVariable Long id, Model model) {
 		Pelicula p = peliculaService.getPelicula(id).get();
-		Set<Sede> sedes = new HashSet<>();
-
+		Set<Sede> sedes = new LinkedHashSet<>();
+		//ArrayList<Sede> sedesOrd=new ArrayList<>();
 		for (Funcion func : funcionService.getFunciones()) {
 
 			// guardar en un lista de sedes todas las funciones con la peli ID
@@ -67,6 +69,7 @@ public class PeliculaController {
 			}
 
 		}
+	
 		model.addAttribute("peliculaList", p);
 		model.addAttribute("sedeList", sedes);
 		return "pelicula";// html

@@ -2,6 +2,10 @@
   max-height: 100px;
 }
 
+#tarifa {
+  background-image: url(fondo.jpg);
+}
+
 #tarifa .container {
   background: rgba(255,255,255,0.80);
   padding: initial;
@@ -72,4 +76,5 @@
 #comprar {
   padding-bottom: 15px;
 }
+
 

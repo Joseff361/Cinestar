@@ -13,7 +13,7 @@ public class SedeService {
 	SedeRepository repository;
 
 	public Iterable<Sede> getSedes() {
-		return repository.findAll();
+		return repository.findAllByOrderByNombreAsc();
 	}
 
 	public Optional<Sede> getSede(Long id) {

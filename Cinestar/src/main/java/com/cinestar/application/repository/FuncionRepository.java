@@ -11,5 +11,9 @@ import com.cinestar.application.entity.Sala;
 public interface FuncionRepository extends CrudRepository<Funcion, Long>{
 
 	Iterable<Funcion> findByPeliculaAndSala(Pelicula pelicula,Sala sala);
+
+	Iterable<Funcion> findByPeliculaAndSalaOrderByDia(Pelicula pelicula, Sala sala);
+
+	Iterable<Funcion> findAllByOrderByDiaAsc();
 	
 }

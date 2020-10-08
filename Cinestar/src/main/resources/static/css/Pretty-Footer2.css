@@ -11,7 +11,6 @@ footer {
   color: #fff;
 }
 
-
 .footer-navigation h3 {
   margin: 0;
   font: normal 36px Cookie, cursive;
@@ -27,7 +26,6 @@ footer {
 .footer-navigation h3 span {
   color: #000;
 }
-
 
 .footer-navigation p.links a {
   color: #fff;
@@ -122,3 +120,4 @@ div.social-links {
   background-size: cover;
   background-color: rgba(100,255,255,0.25);
 }
+

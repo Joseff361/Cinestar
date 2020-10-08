@@ -62,29 +62,32 @@ public class PagoService {
 
 	public float calculoCostoTotal(Funcion funcion,String descripcion) {
 		String [] valores= descripcion.split("-");
-		float monto=(float) 20.0;
-		 int diaSemana=funcion.getDia().getDate();
+		float monto=(float) 0;
+		 int diaSemana=funcion.getDia().getDay();
 
 		//Adulto
-		
+		 System.out.println("DiaSemana:"+diaSemana);
+		System.out.println("Adulto"+valores[0]);
+		System.out.println("Niños"+valores[1]);
+		System.out.print("+60"+valores[2]);
 		if(diaSemana==1|| diaSemana==2) {
 			monto+=Integer.parseInt(valores[0])*9;
 			monto+=Integer.parseInt(valores[1])*6;
 			monto+=Integer.parseInt(valores[2])*7.5;
 		}
-		//Niño
+
 		else if (diaSemana==3) {
 			monto+=Integer.parseInt(valores[0])*10;
 			monto+=Integer.parseInt(valores[1])*6.5;
 			monto+=Integer.parseInt(valores[2])*8;			
 		}
-		//Adulto Mayor +60
+
 		else {//THURSDAY -SUNDAY
 			monto+=Integer.parseInt(valores[0])*15;
 			monto+=Integer.parseInt(valores[1])*10;
 			monto+=Integer.parseInt(valores[2])*11.5;			
 		}
-		
+		System.out.println("monto"+monto);
 		
 		return  monto;
 	}

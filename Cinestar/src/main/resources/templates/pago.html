@@ -2,102 +2,153 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Cinestar1</title>
-    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cookie">
-    <link rel="stylesheet" href="/fonts/font-awesome.min.css">
-    <link rel="stylesheet" href="/css/Pretty-Footer1.css">
-    <link rel="stylesheet" href="/css/styles1.css">
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+<title>Pagar</title>
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css"
+	th:href="@{/bootstrap/css/bootstrap.min.css}">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Cookie">
+<link rel="stylesheet" href="/fonts/font-awesome.min.css"
+	th:href="@{/fonts/font-awesome.min.css}">
+<link rel="stylesheet" href="/css/Pretty-Footer.css"
+	th:href="@{/css/Pretty-Footer.css}">
+<link rel="stylesheet" href="/css/styles.css"
+	th:href="@{/css/styles.css}">
+
 </head>
 
 <body>
-    <nav class="navbar navbar-light navbar-expand-md">
-        <div class="container-fluid"><a class="navbar-brand" href="#"><img id="logo" src="img/logo.jpeg"></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-            <div
-                class="collapse navbar-collapse" id="navcol-1">
-                <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item"><a class="nav-link active" href="/index">Cartelera</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/sedes">Sedes</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/tarifario">Tarifario</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Registrarse</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/login">Ingresar</a></li>
-                </ul>
-        </div>
-        </div>
-    </nav>
-    
-    <form th:action="@{'/pago/'+ ${id} + '/' + ${id1}}" method="post">
-    
-    <div id="pago" >
-        <h2 class="text-center text-white bg-danger border-danger">Tu Compra</h2>
-        <div class="container">
-            <div class="table-responsive border-danger shadow" id="tarjeta">
-                <table class="table">
-                    <thead class="text-uppercase text-center text-white bg-danger shadow">
-                        <tr class="text-monospace"></tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="text-center">Número de Tarjeta:</td>
-                            <td><input class="form-control-sm" type="text"  name="numeroTarjeta"></td>
-                        </tr>
-                        <tr>
-                            <td class="text-center">Fecha de Vencimiento:</td>
-                            <td><input class="form-control-sm" type="text" name="fechaVenc"></td>
-                        </tr>
-                        <tr>
-                            <td class="text-center">CVC:</td>
-                            <td><input class="form-control-sm" type="text" name="cvc"></td>
-                        </tr>
-                        <tr></tr>
-                        <tr></tr>
-                        <tr></tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-    <div id="opcion">
-        <div class="container" id="botones">
-            <div class="row">
-                <div class="col text-center" id="cancelar"><button class="btn btn-secondary" id="bcancelar" type="button">Cancelar</button></div>
-                <div class="col text-center" id="comprar"><button class="btn btn-secondary" id="bcomprar" type="submit">Comprar</button></div>
-            </div>
-        </div>
-    </div>
-    
-    
-   </form>
-    
-    <footer>
-        <div class="row">
-            <div class="col-sm-6 col-md-5 text-center footer-navigation">
-                <h3 class="display-4 text-dark"><a href="#">Cine<span>Star</span></a></h3>
-                <p class="text-dark links"><a class="text-dark" href="index.html">Cartelera</a><strong> · </strong><a class="text-dark" href="#">Sedes</a><strong> · </strong><a class="text-dark" href="Tarifario.html">Tarifario</a><strong>&nbsp;</strong></p>
-                <p class="company-name">CineStar © 2020</p>
-            </div>
-            <div class="col-sm-6 col-md-4 text-justify footer-contacts">
-                <div><span class="fa fa-map-marker footer-contacts-icon"> </span>
-                    <p class="text-dark">Lima, Perú</p>
-                </div>
-                <div><i class="fa fa-mobile-phone footer-contacts-icon"></i>
-                    <p class="text-dark footer-center-info email text-left"> +51 999 867 654</p>
-                </div>
-                <div><i class="fa fa-envelope footer-contacts-icon"></i>
-                    <p> <a href="#" target="_blank">cinestar@company.com</a></p>
-                </div>
-            </div>
-            <div class="clearfix"></div>
-            <div class="col-md-3 text-center footer-about">
-                <h4 class="text-danger">About us...</h4>
-                <div class="social-links social-icons"><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
-            </div>
-        </div>
-    </footer>
-    <script src="/js/jquery.min.js"></script>
-    <script src="/bootstrap/js/bootstrap.min.js"></script>
+	<nav class="navbar navbar-light navbar-expand-md">
+	
+<div class="container-fluid"><a class="navbar-brand" href="/index"><img id="logo" src="/img/logo.jpeg"></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+           
+			<div class="collapse navbar-collapse" id="navcol-1">
+				<ul class="nav navbar-nav ml-auto">
+					<li class="nav-item"><a class="nav-link" href="/index">Cartelera</a></li>
+					<li class="nav-item"><a class="nav-link" href="/sedes">Sedes</a></li>
+					<li class="nav-item"><a class="nav-link" href="/tarifario">Tarifario</a></li>
+					<li class="nav-item"><a class="nav-link" href="/cine">Nosotros</a></li>
+				</ul>
+			</div>
+			<div class="dropdown">
+				<a class="dropdown-toggle text-info" data-toggle="dropdown"
+					aria-expanded="false" id="username"><i
+					class="fa fa-user-circle-o"></i>&nbsp;</a>
+				<form th:action="@{/logout}" method="post">
+					<div class="dropdown-menu">
+						<button class="dropdown-item" type="submit">Cerrar Sesión</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</nav>
+
+	<form th:action="@{'/pago/'+ ${id} + '/' + ${id1}}" method="post">
+
+		<div id="pago">
+			<h2 class="text-center text-white bg-danger border-danger">Tu
+				Compra</h2>
+			<div class="container">
+				<div class="table-responsive border-danger shadow" id="tarjeta">
+					<table class="table">
+						<thead
+							class="text-uppercase text-center text-white bg-danger shadow">
+							<tr class="text-monospace"></tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="text-center">Número de Tarjeta:</td>
+								<td><input class="form-control-sm" type="text"
+									pattern="[0-9]{16}" maxlength=16 name="numeroTarjeta" required></td>
+							</tr>
+							<tr>
+								<td class="text-center">Fecha de Vencimiento:</td>
+								<td><input class="form-control-sm" type="month"
+									name="fechaVenc" required></td>
+							</tr>
+							<tr>
+								<td class="text-center">CVC:</td>
+								<td><input class="form-control-sm" type="text"
+									pattern="[0-9]{3}" maxlength=3 name="cvc" required></td>
+							</tr>
+							<tr></tr>
+							<tr></tr>
+							<tr></tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div id="opcion">
+			<div class="container" id="botones">
+				<div class="row">
+					<div class="col text-center" id="cancelar">
+						<button class="btn btn-secondary" id="bcancelar" type="button">Cancelar</button>
+					</div>
+					<div class="col text-center" id="comprar">
+						<button class="btn btn-secondary" id="bcomprar" type="submit">Comprar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	</form>
+
+	<footer>
+		<div class="row">
+			<div class="col-sm-6 col-md-5 text-center footer-navigation">
+				<h3 class="display-4 text-dark">
+					<a href="#">Cine<span>Star</span></a>
+				</h3>
+				<p class="text-dark links">
+					<a class="text-dark" href="index.html">Cartelera</a><strong>
+						· </strong><a class="text-dark" href="#">Sedes</a><strong> · </strong><a
+						class="text-dark" href="Tarifario.html">Tarifario</a><strong>&nbsp;</strong>
+				</p>
+				<p class="company-name">CineStar © 2020</p>
+			</div>
+			<div class="col-sm-6 col-md-4 text-justify footer-contacts">
+				<div>
+					<span class="fa fa-map-marker footer-contacts-icon"> </span>
+					<p class="text-dark">Lima, Perú</p>
+				</div>
+				<div>
+					<i class="fa fa-mobile-phone footer-contacts-icon"></i>
+					<p class="text-dark footer-center-info email text-left">+51 999
+						867 654</p>
+				</div>
+				<div>
+					<i class="fa fa-envelope footer-contacts-icon"></i>
+					<p>
+						<a href="#" target="_blank">cinestar@company.com</a>
+					</p>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+			<div class="col-md-3 text-center footer-about">
+				<h4 class="text-danger">Encuentranos en...</h4>
+				<div class="social-links social-icons">
+					<a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i
+						class="fa fa-twitter"></i></a><a href="#"><i
+						class="fa fa-instagram"></i></a>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<script src="/js/jquery.min.js"></script>
+	<script src="/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+		var user = "[[${#httpServletRequest.remoteUser}]]";
+		if (user == "") {
+			user = "Iniciar Sesión";
+			$("#username").attr('data-toggle', '');
+			document.getElementById("username").href = "/login";
+		}
+		document.getElementById("username").innerHTML = user;
+	</script>
 </body>
 
 </html>

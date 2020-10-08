@@ -27,3 +27,117 @@
   max-height: 200px;
 }
 
+#Descripcion {
+  /*font-size: 20px;*/
+}
+
+#icon_sede {
+  max-height: 40px;
+}
+#buttonNext{
+  border-radius: 4px;
+  background-color: #f4511e;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+#fondo-index {
+	background-color: #b31d1e;
+}
+
+#fondo-sede-peli {
+	background-color: #b31d1e;
+}
+
+#title-cont {
+  padding-left: 100px;
+}
+#tarifa {
+  background-image: url(/img/fondo.jpg);
+}
+#tarifa .container {
+  background: rgba(255,255,255,0.80);
+  padding: initial;
+}
+#total {
+  margin-top: 15px;
+}
+
+#modoPago {
+  margin-top: 20px;
+}
+
+#tarjeta {
+  padding-left: 100px;
+  padding-right: 100px;
+}
+
+#opcion {
+  margin-top: 30px;
+}
+
+#botones {
+  padding-left: 150px;
+  padding-right: 150px;
+}
+
+#botsig {
+  padding-top: 15px;
+}
+
+#botcan {
+  padding-top: 15px;
+}
+
+#filaF {
+  padding-top: 50px;
+}
+
+#PieRow {
+  padding-bottom: 30px;
+}
+
+#pantalla {
+  padding-top: 20px;
+}
+
+#pago {
+  padding: 50px;
+  text-align: center;
+  background: url(/img/tarjeta.jpg);
+  background-size: cover;
+}
+
+#pago .container {
+  background: rgba(255,255,255,0.80);
+  padding: initial;
+}
+
+#cancelar {
+  padding-bottom: 15px;
+}
+
+#comprar {
+  padding-bottom: 15px;
+}
+#carrusel img {
+  max-height: 400px;
+}
+
+#texto {
+  background-color: rgba(255,255,255,0.80);
+}
+
+#somos {
+  background-color: rgba(255,255,255,0.80);
+}
+#ntext{
+ color: #000000;
+  }

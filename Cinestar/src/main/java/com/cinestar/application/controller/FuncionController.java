@@ -2,6 +2,8 @@ package com.cinestar.application.controller;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -49,12 +51,18 @@ public class FuncionController {
 							sala));
 					
 		}
-		
 		model.addAttribute("pelicula",peliculaService.getPelicula(id1).get());
 		
 		model.addAttribute("funcionList",funcionesDeSede );
 
 		return "funciones";//Html;
 	}
-
+	/**
+	 * Muestra el tarifario
+	 * @return
+	 */
+	@GetMapping("/cine")
+	public String nosotros() {
+		return "cine";//html
+	}
 }

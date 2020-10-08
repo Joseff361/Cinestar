@@ -2,8 +2,10 @@ package com.cinestar.application.service;
 
 import java.sql.Date;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,13 +22,17 @@ public class FuncionService {
 
 	public Iterable<Funcion> getFunciones() {
 
-		Set<Funcion> result = new HashSet<>();
+		Set<Funcion> result = new LinkedHashSet<>();
 		long millis = System.currentTimeMillis();
-		Date today = Date.valueOf("2020-09-22");
-		for (Funcion func : repository.findAll()) {
-			if (func.getDia().equals(today))
+		Date today = Date.valueOf("2020-09-24");
+		
+		for (Funcion func : repository.findAllByOrderByDiaAsc()) {
+			if (func.getDia().getDate()<=26)
+				
 				result.add(func);
 		}
+				
+		
 		return result;
 	}
 
@@ -36,12 +42,12 @@ public class FuncionService {
 
 	public Iterable<Funcion> getFuncionesPeliSede(Pelicula pelicula, Sala sala) {
 
-		Set<Funcion> result = new HashSet<>();
+		Set<Funcion> result = new LinkedHashSet<>();
 		long millis = System.currentTimeMillis();
-		Date today = Date.valueOf("2020-09-22");
+		Date today = Date.valueOf("2020-09-24");
 
-		for (Funcion func : repository.findByPeliculaAndSala(pelicula, sala)) {
-			if (func.getDia().equals(today))
+		for (Funcion func : repository.findByPeliculaAndSalaOrderByDia(pelicula, sala)) {
+			if (func.getDia().getDate()<=26)
 				result.add(func);
 		}
 		return result;

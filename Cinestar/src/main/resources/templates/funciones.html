@@ -1,65 +1,62 @@
+
 <!DOCTYPE html>
+
 <html>
 
 <head>
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-<title>Cinestar</title>
-<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css?family=Cookie">
-<link rel="stylesheet" href="/fonts/font-awesome.min.css">
-<link rel="stylesheet" href="/fonts/ionicons.min.css">
-<link rel="stylesheet" href="/css/Highlight-Phone.css">
-<link rel="stylesheet" href="/css/Login-Form-Dark.css">
-<link rel="stylesheet" href="/css/Pretty-Footer1.css">
-<link rel="stylesheet" href="/css/styles.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Cinestar</title>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Cookie">
+    <link rel="stylesheet" href="/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="/fonts/ionicons.min.css">
+    <link rel="stylesheet" href="/css/Highlight-Phone.css">
+    <link rel="stylesheet" href="/css/Login-Form-Dark.css">
+    <link rel="stylesheet" href="/css/Pretty-Footer.css">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 
 <body>
-	<nav class="navbar navbar-light navbar-expand-md">
-		<div class="container-fluid">
-			<a class="navbar-brand" href="#"><img id="logo"
-				src="/img/logo.jpeg"></a>
-			<button data-toggle="collapse" class="navbar-toggler"
-				data-target="#navcol-1">
-				<span class="sr-only">Toggle navigation</span><span
-					class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navcol-1">
-				<ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item"><a class="nav-link active" href="/index">Cartelera</a></li>
+
+<nav class="navbar navbar-light navbar-expand-md">
+       <div class="container-fluid"><a class="navbar-brand" href="/index"><img id="logo" src="/img/logo.jpeg"></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+               <div
+                class="collapse navbar-collapse" id="navcol-1">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" href="/index">Cartelera</a></li>
                     <li class="nav-item"><a class="nav-link" href="/sedes">Sedes</a></li>
                     <li class="nav-item"><a class="nav-link" href="/tarifario">Tarifario</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Registrarse</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/login">Ingresar</a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
+                    <li class="nav-item"><a class="nav-link" href="/cine">Nosotros</a></li>
+                </ul>
+        </div>
+        <div class="dropdown"><a class="dropdown-toggle text-info"  data-toggle="dropdown" aria-expanded="false" id="username"><i class="fa fa-user-circle-o"></i>&nbsp;</a>
+            <form th:action="@{/logout}" method="post"><div class="dropdown-menu"><button class="dropdown-item" type="submit">Cerrar Sesión</button></div></form>
+        </div>
+        </div>
+    </nav>
 	<div class="col">
 		<h1 class="text-center">
 			Funciones&nbsp;<i class="fa fa-film" id="logo_film"></i>
 		</h1>
 	</div>
-	<div class="container"
-		style="padding: 20px 15px; border-color: rgb(242, 241, 239);">
+	<div class="highlight-phone"
+		style="padding: 50px ; border-color: rgb(242, 241, 239);">
 		<div class="col-md-12 col-lg-8 offset-md-0 offset-lg-2">
 			<div class="table-responsive">
 				<table class="table">
 					<thead>
 						<tr>
-							<th style="text-align: left;">Película</th>
-							<th style="text-align: left;">Género</th>
-							<th style="text-align: left;">Descripción</th>
+							<th style="text-align: justify;">Película</th>
+							<th style="text-align: justify;">Género</th>
+							<th style="text-align: jusitfy;">Descripción</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<td th:text="${pelicula.nombre}"></td>
-							<td th:text="${pelicula.genero}"></td>
-							<td th:text="${pelicula.descripcion}"></td>
+							<td style="text-align: justify; margin: auto; " th:text="${pelicula.nombre}"></td>
+							<td style="text-align: justify; margin: auto; " th:text="${pelicula.genero}"></td>
+							<td style="text-align: justify; margin: auto; " th:text="${pelicula.descripcion}"></td>
 						</tr>
 						<tr></tr>
 					</tbody>
@@ -72,15 +69,19 @@
 					<thead>
 						<tr>
 							<th style="text-align: left;">Tipo:</th>
-							<th style="text-align: left;">Horarios:</th>
+							<th style="text-align: left;">Dia:</th>
+							<th style="text-align: left;">Hora:</th>
 							<th style="text-align: left;">Seleccionar</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr th:each="f: ${funcionList}">
 							<td th:text="${f.tipo}"></td>
+							<td th:text="${f.dia.date}+'/'+${f.dia.month+1}"></td>
 							<td th:text="${f.hora}"></td>
-							<td><a class="text-secondary"th:href="@{'../../../../asientos/'+${f.id}}"  th:text="${f.tipo}"></a> </td>
+							<td><a  role="button" class="btn btn-outline-danger" title="Asientos" data-content="Popover body content is set in this attribute."
+					
+							th:href="@{'../../../../asientos/'+${f.id}}"  >Comprar</a> </td>
 
 							</td>
 						</tr>
@@ -90,26 +91,28 @@
 		</div>
 
 	</div>
-	<footer>
+		<footer>
 		<div class="row">
-			<div class="col-sm-6 col-md-4 footer-navigation">
-				<h3>
+			<div class="col-sm-6 col-md-5 text-center footer-navigation">
+				<h3 class="display-4 text-dark">
 					<a href="#">Cine<span>Star</span></a>
 				</h3>
-				<p class="links">
-					<a href="#">Cartelera</a><strong> · </strong><a href="#">Sedes</a><strong>
-						· </strong><a href="#">Tarifario</a><strong>&nbsp;</strong>
+				<p class="text-dark links">
+					<a class="text-dark" href="index.html">Cartelera</a><strong>
+						· </strong><a class="text-dark" href="#">Sedes</a><strong> · </strong><a
+						class="text-dark" href="Tarifario.html">Tarifario</a><strong>&nbsp;</strong>
 				</p>
 				<p class="company-name">CineStar © 2020</p>
 			</div>
-			<div class="col-sm-6 col-md-4 footer-contacts">
+			<div class="col-sm-6 col-md-4 text-justify footer-contacts">
 				<div>
 					<span class="fa fa-map-marker footer-contacts-icon"> </span>
-					<p>Lima, Perú</p>
+					<p class="text-dark">Lima, Perú</p>
 				</div>
 				<div>
 					<i class="fa fa-mobile-phone footer-contacts-icon"></i>
-					<p class="footer-center-info email text-left">+51 999 867 654</p>
+					<p class="text-dark footer-center-info email text-left">+51 999
+						867 654</p>
 				</div>
 				<div>
 					<i class="fa fa-envelope footer-contacts-icon"></i>
@@ -119,8 +122,8 @@
 				</div>
 			</div>
 			<div class="clearfix"></div>
-			<div class="col-md-4 footer-about">
-				<h4>About us...</h4>
+			<div class="col-md-3 text-center footer-about">
+				<h4 class="text-danger">Encuentranos en...</h4>
 				<div class="social-links social-icons">
 					<a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i
 						class="fa fa-twitter"></i></a><a href="#"><i
@@ -131,6 +134,16 @@
 	</footer>
 	<script src="/js/jquery.min.js"></script>
 	<script src="/bootstrap/js/bootstrap.min.js"></script>
+	
+	<script type="text/javascript">
+    var user = "[[${#httpServletRequest.remoteUser}]]";
+    if (user == ""){
+    	user = "Iniciar Sesión";
+    	$("#username").attr('data-toggle','');
+    	document.getElementById("username").href="/login";
+    }
+    document.getElementById("username").innerHTML=user;
+    </script>
 </body>
 
 </html>

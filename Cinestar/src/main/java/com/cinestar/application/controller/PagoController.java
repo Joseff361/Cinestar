@@ -74,7 +74,7 @@ public class PagoController {
 					colufila.substring(0, 1), Integer.parseInt(colufila.substring(1)), funcion));
 		}
 		Pago nuevo =pagoService.realizarPago(funcion, usuarioService.getUserByUsername(user), asientoLista,
-				nino + "-" + adulto + "-" + adultoMayor);
+				adulto + "-" + nino + "-" + adultoMayor);
 	
 		//Pago.id -->El codigo que se debe enviar
 		System.out.println(adulto);
@@ -109,7 +109,7 @@ public class PagoController {
 		
 		result=result.substring(1);
 		model.addAttribute("asientos",result);
-		model.addAttribute("diaSemana",pa.getAsientos().iterator().next().getFuncion().getDia().getDate());
+		model.addAttribute("diaSemana",pa.getAsientos().iterator().next().getFuncion().getDia().getDay());
 
 
 		return "compra";// Html;

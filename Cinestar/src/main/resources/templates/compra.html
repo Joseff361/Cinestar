@@ -5,31 +5,30 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-<title>Cinestar1</title>
-<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css?family=Cookie">
-<link rel="stylesheet" href="/fonts/font-awesome.min.css">
-<link rel="stylesheet" href="/css/Pretty-Footer1.css">
-<link rel="stylesheet" href="/css/styles1.css">
+<title>Confirmar Pago</title>
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" th:href="@{/bootstrap/css/bootstrap.min.css}">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cookie">
+<link rel="stylesheet" href="/fonts/font-awesome.min.css" th:href="@{/fonts/font-awesome.min.css}">
+<link rel="stylesheet" href="/css/Pretty-Footer1.css" th:href="@{/css/Pretty-Footer1.css}">
+<link rel="stylesheet" href="/css/styles1.css" th:href="@{/css/styles1.css}">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 </head>
 
 <body>
-	<nav class="navbar navbar-light navbar-expand-md">
-        <div class="container-fluid"><a class="navbar-brand" href="#"><img id="logo" src="/img/logo.jpeg"></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-            <div
+<nav class="navbar navbar-light navbar-expand-md">
+        <div class="container-fluid"><a class="navbar-brand" href="/index"><img id="logo" src="/img/logo.jpeg"></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+              <div
                 class="collapse navbar-collapse" id="navcol-1">
                 <ul class="nav navbar-nav ml-auto">
                     <li class="nav-item"><a class="nav-link" href="/index">Cartelera</a></li>
                     <li class="nav-item"><a class="nav-link" href="/sedes">Sedes</a></li>
                     <li class="nav-item"><a class="nav-link" href="/tarifario">Tarifario</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/index">Nosotros</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/cine">Nosotros</a></li>
                 </ul>
         </div>
-        <div class="dropdown"><a class="dropdown-toggle text-info" data-toggle="dropdown" aria-expanded="false" href="#" id="username"><i class="fa fa-user-circle-o"></i>&nbsp;</a>
+        <div class="dropdown"><a class="dropdown-toggle text-info"  data-toggle="dropdown" aria-expanded="false" id="username"><i class="fa fa-user-circle-o"></i>&nbsp;</a>
             <form th:action="@{/logout}" method="post"><div class="dropdown-menu"><button class="dropdown-item" type="submit">Cerrar Sesión</button></div></form>
         </div>
         </div>
@@ -197,7 +196,7 @@
 			</div>
 			<div class="clearfix"></div>
 			<div class="col-md-3 text-center footer-about">
-				<h4 class="text-danger">About us...</h4>
+				<h4 class="text-danger">Encuentranos en...</h4>
 				<div class="social-links social-icons">
 					<a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i
 						class="fa fa-twitter"></i></a><a href="#"><i
@@ -265,6 +264,8 @@
     var user = "[[${#httpServletRequest.remoteUser}]]";
     if (user == ""){
     	user = "Iniciar Sesión";
+    	$("#username").attr('data-toggle','');
+    	document.getElementById("username").href="/login";
     }
     document.getElementById("username").innerHTML=user;
     

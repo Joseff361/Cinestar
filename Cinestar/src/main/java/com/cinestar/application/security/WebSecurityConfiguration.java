@@ -17,19 +17,19 @@ import com.cinestar.application.service.UsuarioService;
 @EnableWebSecurity
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-	String[] resources = new String[] { "/include/**", "/css/**", "/icons/**", "/img/**", "/js/**", "/layer/**","/bootstrap/**" };
+	String[] resources = new String[] { "/include/**", "/css/**", "/icons/**", "/img/**", "/js/**", "/layer/**","/bootstrap/**" ,"/fonts/**"};
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 		.antMatchers(resources).permitAll()
 		.antMatchers("/", "/login","/peliculas","/peliculas/categoria","/peliculas/{id}","/sedes","/sedes/{id}", 
-				"/sedes/{id}/categoria","/peliculas/{id}/sedes/{id}/funciones","/compra/{id}").permitAll()
+				"/sedes/{id}/categoria","/peliculas/{id}/sedes/{id}/funciones","/index").permitAll()
 		.anyRequest().authenticated()
 		.and().formLogin().loginPage("/login").permitAll().defaultSuccessUrl("/peliculas")
 				.failureUrl("/login?error=true").usernameParameter("username").passwordParameter("password")
 			.and()
-				.logout().permitAll().logoutSuccessUrl("/peliculas");
+				.logout().permitAll().logoutSuccessUrl("/index");
 		//"/login?logout"
 	}
 

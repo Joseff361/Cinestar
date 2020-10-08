@@ -2,93 +2,166 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Cinestar</title>
-    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" th:href="@{/bootstrap/css/bootstrap.min.css}">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cookie">
-    <link rel="stylesheet" href="/fonts/font-awesome.min.css" th:href="@{/fonts/font-awesome.min.css}">
-    <link rel="stylesheet" href="/fonts/ionicons.min.css" th:href="@{/fonts/ionicons.min.css}">
-    <link rel="stylesheet" href="/css/Highlight-Phone.css" th:href="@{/css/Highlight-Phone.css}">
-    <link rel="stylesheet" href="/css/Login-Form-Dark.css" th:href="@{/css/Login-Form-Dark.css}">
-    <link rel="stylesheet" href="/css/Pretty-Footer.css" th:href="@{/css/Pretty-Footer.css}">
-    <link rel="stylesheet" href="/css/styles.css" th:href="@{/css/styles.css}">
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+<title>Cinestar</title>
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Cookie">
+<link rel="stylesheet" href="/fonts/font-awesome.min.css">
+<link rel="stylesheet" href="/fonts/ionicons.min.css">
+<link rel="stylesheet" href="/css/Highlight-Phone.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.2.0/aos.css">
+<link rel="stylesheet" href="/css/Login-Form-Dark.css">
+<link rel="stylesheet" href="/css/Pretty-Footer.css">
+<link rel="stylesheet" href="/css/styles.css">
 </head>
 
 <body>
-    <nav class="navbar navbar-light navbar-expand-md">
-        <div class="container-fluid"><a class="navbar-brand" href="#"><img id="logo" src="/img/logo.jpeg"></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-            <div
-                class="collapse navbar-collapse" id="navcol-1">
-                <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item"><a class="nav-link active" href="/index">Cartelera</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/sedes">Sedes</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/tarifario">Tarifario</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Registrarse</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/login">Ingresar</a></li>
-                </ul>
-        </div>
-        </div>
-    </nav>
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-md-5 offset-0">
-                <h1>Películas<img id="claqueta" src="/img/claqueta.jpg"></h1>
-            </div>
-        </div>
-    </div>
-    <div class="highlight-phone">
-        <div class="container">
-            <div class="row Aviacion" th:each="pelicula: ${peliculaList}">
-                <div class="col-md-8 offset-md-0">
-                    <div class="intro">
-                        <h2 th:text="${pelicula.nombre}"></h2>
-                        <p th:text="${pelicula.descripcion}"></p>
-                    </div>
-                </div>
-                <div class="col text-center"><img th:src="@{'/img/'+ ${pelicula.imagen}}" style="height: 300px;"></div>
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <h2 style="margin: 15px 0px 10px;">Sedes</h2>
-    </div>
-    <div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 offset-md-0 text-center" th:each="sede: ${sedeList}"><img th:src="@{'/img/'+ ${sede.imagen}}">
-                    <h3><a class="text-secondary" th:href="@{'/peliculas/'+${peliculaList.id}+'/sedes/'+${sede.id}+'/funciones'}" th:text="${sede.nombre}"></a></h3>
-                </div>
-            </div>
-        </div>
-    </div>
-    <footer>
-        <div class="row">
-            <div class="col-sm-6 col-md-4 footer-navigation">
-                <h3><a href="#">Cine<span>Star</span></a></h3>
-                <p class="links"><a href="#">Cartelera</a><strong> · </strong><a href="#">Sedes</a><strong> · </strong><a href="#">Tarifario</a><strong>&nbsp;</strong></p>
-                <p class="company-name">CineStar © 2020</p>
-            </div>
-            <div class="col-sm-6 col-md-4 footer-contacts">
-                <div><span class="fa fa-map-marker footer-contacts-icon"> </span>
-                    <p>Lima, Perú</p>
-                </div>
-                <div><i class="fa fa-mobile-phone footer-contacts-icon"></i>
-                    <p class="footer-center-info email text-left"> +51 999 867 654</p>
-                </div>
-                <div><i class="fa fa-envelope footer-contacts-icon"></i>
-                    <p> <a href="#" target="_blank">cinestar@company.com</a></p>
-                </div>
-            </div>
-            <div class="clearfix"></div>
-            <div class="col-md-4 footer-about">
-                <h4>About us...</h4>
-                <div class="social-links social-icons"><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
-            </div>
-        </div>
-    </footer>
-    <script src="/js/jquery.min.js"></script>
-    <script src="/bootstrap/js/bootstrap.min.js"></script>
+	<nav class="navbar navbar-light navbar-expand-md">
+<div class="container-fluid"><a class="navbar-brand" href="/index"><img id="logo" src="/img/logo.jpeg"></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+           
+			<div class="collapse navbar-collapse" id="navcol-1">
+				<ul class="nav navbar-nav ml-auto">
+					<li class="nav-item"><a class="nav-link" href="/index">Cartelera</a></li>
+					<li class="nav-item"><a class="nav-link" href="/sedes">Sedes</a></li>
+					<li class="nav-item"><a class="nav-link" href="/tarifario">Tarifario</a></li>
+					<li class="nav-item"><a class="nav-link" href="/cine">Nosotros</a></li>
+				</ul>
+			</div>
+			<div class="dropdown">
+				<a class="dropdown-toggle text-info" data-toggle="dropdown"
+					aria-expanded="false" id="username" ><i
+					class="fa fa-user-circle-o"></i>&nbsp;</a>
+				<form th:action="@{/logout}" method="post">
+					<div class="dropdown-menu">
+						<button class="dropdown-item" type="submit">Cerrar Sesión</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</nav>
+
+
+	<div class="container">
+		<div class="row align-items-center">
+			<div class="col-md-5 offset-0">
+				<h1>
+					Película<img id="claqueta" src="/img/claqueta.jpg">
+				</h1>
+			</div>
+		</div>
+	</div>
+
+	<div class="highlight-phone"
+		style="background: rgba(249, 191, 158, 0.63); padding-top: 15px; padding-bottom: 10px;">
+		<div class="container">
+			<div class="row Aviacion" th:each="pelicula: ${peliculaList}"
+				data-aos="fade-down" data-aos-duration="700" data-aos-delay="100"
+				style="padding-right: 20px; padding-left: 20px; padding-top: 20px; padding-bottom: 20px;">
+				<div class="col-sm-11 col-md-7 col-lg-6 offset-md-0">
+					<div class="intro">
+						<h2 th:text="${pelicula.nombre}"></h2>
+						<p th:text="${pelicula.descripcion}"
+							style="color: rgb(87, 90, 92); font-size: 20px; text-align: justify;"></p>
+					</div>
+				</div>
+				<div
+					class="col text-center d-lg-flex justify-content-lg-center justify-content-xl-start"
+					style="padding-left: 15px;">
+					<img class="d-lg-flex justify-content-lg-start"
+						th:src="@{'/img/'+ ${pelicula.imagen}}"
+						style="height: 360px; border-radius: 25px;">
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<h2 style="margin: 15px 0px 10px;">Sedes</h2>
+	</div>
+	<div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 offset-md-0 text-center"
+					th:each="sede: ${sedeList}">
+					<a
+						th:href="@{'/peliculas/'+${peliculaList.id}+'/sedes/'+${sede.id}+'/funciones'}">
+						<img data-bs-hover-animate="pulse"
+						th:src="@{'/img/'+ ${sede.imagen}}"
+						style="border-top-right-radius: 10px; border-bottom-left-radius: 10px;">
+					</a>
+					<h3>
+						<a class="text-secondary"
+							th:href="@{'/peliculas/'+${peliculaList.id}+'/sedes/'+${sede.id}+'/funciones'}"
+							th:text="${sede.nombre}"></a>
+					</h3>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer>
+		<div class="row">
+			<div class="col-sm-6 col-md-5 text-center footer-navigation">
+				<h3 class="display-4 text-dark">
+					<a href="#">Cine<span>Star</span></a>
+				</h3>
+				<p class="text-dark links">
+					<a class="text-dark" href="index.html">Cartelera</a><strong>
+						· </strong><a class="text-dark" href="#">Sedes</a><strong> · </strong><a
+						class="text-dark" href="Tarifario.html">Tarifario</a><strong>&nbsp;</strong>
+				</p>
+				<p class="company-name">CineStar © 2020</p>
+			</div>
+			<div class="col-sm-6 col-md-4 text-justify footer-contacts">
+				<div>
+					<span class="fa fa-map-marker footer-contacts-icon"> </span>
+					<p class="text-dark">Lima, Perú</p>
+				</div>
+				<div>
+					<i class="fa fa-mobile-phone footer-contacts-icon"></i>
+					<p class="text-dark footer-center-info email text-left">+51 999
+						867 654</p>
+				</div>
+				<div>
+					<i class="fa fa-envelope footer-contacts-icon"></i>
+					<p>
+						<a href="#" target="_blank">cinestar@company.com</a>
+					</p>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+			<div class="col-md-3 text-center footer-about">
+				<h4 class="text-danger">Encuentranos en...</h4>
+				<div class="social-links social-icons">
+					<a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i
+						class="fa fa-twitter"></i></a><a href="#"><i
+						class="fa fa-instagram"></i></a>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	<script src="/js/jquery.min.js"></script>
+	<script src="/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/js/bs-init.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.2.0/aos.js"></script>
+
+	<script type="text/javascript">
+		var user = "[[${#httpServletRequest.remoteUser}]]";
+		if (user == "") {
+			user = "Iniciar Sesión";
+			$("#username").attr('data-toggle', '');
+			document.getElementById("username").href = "/login";
+		}
+		document.getElementById("username").innerHTML = user;
+	</script>
+
 </body>
 
 </html>
