@@ -82,7 +82,6 @@ function limpiar_lista(peliculas_encontradas){
 function remover_hidden(){
 	for(let indice in peliculas){
 		let doc = document.getElementById(peliculas[indice].id)
-		//console.log(doc.hasAttribute("hidden"))
 		doc.removeAttribute("hidden")
 		console.log(doc.hasAttribute("hidden"))
 		location.reload(); 
