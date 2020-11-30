@@ -43,7 +43,14 @@ public class ComentarioService {
 		return comentarios;
 	}
 	public Iterable<Comentario> verComentarioPorUsuario(Usuario user) {
-		return repository.findAllByUserOrderByHoraAsc(user);
+		Set<Comentario> comentarios = new LinkedHashSet<>();
+		for(Comentario C: repository.findAllByOrderByHoraAsc()) {
+			
+			if (C.getPago().getUser()==user) {
+				comentarios.add(C);
+			}
+		}
+		return comentarios;
 	}
 	public void eliminarComentario(Comentario comentario) {
 		repository.delete(comentario);
