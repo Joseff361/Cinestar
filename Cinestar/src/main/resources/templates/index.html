@@ -58,10 +58,21 @@
 	        </div>
 	    </div>
 	      <div class= "highlight-phone">
+      	    <div class="row">
+     		<div class="col-md-4 mx-auto">
+	     		<div class="input-group mb-3">
+					  <div class="input-group-prepend">
+					    <span class="input-group-text" >Buscar Pelicula: </span>
+					  </div>
+					  <input type="text" class="form-control" id="buscar-pelicula" aria-describedby="basic-addon3">
+		     	</div>
+     		</div>
+	     	</div>
         <div class="container bg-light border rounded" >
             <div class="row">
                 <div class="col-md-4" th:each="pelicula: ${peliculaList}">
-                <a th:href="@{/peliculas/}+${pelicula.id}">
+                <div th:id=${pelicula.id}>
+                	<a th:href="@{/peliculas/}+${pelicula.id}">
                     <div class="card">
                     
                     <img class="rounded img-fluid card-img-top w-100 d-block border rounded-0" th:src="@{'/img/' + ${pelicula.imagen}}">
@@ -71,6 +82,7 @@
                         </div>
                     </div>
                     </a>
+                </div>
                 </div>
             </div>
         </div>
@@ -118,6 +130,7 @@
 		</div>
 	</footer>
     <script src="js/jquery.min.js"></script>
+    <script src="js/buscar.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript">
     var user = "[[${#httpServletRequest.remoteUser}]]";
