@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="fonts/font-awesome.min.css">
     <link rel="stylesheet" href="css/Pretty-Footer.css">
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 </head>
 
 <body>
@@ -32,8 +33,88 @@
     </nav>
  	
  	
- 	<h1>perful</h1>
-
+ 	
+	<div class="text-center">
+		<h3>Historial de Pagos <span th:text=${user}></span></h3>
+		<br>	
+	</div>
+	<div class="container">
+		<div class="row text-center">
+			<div class="col-md-8 mx-auto">
+				<table class="table">
+				  <thead class="thead-dark">
+				    <tr>
+				      <th scope="col">ID</th>
+				      <th scope="col">Decripcion</th>
+				      <th scope="col">Fecha</th>
+				      <th scope="col">Monto</th>
+				      <th scope="col">Comentarios</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				    <tr th:each="pago: ${pagos}">
+				    
+				    
+				    
+					<form th:action="@{/comentar}" method="get">
+				      <th th:text="${pago.id}" ></th>
+				      <th th:text="${pago.descripcion}" ></th>
+				      <th th:text="${pago.hora}" ></th>
+				      <th>S/.<span th:text="${pago.monto}" ></span>0</th>
+				      <th>
+				      	<a type="button" data-toggle="modal"  th:attr="data-target=${#strings.concat('#pago',pago.id)}">
+				      	<i class="fa fa-commenting-o" aria-hidden="true"></i>
+				      	</a>
+				      </th>
+				      
+				      <div class="modal fade" th:attr="id=${#strings.concat('pago',pago.id)}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					  <div class="modal-dialog">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h5 class="modal-title" id="exampleModalLabel">Comentario <span th:text="${pago.id}"></span></h5>
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          <span aria-hidden="true">&times;</span>
+					        </button>
+					      </div>
+					      <div class="modal-body">
+					      		  
+					      		  <div class="form-group">
+						            <label for="message-text" class="col-form-label">ID Pago:</label>
+						            <input type="text" class="form-control" name="id"
+						            th:attr="value=${pago.id}" readonly>
+						          </div>
+						          
+						          <div class="form-group">
+						            <label for="message-text" class="col-form-label">Comentario:</label>
+						            <input type="text" class="form-control" name="comentario">
+						          </div>
+						          
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+					        <button type="submit" class="btn btn-primary">Enviar comentario</button>
+					      </div>
+					    </div>
+					  </div>
+					  </div>
+				    </form>  
+				    
+				    
+				    
+				    </tr>
+				  </tbody>
+				</table>
+				
+				
+				
+				
+			</div>
+			<div class="col-md-5 mx-auto">
+				<a class="btn btn-primary btn-lg" href="/perfil" role="button">Volver</a>
+			</div>
+		</div>
+	</div>
+	
 	
 	<footer>
 		<div class="row">

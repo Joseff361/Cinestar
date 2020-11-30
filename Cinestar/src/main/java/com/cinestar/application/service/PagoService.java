@@ -96,6 +96,6 @@ public class PagoService {
 			return repository.findById(id).get();
 	}
 	public Iterable<Pago> getPagosUsuario(Usuario usuario) {
-		return (Iterable<Pago>) repository.findAllByUserOrderByHoraAsc(usuario);
+		return repository.findAllByUserOrderByHoraAsc(usuario);
 	}
 }

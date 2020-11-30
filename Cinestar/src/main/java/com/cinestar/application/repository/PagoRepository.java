@@ -9,7 +9,7 @@ import com.cinestar.application.entity.Usuario;
 
 @Repository
 public interface PagoRepository extends CrudRepository<Pago, Long>{
-	public Iterable<Pago> findAllByUserOrderByHoraAsc(Usuario usuario);
+	Iterable<Pago> findAllByUserOrderByHoraAsc(Usuario usuario);
 
 	
 	

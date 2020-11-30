@@ -8,6 +8,8 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +22,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.cinestar.application.entity.Asiento;
 import com.cinestar.application.entity.Funcion;
 import com.cinestar.application.entity.Pago;
+import com.cinestar.application.entity.Sala;
+import com.cinestar.application.entity.Usuario;
 import com.cinestar.application.service.AsientoService;
 import com.cinestar.application.service.FuncionService;
 import com.cinestar.application.service.PagoService;
@@ -191,6 +195,26 @@ public class PagoController {
 		System.out.println(numeroTarjeta);
 		System.out.println(cvc);
 		return "redirect:/peliculas";
+	}
+	
+	@GetMapping({"/tabla-pagos"})
+	public String login(Model model, HttpServletRequest request) {
+		
+		//Recogiendo el usuario desde SpringSecurity y aniadiendolo al modelo
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String currentPrincipalName = authentication.getName();
+		model.addAttribute("user", currentPrincipalName);
+		
+		Usuario usuario = usuarioService.getUserByUsername(currentPrincipalName);
+		model.addAttribute("usuario",usuario);
+		
+		ArrayList<Pago> pagos = new ArrayList<>() ;
+		
+		for(Pago pago: pagoService.getPagosUsuario(usuario)) {
+			pagos.add(pago);
+		}
+		model.addAttribute("pagos",pagos);
+		return "tabla-pagos";
 	}
 
 }
