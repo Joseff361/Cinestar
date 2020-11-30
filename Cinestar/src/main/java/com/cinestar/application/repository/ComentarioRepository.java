@@ -10,6 +10,6 @@ import com.cinestar.application.entity.Usuario;
 @Repository
 public interface ComentarioRepository extends CrudRepository<Comentario, Long>{
 	public Iterable<Comentario> findAllByOrderByHoraAsc();
-	public Iterable<Comentario> findAllByUserOrderByHoraAsc(Usuario usuario);
+	//public Iterable<Comentario> findAllByUserOrderByHoraAsc(Usuario usuario);
 	
 }
