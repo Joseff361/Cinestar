@@ -2,6 +2,7 @@ package com.cinestar.application.service;
 
 import java.sql.Timestamp;
 import java.util.LinkedHashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,11 @@ public class ComentarioService {
 
 	}
 	public Comentario getComentario(Long id ) {
-		return repository.findById(id).get();
+		Optional<Comentario> optional =  repository.findById(id);
+		if(optional.isPresent()) {
+			return optional.get();
+		}
+		return new Comentario();
 	}
 	
 	public void enviarComentario(String descripcion, Pago pago) {

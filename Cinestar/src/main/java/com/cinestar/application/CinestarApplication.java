@@ -6,10 +6,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.util.logging.Level;
+import java.util.logging.Logger; 
+
 @SpringBootApplication
 public class CinestarApplication implements CommandLineRunner {
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
+	Logger logger = Logger.getLogger(CinestarApplication.class.getName());
 
 	public static void main(String[] args) {
 		SpringApplication.run(CinestarApplication.class, args);
@@ -19,8 +23,7 @@ public class CinestarApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		String password = "12345";
 		String passwordBcrypt = passwordEncoder.encode(password);
-		System.out.println(passwordBcrypt);
-
+		logger.log(Level.INFO, passwordBcrypt);
 	}
 
 }

@@ -3,6 +3,7 @@ package com.cinestar.application.controller;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -50,7 +51,11 @@ public class PagoController {
 	public String eleccionAsientos(@PathVariable String id, Model model) {
 
 		model.addAttribute("funcion", funcionService.getFuncion(Long.parseLong(id)));
-		model.addAttribute("asientoList", asientoService.findAsientos(funcionService.getFuncion(Long.parseLong(id)).get()));
+		
+		Optional<Funcion> optional =  funcionService.getFuncion(Long.parseLong(id));
+		if(optional.isPresent()) {
+			model.addAttribute("asientoList", asientoService.findAsientos(optional.get()));
+		}
 
 		return "asientos";// Html;
 	}
@@ -70,24 +75,32 @@ public class PagoController {
 			@PathVariable String id
 			,RedirectAttributes redirectAttributes) {
 
-		Funcion funcion = funcionService.getFuncion(Long.parseLong(id)).get();
-
-		Set<Asiento> asientoLista = new HashSet<>();
-		for (String colufila : asientos.split("-")) {
-			asientoLista.addAll((Collection<Asiento>) asientoService.findByColumnaAndByFilaAndByFuncion(
-					colufila.substring(0, 1), Integer.parseInt(colufila.substring(1)), funcion));
-		}
-		Pago nuevo =pagoService.realizarPago(funcion, usuarioService.getUserByUsername(user), asientoLista,
-				adulto + "-" + nino + "-" + adultoMayor);
-	
-		//Pago.id -->El codigo que se debe enviar
-		System.out.println(adulto);
-		System.out.println(nino);
-		System.out.println(adultoMayor);
-		System.out.println(user);
-		System.out.println(asientos);
+		Optional<Funcion> optional = funcionService.getFuncion(Long.parseLong(id));
 		
-		return "redirect:/compra/"+nuevo.getId();
+		if(optional.isPresent()) {
+			Funcion funcion = optional.get();
+
+			Set<Asiento> asientoLista = new HashSet<>();
+			for (String colufila : asientos.split("-")) {
+				asientoLista.addAll((Collection<Asiento>) asientoService.findByColumnaAndByFilaAndByFuncion(
+						colufila.substring(0, 1), Integer.parseInt(colufila.substring(1)), funcion));
+			}
+			Pago nuevo =pagoService.realizarPago(funcion, usuarioService.getUserByUsername(user), asientoLista,
+					adulto + "-" + nino + "-" + adultoMayor);
+		
+			
+
+			//Pago.id -->El codigo que se debe enviar
+			System.out.println(adulto);
+			System.out.println(nino);
+			System.out.println(adultoMayor);
+			System.out.println(user);
+			System.out.println(asientos);
+			return "redirect:/compra/"+nuevo.getId();
+
+		}
+		
+		return "redirect:/compra/0";
 	}
 
 	/**

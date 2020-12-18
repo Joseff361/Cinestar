@@ -1,5 +1,6 @@
 package com.cinestar.application.controller;
 
+import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 
 import com.cinestar.application.entity.Pago;
@@ -16,7 +17,8 @@ public class VisaPagoStrategy implements PagoStrategy{
 				}
 
 			} 
-			if (LocalDateTime.now().getDayOfWeek().equals("SUNDAY"));
+			//anteriormente: LocalDateTime.now().getDayOfWeek().equals("SUNDAY")
+			if (LocalDateTime.now().getDayOfWeek().name().equals("SUNDAY"));
 				if (P.getMonto() >= 30) {
 					P.setMonto((float) (P.getMonto() * 1.15));
 				}

@@ -3,6 +3,7 @@ package com.cinestar.application.controller;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,19 +59,23 @@ public class PeliculaController {
 	 */
 	@GetMapping("/peliculas/{id}")
 	public String peliculas_id(@PathVariable Long id, Model model) {
-		Pelicula p = peliculaService.getPelicula(id).get();
 		Set<Sede> sedes = new LinkedHashSet<>();
 		//ArrayList<Sede> sedesOrd=new ArrayList<>();
 		for (Funcion func : funcionService.getFunciones()) {
 
 			// guardar en un lista de sedes todas las funciones con la peli ID
-			if (func.getPelicula().getId() == id) {
+			//func.getPelicula().getId() == id  esto puede fallar, java no tiene buen soporte con el objeto Long
+			if (id != null && func.getPelicula().getId()!= null && func.getPelicula().getId().equals(id)) {
 				sedes.add(func.getSala().getSede());
 			}
 
 		}
 	
-		model.addAttribute("peliculaList", p);
+		Optional<Pelicula> optional = peliculaService.getPelicula(id);
+		if(optional.isPresent()) {
+			Pelicula p = optional.get();
+			model.addAttribute("peliculaList", p);
+		}
 		model.addAttribute("sedeList", sedes);
 		return "pelicula";// html
 	}

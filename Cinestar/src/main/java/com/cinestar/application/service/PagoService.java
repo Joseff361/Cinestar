@@ -2,6 +2,7 @@ package com.cinestar.application.service;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,23 +42,34 @@ public class PagoService {
 	}
 
 	public void cancelarPago(long id) {
-		Pago P=repository.findById(id).get();
-		for(Asiento a:P.getAsientos()) {
-			a.setPago(null);
-			arepository.save(a);
+		Optional<Pago> optional = repository.findById(id);
+		if(optional.isPresent()) {
+			Pago P = optional.get();
+			for(Asiento a:P.getAsientos()) {
+				a.setPago(null);
+				arepository.save(a);
+			}
+			repository.delete(P);
 		}
-		repository.delete(P);
 	}
+	
 	public Pago realizarPagoOficial(long id ,PagoStrategy estrategiaPago) {
-		Pago P=repository.findById(id).get();
-		estrategiaPago.RealizarPago(P);
-		return P;
+		Optional<Pago> optional =  repository.findById(id);
+		if(optional.isPresent()) {
+			Pago P = optional.get();
+			estrategiaPago.RealizarPago(P);
+			return P;
+		}
 		
-		
+		return new Pago();
 	}
+	
 	public void confirmarPago(long id ) {
-		Pago P=repository.findById(id).get();
-		P=repository.save(P);
+		Optional<Pago> optional =  repository.findById(id);
+		if(optional.isPresent()) {
+			Pago P = optional.get();
+			P = repository.save(P);
+		}
 	}
 
 	public float calculoCostoTotal(Funcion funcion,String descripcion) {
@@ -93,8 +105,13 @@ public class PagoService {
 	}
 
 	public Pago getPago(long id) {
-			return repository.findById(id).get();
+		Optional<Pago> optional = repository.findById(id);
+		if(optional.isPresent()) {
+			return optional.get();
+		}
+		return new Pago();
 	}
+	
 	public Iterable<Pago> getPagosUsuario(Usuario usuario) {
 		return repository.findAllByUserOrderByHoraAsc(usuario);
 	}

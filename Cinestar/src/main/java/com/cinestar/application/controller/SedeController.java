@@ -2,6 +2,7 @@ package com.cinestar.application.controller;
 
 import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cinestar.application.entity.Funcion;
 import com.cinestar.application.entity.Pelicula;
+import com.cinestar.application.entity.Sede;
 import com.cinestar.application.service.FuncionService;
 import com.cinestar.application.service.SedeService;
 
@@ -51,13 +53,16 @@ public class SedeController {
 		for (Funcion func : funcionService.getFunciones()) {
 
 			// guardar en un lista de Peliculas de todas las funciones que tenga la sede ID
-			if (func.getSala().getSede().getId() == id) {
+			if (id != null && func.getSala().getSede().getId()!= null && func.getSala().getSede().getId().equals(id)) {
 				peliculas.add(func.getPelicula());
 			}
 
 		}
 		
-		model.addAttribute("sede", sedeService.getSede(id).get());
+		Optional<Sede> optional = sedeService.getSede(id);
+		if(optional.isPresent()) {
+			model.addAttribute("sede", optional.get());
+		}
 		model.addAttribute("peliculaList", peliculas);
 
 		return "sede-peliculas";// html
@@ -77,7 +82,7 @@ public class SedeController {
 		for (Funcion func : funcionService.getFunciones()) {
 
 			// guardar en un lista de Peliculas de todas las funciones que tenga la sede ID
-			if (func.getSala().getSede().getId() == id) {
+			if (id!=null && func.getSala().getSede().getId()!=null && func.getSala().getSede().getId().equals(id)) {
 				if (func.getPelicula().getGenero().equals(genero))
 					peliculas.add(func.getPelicula());
 			}
