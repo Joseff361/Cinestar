@@ -31,12 +31,14 @@ public class ComentarioService {
 	}
 	
 	public void enviarComentario(String descripcion, Pago pago) {
-		Comentario C= new Comentario();
-		C.setHora(new Timestamp(System.currentTimeMillis()));
-		C.setDescripcion(descripcion);
-		C.setPago(pago);
-		C = repository.save(C);
+		Comentario comentario = new Comentario();
+		comentario.setHora(new Timestamp(System.currentTimeMillis()));
+		comentario.setDescripcion(descripcion);
+		comentario.setPago(pago);
+		repository.save(comentario);
 	}
+	
+	
 	public Iterable<Comentario> verComentarioPorSede(Sede sede) {
 		Set<Comentario> comentarios = new LinkedHashSet<>();
 		for(Comentario C: repository.findAllByOrderByHoraAsc()) {

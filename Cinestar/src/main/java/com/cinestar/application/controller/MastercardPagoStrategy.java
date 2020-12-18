@@ -5,27 +5,23 @@ import java.time.LocalDateTime;
 import com.cinestar.application.entity.Pago;
 
 public class MastercardPagoStrategy implements PagoStrategy {
-	public Pago RealizarPago(Pago P) {
+	
+		
+	public Pago realizarPago(Pago ppago) {
 		// Funcionamiento de Pago independiente de la app, al ser servicio de Mastercard
 
-		if (Comprobacion(P)) {
-			P.setEstado("1");
-			if (LocalDateTime.now().getDayOfMonth() <= 15) {
-				if (P.getMonto() >= 30) {
-					P.setMonto((float) (P.getMonto() * 0.8));
-				}
+		ppago.setEstado("1");
+		if (LocalDateTime.now().getDayOfMonth() <= 15) {
+			if (ppago.getMonto() >= 30) {
+				ppago.setMonto((float) (ppago.getMonto() * 0.8));
+			}
 
-			} else if (LocalDateTime.now().getDayOfMonth() > 15 && LocalDateTime.now().getDayOfMonth() <= 25)
-				if (P.getMonto() >= 30) {
-					P.setMonto((float) (P.getMonto() * 0.75));
-				}
-		} 
-		return P;
+		} else if (LocalDateTime.now().getDayOfMonth() > 15 && LocalDateTime.now().getDayOfMonth() <= 25 && ppago.getMonto() >= 30) {
+			ppago.setMonto((float) (ppago.getMonto() * 0.75));
 
-	}
+		}
+		return ppago;
 
-	private boolean Comprobacion(Pago P) {
-		return true;
 	}
 
 }

@@ -17,18 +17,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cinestar.application.entity.Asiento;
 import com.cinestar.application.entity.Funcion;
 import com.cinestar.application.entity.Pago;
-import com.cinestar.application.entity.Sala;
 import com.cinestar.application.entity.Usuario;
 import com.cinestar.application.service.AsientoService;
 import com.cinestar.application.service.FuncionService;
 import com.cinestar.application.service.PagoService;
 import com.cinestar.application.service.UsuarioService;
+
+import java.util.logging.Level; 
+import java.util.logging.Logger;
 
 @Controller
 public class PagoController {
@@ -41,6 +42,8 @@ public class PagoController {
 	@Autowired
 	UsuarioService usuarioService;
 
+	Logger logger = Logger.getLogger( PagoController.class.getName());
+	
 	/**
 	 * Retorna funciones por id de sede e id de peliculas
 	 * 
@@ -57,7 +60,7 @@ public class PagoController {
 			model.addAttribute("asientoList", asientoService.findAsientos(optional.get()));
 		}
 
-		return "asientos";// Html;
+		return "asientos";
 	}
 
 	/**
@@ -91,11 +94,12 @@ public class PagoController {
 			
 
 			//Pago.id -->El codigo que se debe enviar
-			System.out.println(adulto);
-			System.out.println(nino);
-			System.out.println(adultoMayor);
-			System.out.println(user);
-			System.out.println(asientos);
+			logger.log(Level.INFO, adulto);
+			logger.log(Level.INFO, nino);
+			logger.log(Level.INFO, user);
+			logger.log(Level.INFO, adultoMayor);
+			logger.log(Level.INFO, asientos);
+
 			return "redirect:/compra/"+nuevo.getId();
 
 		}
@@ -129,7 +133,7 @@ public class PagoController {
 		model.addAttribute("diaSemana",pa.getAsientos().iterator().next().getFuncion().getDia().getDay());
 
 
-		return "compra";// Html;
+		return "compra";
 	}
 
 	/**
@@ -143,21 +147,8 @@ public class PagoController {
 			@RequestParam("medioPago") String medioPago, 
 			@PathVariable String id) {
 
-		// Chequeo Tarjeta
-		
-	/*	Pago P = pagoService.realizarPagoOficial(Long.parseLong(id), new VisaPagoStrategy());
-		if (P.getEstado().equals("1")) {
-			pagoService.confirmarPago(Long.parseLong(id));
-		}
-
-		else {
-			pagoService.cancelarPago(Long.parseLong(id));
-
-		}
-		// cancelar
-		pagoService.cancelarPago(Long.parseLong(id));*/
-		
-		System.out.println(medioPago);
+		//Aqui deberia haber un chequeo de tarjeta
+		logger.log(Level.INFO, medioPago);
 		
 		return "redirect:/pago/"+id+"/"+medioPago;
 	}
@@ -165,9 +156,7 @@ public class PagoController {
 	
 	@GetMapping("/pago/{id}/{id1}")
 	public String pago(@PathVariable String id, @PathVariable String id1,Model model) {
-
-		//model.addAttribute("funcionList", pagoService.getPago(Long.parseLong(id)));
-		return "pago";// Html;
+		return "pago";
 	}
 	
 	
@@ -186,13 +175,13 @@ public class PagoController {
 			@PathVariable String id1) {
 
 		// Aceptar
-		Pago P=null;
+		Pago pago =null;
 		if(id1.equals("0"))
-				 P = pagoService.realizarPagoOficial(Long.parseLong(id), new VisaPagoStrategy());
+			pago = pagoService.realizarPagoOficial(Long.parseLong(id), new VisaPagoStrategy());
 		else if(id1.equals("1"))
-			 P = pagoService.realizarPagoOficial(Long.parseLong(id), new MastercardPagoStrategy());
-		if(P!=null) {
-			if (P.getEstado().equals("1")) {
+			pago = pagoService.realizarPagoOficial(Long.parseLong(id), new MastercardPagoStrategy());
+		if(pago!=null) {
+			if (pago.getEstado().equals("1")) {
 				pagoService.confirmarPago(Long.parseLong(id));
 			}
 	
@@ -202,11 +191,9 @@ public class PagoController {
 			}
 		}
 		
-		//pagoService.cancelarPago(Long.parseLong(id));
-		
-		System.out.println(fechaVenc);
-		System.out.println(numeroTarjeta);
-		System.out.println(cvc);
+		logger.log(Level.INFO, fechaVenc);
+		logger.log(Level.INFO, numeroTarjeta);
+		logger.log(Level.INFO, cvc);
 		return "redirect:/peliculas";
 	}
 	

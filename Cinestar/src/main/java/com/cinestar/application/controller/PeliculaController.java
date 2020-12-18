@@ -1,7 +1,5 @@
 package com.cinestar.application.controller;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -26,6 +24,8 @@ public class PeliculaController {
 	PeliculaService peliculaService;
 	@Autowired
 	FuncionService funcionService;
+	
+	private static final String PELICULA_LIST = "peliculaList"; 
 
 	/**
 	 * Retorna lista de Peliculas
@@ -35,7 +35,7 @@ public class PeliculaController {
 	 */
 	@GetMapping({"/peliculas","/","/index"})
 	public String peliculas(Model model) {
-		model.addAttribute("peliculaList", peliculaService.getPeliculas());
+		model.addAttribute(PELICULA_LIST, peliculaService.getPeliculas());
 		return "index";// html
 	}
 
@@ -46,8 +46,8 @@ public class PeliculaController {
 	 * @return
 	 */
 	@GetMapping("/peliculas/categoria")
-	public String peliculas_categoria(@RequestParam String genero, Model model) {
-		model.addAttribute("peliculaList", peliculaService.getPeliculasByGenero(genero));
+	public String peliculasCategoria(@RequestParam String genero, Model model) {
+		model.addAttribute(PELICULA_LIST, peliculaService.getPeliculasByGenero(genero));
 		return "index";// html
 	}
 
@@ -58,13 +58,12 @@ public class PeliculaController {
 	 * @return
 	 */
 	@GetMapping("/peliculas/{id}")
-	public String peliculas_id(@PathVariable Long id, Model model) {
+	public String peliculasId(@PathVariable Long id, Model model) {
 		Set<Sede> sedes = new LinkedHashSet<>();
-		//ArrayList<Sede> sedesOrd=new ArrayList<>();
 		for (Funcion func : funcionService.getFunciones()) {
 
-			// guardar en un lista de sedes todas las funciones con la peli ID
-			//func.getPelicula().getId() == id  esto puede fallar, java no tiene buen soporte con el objeto Long
+			/* guardar en un lista de sedes todas las funciones con la peli ID
+			   el operador == puede fallar, java no tiene buen soporte con el objeto Long*/
 			if (id != null && func.getPelicula().getId()!= null && func.getPelicula().getId().equals(id)) {
 				sedes.add(func.getSala().getSede());
 			}
@@ -74,7 +73,7 @@ public class PeliculaController {
 		Optional<Pelicula> optional = peliculaService.getPelicula(id);
 		if(optional.isPresent()) {
 			Pelicula p = optional.get();
-			model.addAttribute("peliculaList", p);
+			model.addAttribute(PELICULA_LIST, p);
 		}
 		model.addAttribute("sedeList", sedes);
 		return "pelicula";// html

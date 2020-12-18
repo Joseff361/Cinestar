@@ -1,12 +1,10 @@
 package com.cinestar.application.service;
 
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Service;
 
 import com.cinestar.application.controller.PagoStrategy;
@@ -17,6 +15,8 @@ import com.cinestar.application.entity.Usuario;
 import com.cinestar.application.repository.AsientoRepository;
 import com.cinestar.application.repository.PagoRepository;
 
+import java.util.logging.Logger;
+
 @Service
 public class PagoService {
 	@Autowired
@@ -24,41 +24,43 @@ public class PagoService {
 	@Autowired
 	AsientoRepository arepository;
 
+	Logger logger = Logger.getLogger(PagoService.class.getName()); 
+	
 	public Pago realizarPago(Funcion funcion, Usuario user, Set<Asiento> asientos, String descripcion) {
-		Pago P = new Pago();
+		Pago pago = new Pago();
 		
-		P.setHora(new Timestamp(System.currentTimeMillis()));
+		pago.setHora(new Timestamp(System.currentTimeMillis()));
 
-		P.setDescripcion(descripcion);
-		P.setMonto(calculoCostoTotal(funcion,descripcion));// Ver costo si es variable por niños o no? La tarjeta y es mamada
-		P.setUser(user);
-		P.setEstado("0");//Estado 0 =  Incompleto el pago
-		P = repository.save(P);
+		pago.setDescripcion(descripcion);
+		pago.setMonto(calculoCostoTotal(funcion,descripcion));// Ver costo si es variable por niños o no? La tarjeta y es mamada
+		pago.setUser(user);
+		pago.setEstado("0");//Estado 0 =  Incompleto el pago
+		pago = repository.save(pago);
 		for(Asiento a:asientos) {
-			a.setPago(P);
+			a.setPago(pago);
 			arepository.save(a);
 		}
-		return P;
+		return pago;
 	}
 
 	public void cancelarPago(long id) {
 		Optional<Pago> optional = repository.findById(id);
 		if(optional.isPresent()) {
-			Pago P = optional.get();
-			for(Asiento a:P.getAsientos()) {
+			Pago pago = optional.get();
+			for(Asiento a:pago.getAsientos()) {
 				a.setPago(null);
 				arepository.save(a);
 			}
-			repository.delete(P);
+			repository.delete(pago);
 		}
 	}
 	
 	public Pago realizarPagoOficial(long id ,PagoStrategy estrategiaPago) {
 		Optional<Pago> optional =  repository.findById(id);
 		if(optional.isPresent()) {
-			Pago P = optional.get();
-			estrategiaPago.RealizarPago(P);
-			return P;
+			Pago pago = optional.get();
+			estrategiaPago.realizarPago(pago);
+			return pago;
 		}
 		
 		return new Pago();
@@ -67,8 +69,8 @@ public class PagoService {
 	public void confirmarPago(long id ) {
 		Optional<Pago> optional =  repository.findById(id);
 		if(optional.isPresent()) {
-			Pago P = optional.get();
-			P = repository.save(P);
+			Pago pago = optional.get();
+			repository.save(pago);
 		}
 	}
 
@@ -76,12 +78,7 @@ public class PagoService {
 		String [] valores= descripcion.split("-");
 		float monto=(float) 0;
 		 int diaSemana=funcion.getDia().getDay();
-
-		//Adulto
-		 System.out.println("DiaSemana:"+diaSemana);
-		System.out.println("Adulto"+valores[0]);
-		System.out.println("Niños"+valores[1]);
-		System.out.print("+60"+valores[2]);
+		
 		if(diaSemana==1|| diaSemana==2) {
 			monto+=Integer.parseInt(valores[0])*9;
 			monto+=Integer.parseInt(valores[1])*6;
@@ -99,7 +96,6 @@ public class PagoService {
 			monto+=Integer.parseInt(valores[1])*10;
 			monto+=Integer.parseInt(valores[2])*11.5;			
 		}
-		System.out.println("monto"+monto);
 		
 		return  monto;
 	}

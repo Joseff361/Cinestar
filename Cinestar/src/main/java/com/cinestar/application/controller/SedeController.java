@@ -1,6 +1,5 @@
 package com.cinestar.application.controller;
 
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -46,7 +45,7 @@ public class SedeController {
 	 * @return
 	 */
 	@GetMapping("/sedes/{id}")
-	public String peliculas_id(@PathVariable Long id, Model model) {
+	public String peliculasId(@PathVariable Long id, Model model) {
 
 		Set<Pelicula> peliculas = new LinkedHashSet<>();
 
@@ -75,15 +74,15 @@ public class SedeController {
 	 * @return
 	 */
 	@GetMapping("/sedes/{id}/categoria")
-	public String peliculas_id_categoria(@PathVariable Long id, @RequestParam String genero, Model model) {
+	public String peliculasIdCategoria(@PathVariable Long id, @RequestParam String genero, Model model) {
 
 		Set<Pelicula> peliculas = new LinkedHashSet<>();
 
 		for (Funcion func : funcionService.getFunciones()) {
 
 			// guardar en un lista de Peliculas de todas las funciones que tenga la sede ID
-			if (id!=null && func.getSala().getSede().getId()!=null && func.getSala().getSede().getId().equals(id)) {
-				if (func.getPelicula().getGenero().equals(genero))
+			if (id!=null && func.getSala().getSede().getId()!=null && func.getSala().getSede().getId().equals(id) &&
+					func.getPelicula().getGenero().equals(genero)) {
 					peliculas.add(func.getPelicula());
 			}
 

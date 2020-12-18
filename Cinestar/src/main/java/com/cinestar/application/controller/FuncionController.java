@@ -2,8 +2,6 @@ package com.cinestar.application.controller;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,7 +64,7 @@ public class FuncionController {
 				
 		model.addAttribute("funcionList",funcionesDeSede );
 
-		return "funciones";//Html;
+		return "funciones";
 	}
 	/**
 	 * Muestra el tarifario
@@ -74,6 +72,6 @@ public class FuncionController {
 	 */
 	@GetMapping("/cine")
 	public String nosotros() {
-		return "cine";//html
+		return "cine";
 	}
 }

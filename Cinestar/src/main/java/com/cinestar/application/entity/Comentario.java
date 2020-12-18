@@ -27,8 +27,6 @@ public class Comentario  implements Serializable{
 	@GenericGenerator(name = "native", strategy = "native")
 	private Long id;
 
-	//@Column(unique=true,nullable=false)
-	//private String cod;
 	@Column(unique=true,nullable=false)
 	private String descripcion;
 	@Column (nullable= true)
@@ -45,16 +43,6 @@ public class Comentario  implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	/*
-	public String getCod() {
-		return cod;
-	}
-
-	public void setCod(String cod) {
-		this.cod = cod;
-	}
-	*/
 
 	public String getDescripcion() {
 		return descripcion;

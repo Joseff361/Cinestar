@@ -5,10 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.cinestar.application.entity.Asiento;
 import com.cinestar.application.entity.Funcion;
-import com.cinestar.application.entity.Pelicula;
-import com.cinestar.application.entity.Sala;
 import com.cinestar.application.repository.AsientoRepository;
-import com.cinestar.application.repository.PeliculaRepository;
 
 @Service
 public class AsientoService {

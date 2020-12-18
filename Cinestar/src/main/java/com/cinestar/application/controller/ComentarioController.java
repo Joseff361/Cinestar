@@ -41,7 +41,7 @@ public class ComentarioController {
 	}
 	
 	@GetMapping("/comentarios/{id}")
-	public String peliculas_id(@PathVariable Long id, Model model) {
+	public String peliculasId(@PathVariable Long id, Model model) {
 		
 		Optional<Sede> optional = sedeService.getSede(id);
 		
@@ -55,7 +55,6 @@ public class ComentarioController {
 				ComentarioSede comentarioSede = new ComentarioSede(comentario.getDescripcion(), comentario.getHora(),
 						comentario.getPago().getUser().getFirstName(), comentario.getPago().getUser().getLastName(), 
 						comentario.getPago().getUser().getUsername());
-				System.out.println("=================> " + comentarioSede.getComentario());
 				comentariosSede.add(comentarioSede);
 			}
 			

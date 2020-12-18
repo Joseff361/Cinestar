@@ -21,10 +21,10 @@ public class UsuarioService implements UserDetailsService{
     UsuarioRepository userRepository;
 
     @Override
-     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+     public UserDetails loadUserByUsername(String username){
 
-     //Buscar el usuario con el repositorio y si no existe lanzar una exepcion
-     Usuario appUser =  userRepository.findByUsername(username);
+    	//Buscar el usuario con el repositorio y si no existe lanzar una exepcion
+    	Usuario appUser =  userRepository.findByUsername(username);
 
 
 		if(appUser == null) {
@@ -33,9 +33,8 @@ public class UsuarioService implements UserDetailsService{
 		}
 
 
-    //Crear El objeto UserDetails que va a ir en sesion y retornarlo.
-    UserDetails user = (UserDetails) new User(appUser.getUsername(), appUser.getPassword(), emptyList());
-         return user;
+		//Crear El objeto UserDetails que va a ir en sesion y retornarlo.
+		return (UserDetails) new User(appUser.getUsername(), appUser.getPassword(), emptyList());
     }
 
 	public Object getAllUsers() {

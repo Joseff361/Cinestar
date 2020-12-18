@@ -1,0 +1,2 @@
+
+mvn sonar:sonar -Dsonar.projectKey=com.cinestar:Cinestar -Dsonar.host.url=http://localhost:9000 -Dsonar.login=d3dc98dec8ef5344afa43bded616b587218226a7
