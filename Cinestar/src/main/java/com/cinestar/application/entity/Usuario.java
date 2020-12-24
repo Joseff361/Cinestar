@@ -56,7 +56,7 @@ public class Usuario implements Serializable{
 	@Column(length = 60)
 	private String password;
 
-	private Boolean enabled;
+
 
 	public Long getId() {
 		return id;
@@ -82,13 +82,6 @@ public class Usuario implements Serializable{
 		this.password = password;
 	}
 
-	public Boolean getEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(Boolean enabled) {
-		this.enabled = enabled;
-	}
 
 
 

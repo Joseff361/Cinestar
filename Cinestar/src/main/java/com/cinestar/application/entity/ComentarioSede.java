@@ -74,8 +74,4 @@ public class ComentarioSede {
 				+ ", lastName=" + lastName + ", username=" + username + "]";
 	}
 	
-	
-	
-	
-	
 }
