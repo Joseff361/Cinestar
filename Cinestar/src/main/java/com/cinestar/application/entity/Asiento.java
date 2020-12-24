@@ -77,4 +77,7 @@ public class Asiento implements Serializable {
 	public void setPago(Pago pago) {
 		this.pago = pago;
 	}
+
+	
+	
 }

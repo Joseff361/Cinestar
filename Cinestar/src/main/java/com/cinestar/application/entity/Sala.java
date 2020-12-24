@@ -74,4 +74,5 @@ public class Sala implements Serializable {
 	public void setSede(Sede sede) {
 		this.sede = sede;
 	}
+
 }

@@ -78,4 +78,6 @@ public class Pelicula implements Serializable {
 		this.funciones = funciones;
 	}
 
+	
+
 }

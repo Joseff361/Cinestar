@@ -5,7 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import com.cinestar.application.entity.Asiento;
 import com.cinestar.application.entity.Funcion;
-import com.cinestar.application.entity.Pago;
 
 @Repository
 public interface AsientoRepository  extends CrudRepository<Asiento, Long> {
@@ -13,6 +12,5 @@ public interface AsientoRepository  extends CrudRepository<Asiento, Long> {
 
 	
 
-	Iterable<Asiento> findByFuncionOrderById(Funcion f);
-	Iterable<Asiento> findByPagoOrderById(Pago p);
+	 Iterable<Asiento> findByFuncionOrderById(Funcion f);
 }
