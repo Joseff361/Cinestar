@@ -21,6 +21,7 @@
 		<sonar.projectDescription>CINESTAR SISTEMA</sonar.projectDescription>
 		<sonar.tests>src/test/java</sonar.tests>
 		<sonar.junit.reportPaths>target/surefire-reports</sonar.junit.reportPaths>
+		<sonar.sources>src/main/java,src/main/resources</sonar.sources>
 	<sonar.coverage.jacoco.xmlReportPaths>/target/jacoco.exec</sonar.coverage.jacoco.xmlReportPaths>
 	</properties>
 
