@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaft.org">
+<html lang="en" xmlns:th="http://www.thymeleaft.org">
 
 <head>
     <meta charset="utf-8">
@@ -19,7 +19,7 @@
 
 <body>
 <nav class="navbar navbar-light navbar-expand-md navbar-default"  >
-        <div class="container-fluid"><a class="navbar-brand" href="/index"><img id="logo" src="/img/logo.jpeg"></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+        <div class="container-fluid"><a class="navbar-brand" href="/index"><img id="logo" src="/img/logo.jpeg" alt="cinestar.jpg"></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div
                 class="collapse navbar-collapse" id="navcol-1">
                 <ul class="nav navbar-nav ml-auto">
@@ -31,7 +31,7 @@
                 </ul>
         </div>
         <div class="dropdown"><a class="dropdown-toggle text-info"  data-toggle="dropdown" aria-expanded="false"  id="username" 
-         ><i class="fa fa-user-circle-o"></i>&nbsp;</a>
+         ><em class="fa fa-user-circle-o"></em>&nbsp;</a>
             <form th:action="@{/logout}" method="post"><div class="dropdown-menu"><button class="dropdown-item"  type="submit">Cerrar Sesión</button></div></form>
         </div>
         </div>
@@ -40,7 +40,7 @@
 	    <div class="container">
 	        <div class="row align-items-center">
 	            <div class="col-md-5 offset-0">
-	                <h1>Películas <img id="claqueta" th:src="@{/img/claqueta.jpg}"></h1>
+	                <h1>Películas <img id="claqueta" th:src="@{/img/claqueta.jpg}" alt="claqueta.jpg"></h1>
 	            </div>
 	            <div class="col-md-auto d-inline float-right ml-auto"> 
 	                <div class="dropdown">
@@ -75,7 +75,7 @@
                 	<a th:href="@{/peliculas/}+${pelicula.id}">
                     <div class="card">
                     
-                    <img class="rounded img-fluid card-img-top w-100 d-block border rounded-0" th:src="@{'/img/' + ${pelicula.imagen}}">
+                    <img class="rounded img-fluid card-img-top w-100 d-block border rounded-0" th:src="@{'/img/' + ${pelicula.imagen}}" alt="pelicula.jpg">
                     
                         <div class="card-body">
                             <h4 class="text-center card-title" th:text="${pelicula.nombre}"></h4>
@@ -107,12 +107,12 @@
 					<p class="text-dark">Lima, Perú</p>
 				</div>
 				<div>
-					<i class="fa fa-mobile-phone footer-contacts-icon"></i>
+					<em class="fa fa-mobile-phone footer-contacts-icon"></em>
 					<p class="text-dark footer-center-info email text-left">+51 999
 						867 654</p>
 				</div>
 				<div>
-					<i class="fa fa-envelope footer-contacts-icon"></i>
+					<em class="fa fa-envelope footer-contacts-icon"></em>
 					<p>
 						<a href="#" target="_blank">cinestar@company.com</a>
 					</p>
@@ -122,9 +122,9 @@
 			<div class="col-md-3 text-center footer-about">
 				<h4 class="text-danger">Encuentranos en...</h4>
 				<div class="social-links social-icons">
-					<a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i
-						class="fa fa-twitter"></i></a><a href="#"><i
-						class="fa fa-instagram"></i></a>
+					<a href="#"><em class="fa fa-facebook"></em></a><a href="#"><em
+						class="fa fa-twitter"></em></a><a href="#"><em
+						class="fa fa-instagram"></em></a>
 				</div>
 			</div>
 		</div>

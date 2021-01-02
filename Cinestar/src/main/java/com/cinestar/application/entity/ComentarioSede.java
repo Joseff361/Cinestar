@@ -2,11 +2,11 @@ package com.cinestar.application.entity;
 
 public class ComentarioSede {
 
-	public String comentario;
-	public java.sql.Timestamp hora;
-	public String firstName;
-	public String lastName;
-	public String username;
+	private String comentario;
+	private java.sql.Timestamp hora;
+	private String firstName;
+	private String lastName;
+	private String username;
 	
 	
 	public ComentarioSede(String comentario,  java.sql.Timestamp hora, String firstName,String lastName, String username) {

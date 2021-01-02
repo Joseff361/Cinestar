@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -20,7 +20,7 @@
 <body>
 
 <nav class="navbar navbar-light navbar-expand-md">
-       <div class="container-fluid"><a class="navbar-brand" href="/index"><img id="logo" src="/img/logo.jpeg"></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+       <div class="container-fluid"><a class="navbar-brand" href="/index"><img id="logo" src="/img/logo.jpeg" alt="cinestar.jpg"></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
                <div
                 class="collapse navbar-collapse" id="navcol-1">
                 <ul class="nav navbar-nav ml-auto">
@@ -31,14 +31,14 @@
                     <li class="nav-item"><a class="nav-link" href="/cine">Nosotros</a></li>
                 </ul>
         </div>
-        <div class="dropdown"><a class="dropdown-toggle text-info"  data-toggle="dropdown" aria-expanded="false" id="username"><i class="fa fa-user-circle-o"></i>&nbsp;</a>
+        <div class="dropdown"><a class="dropdown-toggle text-info"  data-toggle="dropdown" aria-expanded="false" id="username"><em class="fa fa-user-circle-o"></em>&nbsp;</a>
             <form th:action="@{/logout}" method="post"><div class="dropdown-menu"><button class="dropdown-item" type="submit">Cerrar Sesión</button></div></form>
         </div>
         </div>
     </nav>
 	<div class="col">
 		<h1 class="text-center">
-			Funciones&nbsp;<i class="fa fa-film" id="logo_film"></i>
+			Funciones&nbsp;<em class="fa fa-film" id="logo_film"></em>
 		</h1>
 	</div>
 	<div class="highlight-phone"
@@ -46,11 +46,12 @@
 		<div class="col-md-12 col-lg-8 offset-md-0 offset-lg-2">
 			<div class="table-responsive">
 				<table class="table">
+					<caption>Funciones CINESTAR</caption>
 					<thead>
 						<tr>
-							<th style="text-align: justify;">Película</th>
-							<th style="text-align: justify;">Género</th>
-							<th style="text-align: jusitfy;">Descripción</th>
+							<th scope="col" style="text-align: justify;">Película</th>
+							<th scope="col" style="text-align: justify;">Género</th>
+							<th scope="col" style="text-align: jusitfy;">Descripción</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -67,12 +68,13 @@
 		<div class="col-md-12 col-lg-8 offset-md-0 offset-lg-2">
 			<div class="table-responsive">
 				<table class="table">
+					<caption>Funciones CINESTAR</caption>
 					<thead>
 						<tr>
-							<th style="text-align: left;">Tipo:</th>
-							<th style="text-align: left;">Dia:</th>
-							<th style="text-align: left;">Hora:</th>
-							<th style="text-align: left;">Seleccionar</th>
+							<th scope="col" style="text-align: left;">Tipo:</th>
+							<th scope="col" style="text-align: left;">Dia:</th>
+							<th scope="col" style="text-align: left;">Hora:</th>
+							<th scope="col" style="text-align: left;">Seleccionar</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -112,12 +114,12 @@
 					<p class="text-dark">Lima, Perú</p>
 				</div>
 				<div>
-					<i class="fa fa-mobile-phone footer-contacts-icon"></i>
+					<em class="fa fa-mobile-phone footer-contacts-icon"></em>
 					<p class="text-dark footer-center-info email text-left">+51 999
 						867 654</p>
 				</div>
 				<div>
-					<i class="fa fa-envelope footer-contacts-icon"></i>
+					<em class="fa fa-envelope footer-contacts-icon"></em>
 					<p>
 						<a href="#" target="_blank">cinestar@company.com</a>
 					</p>
@@ -127,9 +129,9 @@
 			<div class="col-md-3 text-center footer-about">
 				<h4 class="text-danger">Encuentranos en...</h4>
 				<div class="social-links social-icons">
-					<a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i
-						class="fa fa-twitter"></i></a><a href="#"><i
-						class="fa fa-instagram"></i></a>
+					<a href="#"><em class="fa fa-facebook"></em></a><a href="#"><em
+						class="fa fa-twitter"></em></a><a href="#"><em
+						class="fa fa-instagram"></em></a>
 				</div>
 			</div>
 		</div>

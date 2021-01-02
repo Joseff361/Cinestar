@@ -32,9 +32,8 @@ public class UsuarioService implements UserDetailsService{
 			throw new UsernameNotFoundException("Error en el login: no existe el usuario '"+username+"' en el sistema!");
 		}
 
-
 		//Crear El objeto UserDetails que va a ir en sesion y retornarlo.
-		return (UserDetails) new User(appUser.getUsername(), appUser.getPassword(), emptyList());
+		return new User(appUser.getUsername(), appUser.getPassword(), emptyList());
     }
 
 	public Object getAllUsers() {

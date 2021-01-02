@@ -117,21 +117,18 @@ public class PagoController {
 	public String compraAsientos(@PathVariable String id, Model model) {
 		Pago pa= pagoService.getPago(Long.parseLong(id));
 		model.addAttribute("funcionList",pa);
-		String result ="";
-		
+		StringBuilder result = new StringBuilder();
+
 
 		for(Asiento a: pa.getAsientos()) {
-			result+="-";
-			result+=a.getIdFila();
-			result+=a.getIdColumna().toString();
-			
-		
+			result.append("-");
+			result.append(a.getIdFila());
+			result.append(a.getIdColumna().toString());		
 		}
 		
-		result=result.substring(1);
-		model.addAttribute("asientos",result);
+		String fresult = result.toString().substring(1);
+		model.addAttribute("asientos",fresult);
 		model.addAttribute("diaSemana",pa.getAsientos().iterator().next().getFuncion().getDia().getDay());
-
 
 		return "compra";
 	}
