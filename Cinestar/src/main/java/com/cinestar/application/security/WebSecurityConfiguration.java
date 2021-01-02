@@ -17,7 +17,7 @@ import com.cinestar.application.service.UsuarioService;
 @EnableWebSecurity
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-	String[] resources = new String[] { "/include/**", "/css/**", "/icons/**", "/img/**", "/js/**", "/layer/**","/bootstrap/**" ,"/fonts/**"};
+	String[] resources = new String[] { "/include/**", "/css/**", "/icons/**", "/img/**", "/js/**", "/layer/**","/bootstrap/**" ,"/fonts/**", "/components/**"};
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {

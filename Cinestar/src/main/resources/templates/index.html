@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="/css/Login-Form-Dark.css">
     <link rel="stylesheet" href="/css/Pretty-Footer.css">
     <link rel="stylesheet" href="/css/styles.css"> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -89,46 +90,14 @@
         </div>
     </div>
 	<footer>
-		<div class="row">
-			<div class="col-sm-6 col-md-5 text-center footer-navigation">
-				<h3 class="display-4 text-dark">
-					<a href="#">Cine<span>Star</span></a>
-				</h3>
-				<p class="text-dark links">
-					<a class="text-dark" href="/index.">Cartelera</a><strong>
-						· </strong><a class="text-dark" href="#">Sedes</a><strong> · </strong><a
-						class="text-dark" href="/tarifario">Tarifario</a><strong>&nbsp;</strong>
-				</p>
-				<p class="company-name">CineStar © 2020</p>
-			</div>
-			<div class="col-sm-6 col-md-4 text-justify footer-contacts">
-				<div>
-					<span class="fa fa-map-marker footer-contacts-icon"> </span>
-					<p class="text-dark">Lima, Perú</p>
-				</div>
-				<div>
-					<em class="fa fa-mobile-phone footer-contacts-icon"></em>
-					<p class="text-dark footer-center-info email text-left">+51 999
-						867 654</p>
-				</div>
-				<div>
-					<em class="fa fa-envelope footer-contacts-icon"></em>
-					<p>
-						<a href="#" target="_blank">cinestar@company.com</a>
-					</p>
-				</div>
-			</div>
-			<div class="clearfix"></div>
-			<div class="col-md-3 text-center footer-about">
-				<h4 class="text-danger">Encuentranos en...</h4>
-				<div class="social-links social-icons">
-					<a href="#"><em class="fa fa-facebook"></em></a><a href="#"><em
-						class="fa fa-twitter"></em></a><a href="#"><em
-						class="fa fa-instagram"></em></a>
-				</div>
-			</div>
-		</div>
+		<div id="includedContent"></div>
 	</footer>
+	<script> 
+    $(function(){
+      $("#includedContent").load("./components/footer.html"); 
+    });
+    </script> 
+	
     <script src="../js/jquery.min.js"></script>
     <script src="../js/buscar.js"></script>
     <script src="../bootstrap/js/bootstrap.min.js"></script>
