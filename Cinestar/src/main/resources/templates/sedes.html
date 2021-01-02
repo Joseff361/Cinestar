@@ -13,30 +13,31 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.2.0/aos.css">
     <link rel="stylesheet" href="/css/Login-Form-Dark.css">
-    <link rel="stylesheet" href="/css/Pretty-Footer.css">
     <link rel="stylesheet" href="/css/styles.css"> 
+    <link rel="stylesheet" href="/css/Pretty-Footer.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
-<nav class="navbar navbar-light navbar-expand-md">
+	
+    <nav class="navbar navbar-light navbar-expand-md navbar-default 12">
         <div class="container-fluid"><a class="navbar-brand" href="/index"><img id="logo" src="/img/logo.jpeg" alt="cinestar.jpg"></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-             <div
-                class="collapse navbar-collapse" id="navcol-1">
+            <div
+                class="collapse navbar-collapse 12" id="navcol-1">
                 <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item"><a class="nav-link" href="/index">Cartelera</a></li>
+                    <li class="nav-item" ><a class="nav-link" href="/index">Cartelera</a></li>
                     <li class="nav-item"><a class="nav-link" href="/sedes">Sedes</a></li>
                     <li class="nav-item"><a class="nav-link" href="/tarifario">Tarifario</a></li>
                     <li class="nav-item"><a class="nav-link" href="/perfil">Perfil</a></li>
                     <li class="nav-item"><a class="nav-link" href="/cine">Nosotros</a></li>
                 </ul>
-        </div>
-        <div class="dropdown"><a class="dropdown-toggle text-info"  data-toggle="dropdown" aria-expanded="false" id="username"><em class="fa fa-user-circle-o"></em>&nbsp;</a>
-            <form th:action="@{/logout}" method="post"><div class="dropdown-menu"><button class="dropdown-item" type="submit">Cerrar Sesión</button></div></form>
-        </div>
+        	</div>
+        	<div class="dropdown 12"><a class="dropdown-toggle text-info"  data-toggle="dropdown" aria-expanded="false"  id="username" 
+         		><em class="fa fa-user-circle-o"></em>&nbsp;</a>
+            	<form th:action="@{/logout}" method="post"><div class="dropdown-menu"><button class="dropdown-item"  type="submit">Cerrar Sesión</button></div></form>
+        	</div>
         </div>
     </nav>
-    
     
     <div class="container">
         <div class="row align-items-center">
@@ -63,11 +64,11 @@
     </div>
     
 	<footer>
-		<div id="includedContent"></div>
+		<div id="footer12"></div>
 	</footer>
 	<script> 
     $(function(){
-      $("#includedContent").load("../components/footer.html"); 
+      $("#footer12").load("../components/footer.html"); 
     });
     </script>
     <script src="/js/jquery.min.js"></script>
