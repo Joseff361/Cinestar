@@ -1,6 +1,7 @@
 package com.cinestar.application.controller;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Optional;
@@ -115,6 +116,8 @@ public class PagoController {
 	 */
 	@GetMapping("/compra/{id}")
 	public String compraAsientos(@PathVariable String id, Model model) {
+		Calendar cal= Calendar.getInstance();
+		
 		Pago pa= pagoService.getPago(Long.parseLong(id));
 		model.addAttribute("funcionList",pa);
 		StringBuilder result = new StringBuilder();
@@ -127,8 +130,11 @@ public class PagoController {
 		}
 		
 		String fresult = result.toString().substring(1);
+		
+		cal.setTime(pa.getAsientos().iterator().next().getFuncion().getDia());
+		
 		model.addAttribute("asientos",fresult);
-		model.addAttribute("diaSemana",pa.getAsientos().iterator().next().getFuncion().getDia().getDay());
+		model.addAttribute("diaSemana",(cal.get(Calendar.DAY_OF_WEEK)-1));
 
 		return "compra";
 	}

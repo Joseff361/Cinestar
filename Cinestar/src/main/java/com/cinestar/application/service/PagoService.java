@@ -1,6 +1,7 @@
 package com.cinestar.application.service;
 
 import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.Optional;
 import java.util.Set;
 
@@ -76,8 +77,10 @@ public class PagoService {
 
 	public float calculoCostoTotal(Funcion funcion,String descripcion) {
 		String [] valores= descripcion.split("-");
+		Calendar cal= Calendar.getInstance();
 		float monto=(float) 0;
-		 int diaSemana=funcion.getDia().getDay();
+		cal.setTime(funcion.getDia());
+		 int diaSemana=cal.get(Calendar.DAY_OF_WEEK)-1;
 		
 		if(diaSemana==1|| diaSemana==2) {
 			monto+=Integer.parseInt(valores[0])*9;

@@ -21,8 +21,7 @@ public class CinestarApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		String password = "12345";
-		String passwordBcrypt = passwordEncoder.encode(password);
+		String passwordBcrypt = passwordEncoder.encode("12345");
 		logger.log(Level.INFO, passwordBcrypt);
 	}
 

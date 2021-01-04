@@ -1,5 +1,6 @@
 package com.cinestar.application.service;
 
+import java.util.Calendar;
 import java.util.LinkedHashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -20,9 +21,12 @@ public class FuncionService {
 	public Iterable<Funcion> getFunciones() {
 
 		Set<Funcion> result = new LinkedHashSet<>();
+		Calendar cal= Calendar.getInstance();
 		
 		for (Funcion func : repository.findAllByOrderByDiaAsc()) {
-			if (func.getDia().getDate()<=26)
+			cal.setTime(func.getDia());
+			
+			if (cal.get(Calendar.DAY_OF_MONTH)<=26)
 				
 				result.add(func);
 		}
@@ -36,11 +40,14 @@ public class FuncionService {
 	}
 
 	public Iterable<Funcion> getFuncionesPeliSede(Pelicula pelicula, Sala sala) {
-
+		
 		Set<Funcion> result = new LinkedHashSet<>();
+		Calendar cal= Calendar.getInstance();
+		
 
 		for (Funcion func : repository.findByPeliculaAndSalaOrderByDia(pelicula, sala)) {
-			if (func.getDia().getDate()<=26)
+			cal.setTime(func.getDia());
+			if (cal.get(Calendar.DAY_OF_MONTH)<=26)
 				result.add(func);
 		}
 		return result;

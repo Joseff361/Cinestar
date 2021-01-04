@@ -68,10 +68,5 @@ public class ComentarioSede {
 	}
 
 
-	@Override
-	public String toString() {
-		return "ComentarioSede [comentario=" + comentario + ", hora=" + hora + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", username=" + username + "]";
-	}
-	
+
 }
