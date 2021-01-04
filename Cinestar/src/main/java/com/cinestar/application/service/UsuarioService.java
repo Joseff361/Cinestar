@@ -22,16 +22,11 @@ public class UsuarioService implements UserDetailsService{
 
     @Override
      public UserDetails loadUserByUsername(String username){
-
     	//Buscar el usuario con el repositorio y si no existe lanzar una exepcion
     	Usuario appUser =  userRepository.findByUsername(username);
-
-
 		if(appUser == null) {
-
 			throw new UsernameNotFoundException("Error en el login: no existe el usuario '"+username+"' en el sistema!");
 		}
-
 		//Crear El objeto UserDetails que va a ir en sesion y retornarlo.
 		return new User(appUser.getUsername(), appUser.getPassword(), emptyList());
     }

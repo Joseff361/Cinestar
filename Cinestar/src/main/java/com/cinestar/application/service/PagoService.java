@@ -2,13 +2,17 @@ package com.cinestar.application.service;
 
 import java.sql.Timestamp;
 import java.util.Calendar;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cinestar.application.controller.MastercardPagoStrategy;
 import com.cinestar.application.controller.PagoStrategy;
+import com.cinestar.application.controller.VisaPagoStrategy;
 import com.cinestar.application.entity.Asiento;
 import com.cinestar.application.entity.Funcion;
 import com.cinestar.application.entity.Pago;
@@ -16,6 +20,7 @@ import com.cinestar.application.entity.Usuario;
 import com.cinestar.application.repository.AsientoRepository;
 import com.cinestar.application.repository.PagoRepository;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Service
@@ -24,10 +29,31 @@ public class PagoService {
 	PagoRepository repository;
 	@Autowired
 	AsientoRepository arepository;
-
+	@Autowired
+	UsuarioService usuarioService;
+	@Autowired
+	AsientoService asientoService;
+	
 	Logger logger = Logger.getLogger(PagoService.class.getName()); 
 	
-	public Pago realizarPago(Funcion funcion, Usuario user, Set<Asiento> asientos, String descripcion) {
+	public Pago previoPago(Funcion funcion, String asientos,String adulto, String nino, String adultoMayor,String user) {
+		Set<Asiento> asientoLista = new HashSet<>();
+		for (String colufila : asientos.split("-")) {
+			asientoLista.addAll((Collection<Asiento>) asientoService.findByColumnaAndByFilaAndByFuncion(
+					colufila.substring(0, 1), Integer.parseInt(colufila.substring(1)), funcion));
+		}
+	
+		logger.log(Level.INFO, adulto);
+		logger.log(Level.INFO, nino);
+		logger.log(Level.INFO, user);
+		logger.log(Level.INFO, adultoMayor);
+		logger.log(Level.INFO, asientos);
+		return realizarPago(funcion, usuarioService.getUserByUsername(user), asientoLista,
+				adulto + "-" + nino + "-" + adultoMayor);
+
+	
+	}
+	private Pago realizarPago(Funcion funcion, Usuario user, Set<Asiento> asientos, String descripcion) {
 		Pago pago = new Pago();
 		
 		pago.setHora(new Timestamp(System.currentTimeMillis()));
@@ -43,8 +69,22 @@ public class PagoService {
 		}
 		return pago;
 	}
-
-	public void cancelarPago(long id) {
+	public Integer obtenerFechaFuncion(Pago pago) {
+		Calendar cal= Calendar.getInstance();
+		cal.setTime(pago.getAsientos().iterator().next().getFuncion().getDia());
+		return cal.get(Calendar.DAY_OF_WEEK)-1;
+	}
+	public String generarStringAsientos(Pago pago) {
+		StringBuilder result = new StringBuilder();
+		for(Asiento a: pago.getAsientos()) {
+			result.append("-");
+			result.append(a.getIdFila());
+			result.append(a.getIdColumna().toString());		
+		}
+	
+		return result.toString().substring(1);
+	}
+	private void cancelarPago(long id) {
 		Optional<Pago> optional = repository.findById(id);
 		if(optional.isPresent()) {
 			Pago pago = optional.get();
@@ -56,7 +96,7 @@ public class PagoService {
 		}
 	}
 	
-	public Pago realizarPagoOficial(long id ,PagoStrategy estrategiaPago) {
+	private Pago realizarPagoOficial(long id ,PagoStrategy estrategiaPago) {
 		Optional<Pago> optional =  repository.findById(id);
 		if(optional.isPresent()) {
 			Pago pago = optional.get();
@@ -67,15 +107,38 @@ public class PagoService {
 		return new Pago();
 	}
 	
-	public void confirmarPago(long id ) {
+	private void confirmarPago(long id ) {
 		Optional<Pago> optional =  repository.findById(id);
 		if(optional.isPresent()) {
 			Pago pago = optional.get();
 			repository.save(pago);
 		}
 	}
-
-	public float calculoCostoTotal(Funcion funcion,String descripcion) {
+	
+	public void accionPago(String fechaVenc, String numeroTarjeta, String cvc, String id, String id1) {
+		// Aceptar
+		Pago pago =null;
+		if(id1.equals("0"))
+			pago = realizarPagoOficial(Long.parseLong(id), new VisaPagoStrategy());
+		else if(id1.equals("1"))
+			pago = realizarPagoOficial(Long.parseLong(id), new MastercardPagoStrategy());
+		if(pago!=null) {
+			if (pago.getEstado().equals("1")) {
+				confirmarPago(Long.parseLong(id));
+			}
+	
+			else {
+				cancelarPago(Long.parseLong(id));
+	
+			}
+		}
+		
+		logger.log(Level.INFO, fechaVenc);
+		logger.log(Level.INFO, numeroTarjeta);
+		logger.log(Level.INFO, cvc);
+		
+	}
+	private float calculoCostoTotal(Funcion funcion,String descripcion) {
 		String [] valores= descripcion.split("-");
 		Calendar cal= Calendar.getInstance();
 		float monto=(float) 0;

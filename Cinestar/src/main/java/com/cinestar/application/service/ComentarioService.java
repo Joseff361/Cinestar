@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cinestar.application.entity.Comentario;
+import com.cinestar.application.entity.ComentarioSede;
 import com.cinestar.application.entity.Pago;
 import com.cinestar.application.entity.Sede;
 import com.cinestar.application.entity.Usuario;
@@ -39,15 +40,25 @@ public class ComentarioService {
 	}
 	
 	
-	public Iterable<Comentario> verComentarioPorSede(Sede sede) {
+	private Iterable<Comentario> verComentarioPorSede(Sede sede) {
 		Set<Comentario> comentarios = new LinkedHashSet<>();
 		for(Comentario C: repository.findAllByOrderByHoraAsc()) {
-			
 			if (C.getPago().getAsientos().iterator().next().getFuncion().getSala().getSede() == sede ) {
 				comentarios.add(C);
 			}
 		}
 		return comentarios;
+	}
+	public Iterable<ComentarioSede> verComentarioSede(Sede sede){
+		Set<ComentarioSede> comentariosSede = new LinkedHashSet<>();
+		for (Comentario comentario: verComentarioPorSede(sede)) {
+			//Nuevo objeto comentarioSede
+			ComentarioSede comentarioSede = new ComentarioSede(comentario.getDescripcion(), comentario.getHora(),
+					comentario.getPago().getUser().getFirstName(), comentario.getPago().getUser().getLastName(), 
+					comentario.getPago().getUser().getUsername());
+			comentariosSede.add(comentarioSede);
+		}
+		return comentariosSede;
 	}
 	public Iterable<Comentario> verComentarioPorUsuario(Usuario user) {
 		Set<Comentario> comentarios = new LinkedHashSet<>();

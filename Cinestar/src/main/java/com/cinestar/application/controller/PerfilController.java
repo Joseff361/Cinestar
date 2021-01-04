@@ -24,7 +24,6 @@ public class PerfilController {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String currentPrincipalName = authentication.getName();
 		model.addAttribute("user", currentPrincipalName);
-		
 		model.addAttribute("usuario", usuarioService.getUserByUsername(currentPrincipalName));
 		
 		return "perfil";

@@ -6,7 +6,6 @@ package com.cinestar.application.entity;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.sql.Date;
-import java.sql.Timestamp;
 import java.util.LinkedHashSet;
 import java.util.Set;
 

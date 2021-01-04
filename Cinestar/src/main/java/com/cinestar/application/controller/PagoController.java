@@ -1,12 +1,5 @@
 package com.cinestar.application.controller;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.cinestar.application.entity.Asiento;
+
 import com.cinestar.application.entity.Funcion;
 import com.cinestar.application.entity.Pago;
 import com.cinestar.application.entity.Usuario;
@@ -53,14 +46,8 @@ public class PagoController {
 	 */
 	@GetMapping("/asientos/{id}")
 	public String eleccionAsientos(@PathVariable String id, Model model) {
-
 		model.addAttribute("funcion", funcionService.getFuncion(Long.parseLong(id)));
-		
-		Optional<Funcion> optional =  funcionService.getFuncion(Long.parseLong(id));
-		if(optional.isPresent()) {
-			model.addAttribute("asientoList", asientoService.findAsientos(optional.get()));
-		}
-
+		model.addAttribute("asientoList", asientoService.findAsientos(funcionService.getFuncion(Long.parseLong(id))));
 		return "asientos";
 	}
 
@@ -75,37 +62,13 @@ public class PagoController {
 			// @RequestParam("descripcion") String descripcion,
 			@RequestParam("asientos") String asientos, @RequestParam("adulto") String adulto,
 			@RequestParam("nino") String nino, @RequestParam("adultoMayor") String adultoMayor,
-			 @RequestParam("user") String user ,
+			@RequestParam("user") String user ,
 			@PathVariable String id
 			,RedirectAttributes redirectAttributes) {
-
-		Optional<Funcion> optional = funcionService.getFuncion(Long.parseLong(id));
 		
-		if(optional.isPresent()) {
-			Funcion funcion = optional.get();
-
-			Set<Asiento> asientoLista = new HashSet<>();
-			for (String colufila : asientos.split("-")) {
-				asientoLista.addAll((Collection<Asiento>) asientoService.findByColumnaAndByFilaAndByFuncion(
-						colufila.substring(0, 1), Integer.parseInt(colufila.substring(1)), funcion));
-			}
-			Pago nuevo =pagoService.realizarPago(funcion, usuarioService.getUserByUsername(user), asientoLista,
-					adulto + "-" + nino + "-" + adultoMayor);
-		
-			
-
-			//Pago.id -->El codigo que se debe enviar
-			logger.log(Level.INFO, adulto);
-			logger.log(Level.INFO, nino);
-			logger.log(Level.INFO, user);
-			logger.log(Level.INFO, adultoMayor);
-			logger.log(Level.INFO, asientos);
-
+			Funcion funcion = funcionService.getFuncion(Long.parseLong(id));
+			Pago nuevo=pagoService.previoPago(funcion, asientos, adulto, nino, adultoMayor, user);	
 			return "redirect:/compra/"+nuevo.getId();
-
-		}
-		
-		return "redirect:/compra/0";
 	}
 
 	/**
@@ -115,27 +78,11 @@ public class PagoController {
 	 * @return
 	 */
 	@GetMapping("/compra/{id}")
-	public String compraAsientos(@PathVariable String id, Model model) {
-		Calendar cal= Calendar.getInstance();
-		
-		Pago pa= pagoService.getPago(Long.parseLong(id));
+	public String compraAsientos(@PathVariable String id, Model model) {	
+		Pago pa= pagoService.getPago(Long.parseLong(id));	
 		model.addAttribute("funcionList",pa);
-		StringBuilder result = new StringBuilder();
-
-
-		for(Asiento a: pa.getAsientos()) {
-			result.append("-");
-			result.append(a.getIdFila());
-			result.append(a.getIdColumna().toString());		
-		}
-		
-		String fresult = result.toString().substring(1);
-		
-		cal.setTime(pa.getAsientos().iterator().next().getFuncion().getDia());
-		
-		model.addAttribute("asientos",fresult);
-		model.addAttribute("diaSemana",(cal.get(Calendar.DAY_OF_WEEK)-1));
-
+		model.addAttribute("asientos",pagoService.generarStringAsientos(pa));
+		model.addAttribute("diaSemana",pagoService.obtenerFechaFuncion(pa));
 		return "compra";
 	}
 
@@ -176,27 +123,7 @@ public class PagoController {
 			@RequestParam("cvc") String cvc, 
 			@PathVariable String id,
 			@PathVariable String id1) {
-
-		// Aceptar
-		Pago pago =null;
-		if(id1.equals("0"))
-			pago = pagoService.realizarPagoOficial(Long.parseLong(id), new VisaPagoStrategy());
-		else if(id1.equals("1"))
-			pago = pagoService.realizarPagoOficial(Long.parseLong(id), new MastercardPagoStrategy());
-		if(pago!=null) {
-			if (pago.getEstado().equals("1")) {
-				pagoService.confirmarPago(Long.parseLong(id));
-			}
-	
-			else {
-				pagoService.cancelarPago(Long.parseLong(id));
-	
-			}
-		}
-		
-		logger.log(Level.INFO, fechaVenc);
-		logger.log(Level.INFO, numeroTarjeta);
-		logger.log(Level.INFO, cvc);
+		pagoService.accionPago(fechaVenc, numeroTarjeta, cvc, id, id1);
 		return "redirect:/peliculas";
 	}
 	
@@ -206,17 +133,10 @@ public class PagoController {
 		//Recogiendo el usuario desde SpringSecurity y aniadiendolo al modelo
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String currentPrincipalName = authentication.getName();
-		model.addAttribute("user", currentPrincipalName);
-		
 		Usuario usuario = usuarioService.getUserByUsername(currentPrincipalName);
+		model.addAttribute("user", currentPrincipalName);
 		model.addAttribute("usuario",usuario);
-		
-		ArrayList<Pago> pagos = new ArrayList<>() ;
-		
-		for(Pago pago: pagoService.getPagosUsuario(usuario)) {
-			pagos.add(pago);
-		}
-		model.addAttribute("pagos",pagos);
+		model.addAttribute("pagos",pagoService.getPagosUsuario(usuario));
 		return "tabla-pagos";
 	}
 

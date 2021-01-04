@@ -1,8 +1,5 @@
 package com.cinestar.application.controller;
 
-import java.util.LinkedHashSet;
-import java.util.Optional;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,10 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.cinestar.application.entity.Funcion;
+
 import com.cinestar.application.entity.Pelicula;
-import com.cinestar.application.entity.Sede;
-import com.cinestar.application.service.FuncionService;
+
 import com.cinestar.application.service.PeliculaService;
 
 @Controller
@@ -22,8 +18,6 @@ public class PeliculaController {
 
 	@Autowired
 	PeliculaService peliculaService;
-	@Autowired
-	FuncionService funcionService;
 	
 	private static final String PELICULA_LIST = "peliculaList"; 
 
@@ -59,23 +53,9 @@ public class PeliculaController {
 	 */
 	@GetMapping("/peliculas/{id}")
 	public String peliculasId(@PathVariable Long id, Model model) {
-		Set<Sede> sedes = new LinkedHashSet<>();
-		for (Funcion func : funcionService.getFunciones()) {
-
-			/* guardar en un lista de sedes todas las funciones con la peli ID
-			   el operador == puede fallar, java no tiene buen soporte con el objeto Long*/
-			if (id != null && func.getPelicula().getId()!= null && func.getPelicula().getId().equals(id)) {
-				sedes.add(func.getSala().getSede());
-			}
-
-		}
-	
-		Optional<Pelicula> optional = peliculaService.getPelicula(id);
-		if(optional.isPresent()) {
-			Pelicula p = optional.get();
-			model.addAttribute(PELICULA_LIST, p);
-		}
-		model.addAttribute("sedeList", sedes);
+		Pelicula p = peliculaService.getPelicula(id);
+		model.addAttribute(PELICULA_LIST, p);
+		model.addAttribute("sedeList", peliculaService.getSedesPorPelicula(id));
 		return "pelicula";// html
 	}
 }

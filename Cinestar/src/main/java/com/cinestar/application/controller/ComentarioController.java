@@ -1,8 +1,5 @@
 package com.cinestar.application.controller;
 
-import java.util.LinkedHashSet;
-import java.util.Optional;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,8 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.cinestar.application.entity.Comentario;
-import com.cinestar.application.entity.ComentarioSede;
+
 import com.cinestar.application.entity.Pago;
 import com.cinestar.application.entity.Sede;
 import com.cinestar.application.service.ComentarioService;
@@ -43,25 +39,12 @@ public class ComentarioController {
 	@GetMapping("/comentarios/{id}")
 	public String peliculasId(@PathVariable Long id, Model model) {
 		
-		Optional<Sede> optional = sedeService.getSede(id);
-		
-		if(optional.isPresent()) {
-			Sede sede = optional.get();
+			Sede sede = sedeService.getSede(id);
 
-			Set<ComentarioSede> comentariosSede = new LinkedHashSet<>();
-
-			for (Comentario comentario: comentarioService.verComentarioPorSede(sede)) {
-				//Nuevo objeto comentarioSede
-				ComentarioSede comentarioSede = new ComentarioSede(comentario.getDescripcion(), comentario.getHora(),
-						comentario.getPago().getUser().getFirstName(), comentario.getPago().getUser().getLastName(), 
-						comentario.getPago().getUser().getUsername());
-				comentariosSede.add(comentarioSede);
-			}
-			
 			model.addAttribute("imagen", sede.getImagen());
 			model.addAttribute("sede", sede.getNombre());
-			model.addAttribute("comentarios", comentariosSede);
-		}
+			model.addAttribute("comentarios", comentarioService.verComentarioSede(sede));
+		
 
 		return "comentarios";// html
 	}
