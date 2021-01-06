@@ -27,12 +27,12 @@ public class Comentario  implements Serializable{
 	@GenericGenerator(name = "native", strategy = "native")
 	private Long id;
 
-	@Column(unique=true,nullable=false)
+	@Column(nullable=false)
 	private String descripcion;
 	@Column (nullable= true)
 	private java.sql.Timestamp hora  ;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idPago", referencedColumnName = "id")
     private Pago pago;
 

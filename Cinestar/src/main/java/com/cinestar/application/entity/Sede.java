@@ -37,7 +37,7 @@ public class Sede implements Serializable{
 	@OneToMany(
 	        mappedBy = "sede",
 	        cascade = CascadeType.PERSIST,
-	        fetch = FetchType.LAZY
+	        fetch = FetchType.EAGER
 	    )
 	private Set<Sala> salas;
 	

@@ -38,7 +38,7 @@ public class Pelicula implements Serializable {
 	@OneToMany(
 	        mappedBy = "pelicula",
 	        cascade = CascadeType.PERSIST,
-	        fetch = FetchType.LAZY
+	        fetch = FetchType.EAGER
 	    )
 	private Set<Funcion> funciones;
 	public Long getId() {

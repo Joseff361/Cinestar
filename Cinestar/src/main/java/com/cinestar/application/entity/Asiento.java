@@ -30,11 +30,11 @@ public class Asiento implements Serializable {
 	private Integer idColumna;
 	
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idFuncion", referencedColumnName = "id")
     private Funcion funcion;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idPago", referencedColumnName = "id")
     private Pago pago;
 

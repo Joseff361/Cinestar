@@ -35,11 +35,11 @@ public class Sala implements Serializable {
 	@OneToMany(
 	        mappedBy = "sala",
 	        cascade = CascadeType.PERSIST,
-	        fetch = FetchType.LAZY
+	        fetch = FetchType.EAGER
 	    )
 	private Set<Funcion> funciones;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idSede", referencedColumnName = "id")
     private Sede sede;
 

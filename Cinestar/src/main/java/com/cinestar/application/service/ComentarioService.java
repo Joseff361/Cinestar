@@ -1,9 +1,11 @@
+
 package com.cinestar.application.service;
 
 import java.sql.Timestamp;
 import java.util.LinkedHashSet;
 import java.util.Optional;
 import java.util.Set;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +20,7 @@ import com.cinestar.application.repository.ComentarioRepository;
 @Service 
 public class ComentarioService {
 	@Autowired
-	ComentarioRepository repository;
+	ComentarioRepository repository; 
 	public Iterable<Comentario> getComentarios() {
 		return repository.findAllByOrderByHoraAsc();
 
@@ -31,31 +33,36 @@ public class ComentarioService {
 		return new Comentario();
 	}
 	
-	public void enviarComentario(String descripcion, Pago pago) {
+	public Long enviarComentario(String descripcion, Pago pago) {
 		Comentario comentario = new Comentario();
 		comentario.setHora(new Timestamp(System.currentTimeMillis()));
 		comentario.setDescripcion(descripcion);
 		comentario.setPago(pago);
 		repository.save(comentario);
+		return comentario.getId();
 	}
 	
 	
 	private Iterable<Comentario> verComentarioPorSede(Sede sede) {
 		Set<Comentario> comentarios = new LinkedHashSet<>();
+		
 		for(Comentario C: repository.findAllByOrderByHoraAsc()) {
-			if (C.getPago().getAsientos().iterator().next().getFuncion().getSala().getSede() == sede ) {
+			if (C.getPago().getAsientos().iterator().next().getFuncion().getSala().getSede().getId().equals(sede.getId())) {
 				comentarios.add(C);
+				
 			}
 		}
 		return comentarios;
 	}
 	public Iterable<ComentarioSede> verComentarioSede(Sede sede){
 		Set<ComentarioSede> comentariosSede = new LinkedHashSet<>();
+
 		for (Comentario comentario: verComentarioPorSede(sede)) {
 			//Nuevo objeto comentarioSede
 			ComentarioSede comentarioSede = new ComentarioSede(comentario.getDescripcion(), comentario.getHora(),
 					comentario.getPago().getUser().getFirstName(), comentario.getPago().getUser().getLastName(), 
 					comentario.getPago().getUser().getUsername());
+
 			comentariosSede.add(comentarioSede);
 		}
 		return comentariosSede;
@@ -64,7 +71,7 @@ public class ComentarioService {
 		Set<Comentario> comentarios = new LinkedHashSet<>();
 		for(Comentario C: repository.findAllByOrderByHoraAsc()) {
 			
-			if (C.getPago().getUser()==user) {
+			if (C.getPago().getUser().getId().equals(user.getId())) {
 				comentarios.add(C);
 			}
 		}

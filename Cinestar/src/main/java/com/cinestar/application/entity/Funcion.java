@@ -42,15 +42,15 @@ public class Funcion implements Serializable {
 	@OneToMany(
 	        mappedBy = "funcion",
 	        cascade = CascadeType.PERSIST,
-	        fetch = FetchType.LAZY
+	        fetch = FetchType.EAGER
 	    )
 	private Set<Asiento> asientos;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idSala", referencedColumnName = "id")
     private Sala sala;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idPelicula", referencedColumnName = "id")
     private Pelicula pelicula;
 

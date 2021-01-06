@@ -3,7 +3,7 @@ package com.cinestar.application.service;
 
 import static java.util.Collections.emptyList;
 
-import java.util.Optional;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
@@ -31,13 +31,6 @@ public class UsuarioService implements UserDetailsService{
 		return new User(appUser.getUsername(), appUser.getPassword(), emptyList());
     }
 
-	public Object getAllUsers() {
-		return userRepository.findAll();
-	}
-
-	public Optional<Usuario> getUser(Long id) {
-		return userRepository.findById( id);
-	}
 	public Usuario getUserByUsername(String username){
 		return (userRepository.findByUsername(username));
 	}

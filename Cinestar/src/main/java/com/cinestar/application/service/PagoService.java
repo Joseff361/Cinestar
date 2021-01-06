@@ -1,6 +1,7 @@
 package com.cinestar.application.service;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.HashSet;
@@ -36,6 +37,15 @@ public class PagoService {
 	
 	Logger logger = Logger.getLogger(PagoService.class.getName()); 
 	
+	
+	
+	public Pago getPago(Long id) {
+		Optional<Pago> optional=repository.findById(id);
+		if(optional.isPresent())
+			return  optional.get();
+		else
+			return new Pago();
+	}
 	public Pago previoPago(Funcion funcion, String asientos,String adulto, String nino, String adultoMayor,String user) {
 		Set<Asiento> asientoLista = new HashSet<>();
 		for (String colufila : asientos.split("-")) {
@@ -76,43 +86,37 @@ public class PagoService {
 	}
 	public String generarStringAsientos(Pago pago) {
 		StringBuilder result = new StringBuilder();
-		for(Asiento a: pago.getAsientos()) {
+		
+		
+		for(Asiento a: arepository.findByPagoOrderById(pago)) {
 			result.append("-");
 			result.append(a.getIdFila());
-			result.append(a.getIdColumna().toString());		
+			result.append(a.getIdColumna().toString());	
+			
 		}
 	
 		return result.toString().substring(1);
 	}
-	private void cancelarPago(long id) {
-		Optional<Pago> optional = repository.findById(id);
-		if(optional.isPresent()) {
-			Pago pago = optional.get();
-			for(Asiento a:pago.getAsientos()) {
-				a.setPago(null);
-				arepository.save(a);
-			}
-			repository.delete(pago);
+	public void cancelarPago(long id) {
+		
+		Pago pago = getPago(id);
+		for(Asiento a:pago.getAsientos()) {
+			a.setPago(null);
+			arepository.save(a);
 		}
+		repository.delete(pago);
+		
 	}
 	
 	private Pago realizarPagoOficial(long id ,PagoStrategy estrategiaPago) {
-		Optional<Pago> optional =  repository.findById(id);
-		if(optional.isPresent()) {
-			Pago pago = optional.get();
-			estrategiaPago.realizarPago(pago);
-			return pago;
-		}
-		
-		return new Pago();
+		Pago pago = getPago(id);
+		estrategiaPago.realizarPago(pago,LocalDate.now());
+		return pago;
 	}
 	
 	private void confirmarPago(long id ) {
-		Optional<Pago> optional =  repository.findById(id);
-		if(optional.isPresent()) {
-			Pago pago = optional.get();
-			repository.save(pago);
-		}
+		Pago pago = getPago(id);
+		repository.save(pago);
 	}
 	
 	public void accionPago(String fechaVenc, String numeroTarjeta, String cvc, String id, String id1) {
@@ -124,12 +128,13 @@ public class PagoService {
 			pago = realizarPagoOficial(Long.parseLong(id), new MastercardPagoStrategy());
 		if(pago!=null) {
 			if (pago.getEstado().equals("1")) {
+				repository.save(pago);
 				confirmarPago(Long.parseLong(id));
 			}
 	
 			else {
 				cancelarPago(Long.parseLong(id));
-	
+				logger.log(Level.INFO, "Cancelado");
 			}
 		}
 		
@@ -138,7 +143,7 @@ public class PagoService {
 		logger.log(Level.INFO, cvc);
 		
 	}
-	private float calculoCostoTotal(Funcion funcion,String descripcion) {
+	protected float calculoCostoTotal(Funcion funcion,String descripcion) {
 		String [] valores= descripcion.split("-");
 		Calendar cal= Calendar.getInstance();
 		float monto=(float) 0;
@@ -166,13 +171,6 @@ public class PagoService {
 		return  monto;
 	}
 
-	public Pago getPago(long id) {
-		Optional<Pago> optional = repository.findById(id);
-		if(optional.isPresent()) {
-			return optional.get();
-		}
-		return new Pago();
-	}
 	
 	public Iterable<Pago> getPagosUsuario(Usuario usuario) {
 		return repository.findAllByUserOrderByHoraAsc(usuario);

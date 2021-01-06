@@ -48,11 +48,11 @@ public class Pago implements Serializable {
 	@OneToMany(
 	        mappedBy = "pago",
 	        cascade = CascadeType.PERSIST,
-	        fetch = FetchType.LAZY
+	        fetch = FetchType.EAGER
 	    )
 	private Set<Asiento> asientos;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idUser", referencedColumnName = "id")
     private Usuario user;
 
