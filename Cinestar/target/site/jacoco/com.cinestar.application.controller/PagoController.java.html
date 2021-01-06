@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PagoController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Cinestar</a> &gt; <a href="index.source.html" class="el_package">com.cinestar.application.controller</a> &gt; <span class="el_source">PagoController.java</span></div><h1>PagoController.java</h1><pre class="source lang-java linenums">package com.cinestar.application.controller;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+
+import com.cinestar.application.entity.Funcion;
+import com.cinestar.application.entity.Pago;
+import com.cinestar.application.entity.Usuario;
+import com.cinestar.application.service.AsientoService;
+import com.cinestar.application.service.FuncionService;
+import com.cinestar.application.service.PagoService;
+import com.cinestar.application.service.UsuarioService;
+
+import java.util.logging.Level; 
+import java.util.logging.Logger;
+
+@Controller
+<span class="fc" id="L29">public class PagoController {</span>
+	@Autowired
+	FuncionService funcionService;
+	@Autowired
+	PagoService pagoService;
+	@Autowired
+	AsientoService asientoService;
+	@Autowired
+	UsuarioService usuarioService;
+
+<span class="fc" id="L39">	Logger logger = Logger.getLogger( PagoController.class.getName());</span>
+	
+	/**
+	 * Retorna funciones por id de sede e id de peliculas
+	 * 
+	 * @param model
+	 * @return
+	 */
+	@GetMapping(&quot;/asientos/{id}&quot;)
+	public String eleccionAsientos(@PathVariable String id, Model model) {
+<span class="nc" id="L49">		model.addAttribute(&quot;funcion&quot;, funcionService.getFuncion(Long.parseLong(id)));</span>
+<span class="nc" id="L50">		model.addAttribute(&quot;asientoList&quot;, asientoService.findAsientos(funcionService.getFuncion(Long.parseLong(id))));</span>
+<span class="nc" id="L51">		return &quot;asientos&quot;;</span>
+	}
+
+	/**
+	 * Enviar los valores de los Asientos funcion y User
+	 * 
+	 * @param model
+	 * @return
+	 */
+	@PostMapping(&quot;/asientos/{id}&quot;)
+	public String enviarAsientos(HttpServletRequest request,
+			// @RequestParam(&quot;descripcion&quot;) String descripcion,
+			@RequestParam(&quot;asientos&quot;) String asientos, @RequestParam(&quot;adulto&quot;) String adulto,
+			@RequestParam(&quot;nino&quot;) String nino, @RequestParam(&quot;adultoMayor&quot;) String adultoMayor,
+			@RequestParam(&quot;user&quot;) String user ,
+			@PathVariable String id
+			,RedirectAttributes redirectAttributes) {
+		
+<span class="nc" id="L69">			Funcion funcion = funcionService.getFuncion(Long.parseLong(id));</span>
+<span class="nc" id="L70">			Pago nuevo=pagoService.previoPago(funcion, asientos, adulto, nino, adultoMayor, user);	</span>
+<span class="nc" id="L71">			return &quot;redirect:/compra/&quot;+nuevo.getId();</span>
+	}
+
+	/**
+	 * Recuperar la info de la compra hecha
+	 * 
+	 * @param model
+	 * @return
+	 */
+	@GetMapping(&quot;/compra/{id}&quot;)
+	public String compraAsientos(@PathVariable String id, Model model) {	
+<span class="nc" id="L82">		Pago pa= pagoService.getPago(Long.parseLong(id));	</span>
+<span class="nc" id="L83">		model.addAttribute(&quot;funcionList&quot;,pa);</span>
+<span class="nc" id="L84">		model.addAttribute(&quot;asientos&quot;,pagoService.generarStringAsientos(pa));</span>
+<span class="nc" id="L85">		model.addAttribute(&quot;diaSemana&quot;,pagoService.obtenerFechaFuncion(pa));</span>
+<span class="nc" id="L86">		return &quot;compra&quot;;</span>
+	}
+
+	/**
+	 * Enviar los valores de los Asientos funcion y User
+	 * 
+	 * @param model
+	 * @return
+	 */
+	@PostMapping(&quot;/compra/{id}&quot;)
+	public String confirmarCompra(HttpServletRequest request,
+			@RequestParam(&quot;medioPago&quot;) String medioPago, 
+			@PathVariable String id) {
+
+		//Aqui deberia haber un chequeo de tarjeta
+<span class="nc" id="L101">		logger.log(Level.INFO, medioPago);</span>
+		
+<span class="nc" id="L103">		return &quot;redirect:/pago/&quot;+id+&quot;/&quot;+medioPago;</span>
+	}
+	
+	
+	@GetMapping(&quot;/pago/{id}/{id1}&quot;)
+	public String pago(@PathVariable String id, @PathVariable String id1,Model model) {
+<span class="nc" id="L109">		return &quot;pago&quot;;</span>
+	}
+	
+	
+	/**
+	 * Enviar los valores de los Asientos funcion y User
+	 * 
+	 * @param model
+	 * @return
+	 */
+	@PostMapping(&quot;/pago/{id}/{id1}&quot;)
+	public String confirmarPago(HttpServletRequest request,
+			@RequestParam(&quot;fechaVenc&quot;) String fechaVenc, 
+			@RequestParam(&quot;numeroTarjeta&quot;) String numeroTarjeta, 
+			@RequestParam(&quot;cvc&quot;) String cvc, 
+			@PathVariable String id,
+			@PathVariable String id1) {
+<span class="nc" id="L126">		pagoService.accionPago(fechaVenc, numeroTarjeta, cvc, id, id1);</span>
+<span class="nc" id="L127">		return &quot;redirect:/peliculas&quot;;</span>
+	}
+	
+	@GetMapping({&quot;/tabla-pagos&quot;})
+	public String login(Model model, HttpServletRequest request) {
+		
+		//Recogiendo el usuario desde SpringSecurity y aniadiendolo al modelo
+<span class="nc" id="L134">		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();</span>
+<span class="nc" id="L135">		String currentPrincipalName = authentication.getName();</span>
+<span class="nc" id="L136">		Usuario usuario = usuarioService.getUserByUsername(currentPrincipalName);</span>
+<span class="nc" id="L137">		model.addAttribute(&quot;user&quot;, currentPrincipalName);</span>
+<span class="nc" id="L138">		model.addAttribute(&quot;usuario&quot;,usuario);</span>
+<span class="nc" id="L139">		model.addAttribute(&quot;pagos&quot;,pagoService.getPagosUsuario(usuario));</span>
+<span class="nc" id="L140">		return &quot;tabla-pagos&quot;;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

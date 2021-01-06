@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Cinestar1</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cookie">
+    <link rel="stylesheet" href="fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="css/Pretty-Footer.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+	<nav class="navbar navbar-light navbar-expand-md navbar-default 10">
+        <div class="container-fluid"><a class="navbar-brand" href="/index"><img id="logo" src="/img/logo.jpeg" alt="cinestar.jpg"></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div
+                class="collapse navbar-collapse 10" id="navcol-1">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item" ><a class="nav-link" href="/index">Cartelera</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/sedes">Sedes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/tarifario">Tarifario</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/perfil">Perfil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/cine">Nosotros</a></li>
+                </ul>
+        	</div>
+        	<div class="dropdown 10"><a class="dropdown-toggle text-info"  data-toggle="dropdown" aria-expanded="false"  id="username" 
+         		><em class="fa fa-user-circle-o"></em>&nbsp;</a>
+            	<form th:action="@{/logout}" method="post"><div class="dropdown-menu"><button class="dropdown-item"  type="submit">Cerrar Sesión</button></div></form>
+        	</div>
+        </div>
+    </nav>
+ 	
+ 	<div class="container mx-auto my-5">
+ 		<div class="card">
+ 		<div class="card-body">
+ 		<div class="row">
+ 		
+ 			<div class="col-md-4 text-center">
+ 				<h1><i class="fa fa-user" aria-hidden="true"></i> <span th:text="${user}"></span></h1>
+ 				<img src="/img/profile.png" width="350" height="350" alt="profile.png">
+ 			</div>
+ 			
+ 			<div class="col-md-8 ">
+ 				<br>
+ 				<form>
+				  <fieldset disabled>
+				  	<legend>Profile</legend>
+				  	<div class="form-row">
+				  		    <div class="form-group col-md-6">
+						      <label for="inputEmail4">Nombres</label>
+						      <input type="email" class="form-control" id="inputEmail4" th:placeholder="${usuario.firstName}">
+						    </div>
+						    <div class="form-group col-md-6">
+						      <label for="inputPassword4">Apellidos</label>
+						      <input type="password" class="form-control" id="inputPassword4" th:placeholder="${usuario.lastName}">
+						    </div>
+				  	</div>
+				  	<div class="form-group">
+					    <label for="inputAddress">Direccion</label>
+					    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+					 </div>
+					 <div class="form-group">
+					    <label for="inputAddress">Correo</label>
+					    <input type="text" class="form-control" id="inputAddress" th:placeholder="${usuario.Email}">
+					 </div>
+					 <div class="form-row">
+					    <div class="form-group col-md-4">
+					      <label for="inputCity">Ciudad</label>
+					      <input type="text" class="form-control" id="inputCity" placeholder="Lima">
+					    </div>
+					    <div class="form-group col-md-4">
+					      <label for="inputState">Distrito</label>
+					   	  <input type="text" class="form-control" id="inputState" placeholder="Magdalena">	
+					    </div>
+					    <div class="form-group col-md-4">
+					      <label for="inputZip">Celular</label>
+					      <input type="text" class="form-control" id="inputZip" placeholder="952141938">
+					    </div>
+					  </div>
+				  </fieldset>
+				</form>	
+				<div class="text-center">
+					<a class="btn btn-primary btn-lg" href="/tabla-pagos" role="button">Ver historial de Pagos</a>
+				</div>
+ 			</div>
+ 		</div>
+ 		
+ 		</div>
+ 		</div>
+ 	</div>
+	<footer>
+		<div id="footer10"></div>
+	</footer>
+	<script> 
+    $(function(){
+      $("#footer10").load("../components/footer.html"); 
+    });
+    </script>	
+	
+    <script src="js/jquery.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+    var sonar1 = " ";
+    var user = "[[${#httpServletRequest.remoteUser}]]";
+    if (user == ""){
+    	user = "Iniciar Sesión";
+    	$("#username").attr('data-toggle','');
+    	document.getElementById("username").href="/login";
+    }
+    document.getElementById("username").innerHTML=user;
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+	<title>Seleccionar Asientos</title>
+	<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" th:href="@{/bootstrap/css/bootstrap.min.css}">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cookie">
+	<link rel="stylesheet" href="/fonts/font-awesome.min.css" th:href="@{/fonts/font-awesome.min.css}">
+	<link rel="stylesheet" href="/css/Pretty-Footer1.css" th:href="@{/css/Pretty-Footer1.css}">
+	<link rel="stylesheet" href="/css/styles1.css" th:href="@{/css/styles1.css}">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+	
+		<nav class="navbar navbar-light navbar-expand-md navbar-default 1">
+        <div class="container-fluid"><a class="navbar-brand" href="/index"><img id="logo" src="/img/logo.jpeg" alt="cinestar.jpg"></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div
+                class="collapse navbar-collapse 1" id="navcol-1">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item" ><a class="nav-link" href="/index">Cartelera</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/sedes">Sedes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/tarifario">Tarifario</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/perfil">Perfil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/cine">Nosotros</a></li>
+                </ul>
+        	</div>
+        	<div class="dropdown 1"><a class="dropdown-toggle text-info"  data-toggle="dropdown" aria-expanded="false"  id="username" 
+         		><em class="fa fa-user-circle-o"></em>&nbsp;</a>
+            	<form th:action="@{/logout}" method="post"><div class="dropdown-menu"><button class="dropdown-item"  type="submit">Cerrar Sesión</button></div></form>
+        	</div>
+        </div>
+    </nav>
+	
+	<form class="col-12" th:action="@{/asientos/{id}(id = ${id})}"
+		method="post" onsubmit="return validar();">
+		<div>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4 col-lg-5 col-xl-4">
+						<h2>Asientos</h2>
+						<div class="form-group">
+							<label>Película:&nbsp;</label>
+							<div>
+								<input type="text" id="nombrePelicula"
+									th:field="${funcion.pelicula.nombre}" readonly="">
+							</div>
+						</div>
+						<div class="form-group">
+							<label>Asiento(s):&nbsp;</label>
+							<div>
+								<input type="text" id="asientos" name="asientos" readonly="">
+							</div>
+						</div>
+
+
+
+
+						<div class="row">
+							<div class="col-lg-3">
+								<label class="col-form-label">Adulto(s)</label>
+							</div>
+							<div class="col">
+								<input class="form-control-sm" type="number" value="0" min="0"
+									max="30" id="cantAdultos" name="adulto">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-3">
+								<label class="col-form-label">Niño(s)</label>
+							</div>
+							<div class="col">
+								<input class="form-control-sm" type="number" value="0" min="0"
+									max="30" id="cantNi" name="nino">
+							</div>
+						</div>
+						<div class="row" id="PieRow">
+							<div class="col-lg-3">
+								<label class="col-form-label">+60</label>
+							</div>
+							<div class="col">
+								<input class="form-control-sm" type="number" value="0" min="0"
+									max="30" id="cantMay" name="adultoMayor">
+							</div>
+							
+						</div>
+						<div class="row" id="PieRow">
+								<label id="label" class="col-form-label" style="color: red "></label>
+						</div>
+
+
+						<input type="hidden" name="user"
+							th:value="${#httpServletRequest.remoteUser}"> 
+
+
+						<div class="form-group">
+							<label>Total Asiento(s):&nbsp;</label>
+							<div>
+								<input type="text" id="total" readonly="">
+							</div>
+						</div>
+					</div>
+					<div class="col" id="filaF">
+						<div class="row justify-content-center">
+							<div class="col-sm-11">
+								<div class="table-responsive">
+									<table class="table">
+										<caption>Asientos CINESTAR</caption>
+										<thead class="text-center">
+											<tr>
+												<th scope="row" >COL</th>
+												<th scope="row" >COL</th>
+												<th scope="row" >COL</th>
+												<th scope="row" >COL</th>
+												<th scope="row" >COL</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+
+
+												<td class="text-center"><button
+														class="btn btn-primary  border-dark"
+														type="button"
+														th:style="${asientoList[5].pago} == null ? 'background-color: green' : 'background-color: red '"
+														name="F1" onclick='toggle(25)' id=25>F1</button></td>
+												<td class="text-center"><button
+														class="btn btn-primary border-dark"
+														type="button"
+														th:style="${asientoList[11].pago} == null ? 'background-color: green' : 'background-color: red '"
+														name="F2" onclick='toggle(26)' id=26>F2</button></td>
+												<td class="text-center"><button
+														class="btn btn-primary border-dark"
+														type="button"
+														th:style="${asientoList[17].pago} == null ? 'background-color: green' : 'background-color: red '"
+														name="F3" onclick='toggle(27)' id=27>F3</button></td>
+												<td class="text-center"><button
+														class="btn btn-primary border-dark"
+														type="button"
+														th:style="${asientoList[23].pago} == null ? 'background-color: green' : 'background-color: red '"
+														name="F4" onclick='toggle(28)' id=28>F4</button></td>
+												<td class="text-center"><button
+														class="btn btn-primary border-dark"
+														type="button"
+														th:style="${asientoList[29].pago} == null ? 'background-color: green' : 'background-color: red '"
+														name="F5" onclick='toggle(29)' id=29>F5</button></td>
+											</tr>
+											<tr>
+												<td class="text-center"><button
+														style="background-color: yellow"
+														class="btn btn-primary border-dark"
+														type="button"
+														th:style="${asientoList[4].pago} == null ? 'background-color: green ' : 'background-color: red '"
+														name="E1" onclick='toggle(20)' id=20>E1</button></td>
+												<td class="text-center"><button
+														class="btn btn-primary border-dark"
+														type="button"
+														th:style="${asientoList[10].pago} == null ? 'background-color: green ' : 'background-color: red '"
+														name="E2" onclick='toggle(21)' id=21>E2</button></td>
+												<td class="text-center"><button
+														class="btn btn-primary border-dark"
+														type="button"
+														th:style="${asientoList[16].pago} == null ? 'background-color: green ' : 'background-color: red '"
+														name="E3" onclick='toggle(22)' id=22>E3</button></td>
+												<td class="text-center"><button
+														class="btn btn-primary border-dark"
+														type="button"
+														th:style="${asientoList[22].pago} == null ? 'background-color: green ' : 'background-color: red '"
+														name="E4" onclick='toggle(23)' id=23>E4</button></td>
+												<td class="text-center"><button
+														class="btn btn-primary border-dark"
+														type="button"
+														th:style="${asientoList[28].pago} == null ? 'background-color: green ' : 'background-color: red '"
+														name="E5" onclick='toggle(24)' id=24>E5</button></td>
+											</tr>
+											<tr>
+												<td class="text-center"><button
+														class="btn btn-primary border-dark"
+														type="button"
+														th:style="${asientoList[3].pago} == null ? 'background-color: green ' : 'background-color: red '"
+														name="D1" onclick='toggle(15)' id=15>D1</button></td>
+												<td class="text-center"><button
+														class="btn btn-primary border-dark"
+														type="button"
+														th:style="${asientoList[9].pago} == null ? 'background-color: green ' : 'background-color: red '"
+														name="D2" onclick='toggle(16)' id=16>D2</button></td>
+												<td class="text-center"><button
+														class="btn btn-primary border-dark"
+														type="button"
+														th:style="${asientoList[15].pago} == null ? 'background-color: green ' : 'background-color: red '"
+														name="D3" onclick='toggle(17)' id=17>D3</button></td>
+												<td class="text-center"><button
+														class="btn btn-primary border-dark"
+														type="button"
+														th:style="${asientoList[21].pago} == null ? 'background-color: green ' : 'background-color: red '"
+														name="D4" onclick='toggle(18)' id=18>D4</button></td>
+												<td class="text-center"><button
+														class="btn btn-primary border-dark"
+														type="button"
+														th:style="${asientoList[27].pago} == null ? 'background-color: green ' : 'background-color: red '"
+														name="D5" onclick='toggle(19)' id=19>D5</button></td>
+											</tr>
+											<tr>
+												<td class="text-center"><button
+														class="btn btn-primary border-dark"
+														type="button"
+														th:style="${asientoList[2].pago} == null ? 'background-color: green ' : 'background-color: red '"
+														name="C1" onclick='toggle(10)' id=10>C1</button></td>
+												<td class="text-center"><button
+														class="btn btn-primary border-dark"
+														type="button"
+														th:style="${asientoList[8].pago} == null ? 'background-color: green ' : 'background-color: red '"
+														name="C2" onclick='toggle(11)' id=11>C2</button></td>
+												<td class="text-center"><button
+														class="btn btn-primary border-dark"
+														type="button"
+														th:style="${asientoList[14].pago} == null ? 'background-color: green ' : 'background-color: red '"
+														name="C3" onclick='toggle(12)' id=12>C3</button></td>
+												<td class="text-center"><button
+														class="btn btn-primary border-dark"
+														type="button"
+														th:style="${asientoList[20].pago} == null ? 'background-color: green ' : 'background-color: red '"
+														name="C4" onclick='toggle(13)' id=13>C4</button></td>
+												<td class="text-center"><button
+														class="btn btn-primary border-dark"
+														type="button"
+														th:style="${asientoList[26].pago} == null ? 'background-color: green ' : 'background-color: red '"
+														name="C5" onclick='toggle(14)' id=14>C5</button></td>
+											</tr>
+											<tr>
+												<td class="text-center"><button
+														class="btn btn-primary border-dark"
+														type="button"
+														th:style="${asientoList[1].pago} == null ? 'background-color: green ' : 'background-color: red '"
+														name="B1" onclick='toggle(5)' id=5>B1</button></td>
+												<td class="text-center"><button
+														class="btn btn-primary border-dark"
+														type="button"
+														th:style="${asientoList[7].pago} == null ? 'background-color: green ' : 'background-color: red '"
+														name="B2" onclick='toggle(6)' id=6>B2</button></td>
+												<td class="text-center"><button
+														class="btn btn-primary border-dark"
+														type="button"
+														th:style="${asientoList[13].pago} == null ? 'background-color: green ' : 'background-color: red '"
+														name="B3" onclick='toggle(7)' id=7>B3</button></td>
+												<td class="text-center"><button
+														class="btn btn-primary border-dark"
+														type="button"
+														th:style="${asientoList[19].pago} == null ? 'background-color: green ' : 'background-color: red '"
+														name="B4" onclick='toggle(8)' id=8>B4</button></td>
+												<td class="text-center"><button
+														class="btn btn-primary border-dark"
+														type="button"
+														th:style="${asientoList[25].pago} == null ? 'background-color: green ' : 'background-color: red '"
+														name="B5" onclick='toggle(9)' id=9>B5</button></td>
+											</tr>
+											<tr>
+												<td class="text-center"><button
+														class="btn btn-primary border-dark"
+														type="button"
+														th:style="${asientoList[0].pago} == null ? 'background-color: green ' : 'background-color: red '"
+														name="A1" onclick='toggle(0)' id=0>A1</button></td>
+												<td class="text-center"><button
+														class="btn btn-primary border-dark"
+														type="button"
+														th:style="${asientoList[6].pago} == null ? 'background-color: green ' : 'background-color: red '"
+														name="A2" onclick='toggle(1)' id=1>A2</button></td>
+												<td class="text-center"><button
+														class="btn btn-primary border-dark"
+														type="button"
+														th:style="${asientoList[12].pago} == null ? 'background-color: green ' : 'background-color: red '"
+														name="A3" onclick='toggle(2)' id=2>A3</button></td>
+												<td class="text-center"><button
+														class="btn btn-primary border-dark"
+														type="button"
+														th:style="${asientoList[18].pago} == null ? 'background-color: green ' : 'background-color: red '"
+														name="A4" onclick='toggle(3)' id=3>A4</button></td>
+												<td class="text-center"><button
+														class="btn btn-primary text-white border-dark"
+														type="button"
+														th:style="${asientoList[24].pago} == null ? 'background-color: green ' : 'background-color: red '"
+														name="A5" onclick='toggle(4)' id=4>A5</button></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<h2 class="text-center" id="pantalla">PANTALLA</h2>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="opcion">
+			<div class="container" id="botones">
+				<div class="row">
+					<div class="col text-center" id="botcan">
+						<a class="btn btn-secondary" id="cancelar" type="button" href="/sedes">Cancelar</a>
+					</div>
+					<div class="col text-center" id="botsig">
+						<button class="btn btn-secondary" id="siguiente" type="submit">Siguiente</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	</form>
+
+
+
+
+	<footer>
+		<div id="footer1"></div>
+	</footer>
+	<script> 
+    $(function(){
+      $("#footer1").load("../components/footer.html"); 
+    });
+    
+    </script>
+
+	<script src="/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+	<script src="/bootstrap/js/bootstrap.min.js" th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+	<script type="text/javascript">
+	var count = 0;
+	const selectElement1 = document.querySelector('#cantAdultos');
+	selectElement1.addEventListener('change', (event) => {
+			var adulto = parseInt(document.getElementById("cantAdultos").value);
+			var niño = parseInt(document.getElementById("cantNi").value);
+			var mayor = parseInt(document.getElementById("cantMay").value);
+			if (adulto+niño+mayor>count && parseInt($('#cantAdultos').val())!=0) {
+				$('#cantAdultos').val(parseInt($('#cantAdultos').val())-1);
+				document.getElementById("label").innerHTML="";
+			}else if(adulto+niño+mayor<count)
+				document.getElementById("label").innerHTML = "Seleccione un asiento";
+			else
+				document.getElementById("label").innerHTML="";
+	});
+	
+	const selectElement2 = document.querySelector('#cantNi');
+	selectElement2.addEventListener('change', (event) => {
+			var adulto = parseInt(document.getElementById("cantAdultos").value);
+			var niño = parseInt(document.getElementById("cantNi").value);
+			var mayor = parseInt(document.getElementById("cantMay").value);
+			if (adulto+niño+mayor>count && parseInt($('#cantNi').val())!=0) {
+				$('#cantNi').val(parseInt($('#cantNi').val())-1);
+				document.getElementById("label").innerHTML="";
+			}else if(adulto+niño+mayor<count)
+				document.getElementById("label").innerHTML="Seleccione un asiento";
+			else
+				document.getElementById("label").innerHTML="";
+		
+	});
+	
+	const selectElement3 = document.querySelector('#cantMay');
+	selectElement3.addEventListener('change', (event) => {
+			var adulto = parseInt(document.getElementById("cantAdultos").value);
+			var niño = parseInt(document.getElementById("cantNi").value);
+			var mayor = parseInt(document.getElementById("cantMay").value);
+			if (adulto+niño+mayor>count && parseInt($('#cantMay').val())!=0) {
+				$('#cantMay').val(parseInt($('#cantMay').val())-1);
+				document.getElementById("label").innerHTML="";
+			}else if(adulto+niño+mayor<count)
+				document.getElementById("label").innerHTML = "Seleccione un asiento";
+			else
+				document.getElementById("label").innerHTML="";
+	});
+	
+	var user = "[[${#httpServletRequest.remoteUser}]]";
+    if (user == ""){
+    	user = "Iniciar Sesión";
+    	$("#username").attr('data-toggle','');
+    	document.getElementById("username").href="/login";
+    }
+    document.getElementById("username").innerHTML=user;
+    
+	
+	
+	
+	function toggle(id) {
+
+		if ($("#" + id).val() == "0" || $("#" + id).val() == "") {
+			$("#" + id).val("1");
+			$("#" + id).css('background-color', 'gray');
+			$("#cantAdultos").val(parseInt($("#cantAdultos").val())+1);
+		} else if ($("form #" + id).val() == "1") {
+			$("#" + id).val("0");
+			$("#" + id).css('background-color', 'green');
+		}
+		asientosvec = [];
+		count = 0;
+		for (var i = 0; i < 30; i++) {
+			if ($("#" + i).val() == "1") {
+				asientosvec.push(document.getElementById(i).name);
+				count++;
+			}
+		}
+		var adulto = parseInt(document.getElementById("cantAdultos").value);
+		var niño = parseInt(document.getElementById("cantNi").value);
+		var mayor = parseInt(document.getElementById("cantMay").value);
+		if (adulto+niño+mayor>count && $('#cantAdultos').val()!=0) {
+			$('#cantAdultos').val(parseInt($('#cantAdultos').val())-1);
+		}else if(adulto+niño+mayor>count && $('#cantNi').val()!=0)
+			$('#cantNi').val(parseInt($('#cantNi').val())-1);
+		else if(adulto+niño+mayor>count && $('#cantMay').val()!=0)
+			$('#cantMay').val(parseInt($('#cantMay').val())-1);
+		else if (adulto+niño+mayor == count)
+			document.getElementById("label").innerHTML = "";
+			
+		
+		
+		document.getElementById("asientos").value = asientosvec.join('-');
+		document.getElementById("total").value = count;
+	}
+	
+	function validar(){
+		var adulto = parseInt(document.getElementById("cantAdultos").value);
+	    var niño = parseInt(document.getElementById("cantNi").value);
+	    var mayor = parseInt(document.getElementById("cantMay").value);
+	    if(adulto+niño+mayor != document.getElementById("total").value || adulto+niño+mayor==0){
+	    	document.getElementById("cantAdultos").focus();
+	    	document.getElementById("label").innerHTML = "Seleccione un asiento";
+	    	return false;
+	    }
+		return true;
+	}
+	
+</script>
+	
+</body>
+
+</html>

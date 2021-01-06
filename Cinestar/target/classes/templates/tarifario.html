@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Cinestar1</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cookie">
+    <link rel="stylesheet" href="fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="css/Pretty-Footer.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+	
+	<nav class="navbar navbar-light navbar-expand-md navbar-default 14">
+        <div class="container-fluid"><a class="navbar-brand" href="/index"><img id="logo" src="/img/logo.jpeg" alt="cinestar.jpg"></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div
+                class="collapse navbar-collapse 14" id="navcol-1">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item" ><a class="nav-link" href="/index">Cartelera</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/sedes">Sedes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/tarifario">Tarifario</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/perfil">Perfil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/cine">Nosotros</a></li>
+                </ul>
+        	</div>
+        	<div class="dropdown 14"><a class="dropdown-toggle text-info"  data-toggle="dropdown" aria-expanded="false"  id="username" 
+         		><em class="fa fa-user-circle-o"></em>&nbsp;</a>
+            	<form th:action="@{/logout}" method="post"><div class="dropdown-menu"><button class="dropdown-item"  type="submit">Cerrar Sesión</button></div></form>
+        	</div>
+        </div>
+    </nav>
+	
+    <div id="tarifa">
+        <div class="container text-center text-dark" id="title-cont">
+            <h3 class="display-4 text-dark"><strong>TARIFARIO</strong></h3>
+        </div>
+        <div class="container">
+            <div class="table-responsive table-bordered border-danger shadow">
+                <table class="table table-bordered">
+                	<caption>Tarifario CINESTAR</caption>
+                    <thead class="text-uppercase text-center text-white bg-danger shadow">
+                        <tr>
+                            <th scope="col">Días</th>
+                            <th scope="col">Detalles</th>
+                            <th scope="col">Precio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-center"><strong>Lunes - Martes</strong></td>
+                            <td><strong>Adulto</strong><br><strong>Niños</strong><br><strong>+60</strong></td>
+                            <td><strong>S/. 9.00</strong><br><strong>S/. 6.00</strong><br><strong>S/. 7.50</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Miércoles</strong></td>
+                            <td><strong>Adulto</strong><br><strong>Niños</strong><br><strong>+60</strong><br></td>
+                            <td><strong>S/. 10.00</strong><br><strong>S/. 6.50</strong><br><strong>S/. 8.00</strong><br></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Jueves - Domingo</strong></td>
+                            <td><strong>Adulto</strong><br><strong>Niños</strong><br><strong>+60</strong><br></td>
+                            <td><strong>S/. 15.00</strong><br><strong>S/. 10.00</strong><br><strong>S/. 11.50</strong><br></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+	<footer>
+		<div id="footer14"></div>
+	</footer>
+	<script> 
+    $(function(){
+      $("#footer14").load("../components/footer.html"); 
+    });
+    </script>
+    <script src="js/jquery.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+    var variableSonar =" ";
+    var user = "[[${#httpServletRequest.remoteUser}]]";
+    if (user == ""){
+    	user = "Iniciar Sesión";
+    	$("#username").attr('data-toggle','');
+    	document.getElementById("username").href="/login";
+    }
+    document.getElementById("username").innerHTML=user;
+    </script>
+</body>
+
+</html>

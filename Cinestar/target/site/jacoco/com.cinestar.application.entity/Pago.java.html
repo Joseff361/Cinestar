@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Pago.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Cinestar</a> &gt; <a href="index.source.html" class="el_package">com.cinestar.application.entity</a> &gt; <span class="el_source">Pago.java</span></div><h1>Pago.java</h1><pre class="source lang-java linenums">package com.cinestar.application.entity;
+
+import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
+<span class="fc" id="L21">public class Pago implements Serializable {</span>
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3864507835066720080L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = &quot;native&quot;)
+	@GenericGenerator(name = &quot;native&quot;, strategy = &quot;native&quot;)
+	
+	private Long id;
+	
+	
+
+	@Column(nullable= true)
+	private Float monto;
+
+	@Column (nullable= true)
+	private java.sql.Timestamp hora  ;
+	
+	@Column (nullable=true)
+	private String descripcion;
+	
+	@Column (nullable=false,length=1)
+	private String estado;
+	
+	
+	@OneToMany(
+	        mappedBy = &quot;pago&quot;,
+	        cascade = CascadeType.PERSIST,
+	        fetch = FetchType.EAGER
+	    )
+	private Set&lt;Asiento&gt; asientos;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = &quot;idUser&quot;, referencedColumnName = &quot;id&quot;)
+    private Usuario user;
+
+	public Long getId() {
+<span class="fc" id="L60">		return id;</span>
+	}
+
+	public void setId(Long id) {
+<span class="fc" id="L64">		this.id = id;</span>
+<span class="fc" id="L65">	}</span>
+
+	public Float getMonto() {
+<span class="fc" id="L68">		return monto;</span>
+	}
+
+	public void setMonto(Float monto) {
+<span class="fc" id="L72">		this.monto = monto;</span>
+<span class="fc" id="L73">	}</span>
+
+
+
+	public String getDescripcion() {
+<span class="fc" id="L78">		return descripcion;</span>
+	}
+
+	public void setDescripcion(String descripcion) {
+<span class="fc" id="L82">		this.descripcion = descripcion;</span>
+<span class="fc" id="L83">	}</span>
+
+	public String getEstado() {
+<span class="fc" id="L86">		return estado;</span>
+	}
+
+	public void setEstado(String estado) {
+<span class="fc" id="L90">		this.estado = estado;</span>
+<span class="fc" id="L91">	}</span>
+
+	public Timestamp getHora() {
+<span class="fc" id="L94">		return hora;</span>
+	}
+
+	public void setHora(Timestamp hora) {
+<span class="fc" id="L98">		this.hora = hora;</span>
+<span class="fc" id="L99">	}</span>
+
+	public Set&lt;Asiento&gt; getAsientos() {
+<span class="fc" id="L102">		return asientos;</span>
+	}
+
+	public void setAsientos(Set&lt;Asiento&gt; asientos) {
+<span class="fc" id="L106">		this.asientos = asientos;</span>
+<span class="fc" id="L107">	}</span>
+
+	public Usuario getUser() {
+<span class="fc" id="L110">		return user;</span>
+	}
+
+	public void setUser(Usuario user) {
+<span class="fc" id="L114">		this.user = user;</span>
+<span class="fc" id="L115">	}</span>
+
+
+	
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

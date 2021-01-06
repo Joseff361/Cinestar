@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Cinestar1</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cookie">
+    <link rel="stylesheet" href="fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="css/Pretty-Footer.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+	
+ 	<nav class="navbar navbar-light navbar-expand-md navbar-default 13">
+        <div class="container-fluid"><a class="navbar-brand" href="/index"><img id="logo" src="/img/logo.jpeg" alt="cinestar.jpg"></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div
+                class="collapse navbar-collapse 13" id="navcol-1">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item" ><a class="nav-link" href="/index">Cartelera</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/sedes">Sedes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/tarifario">Tarifario</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/perfil">Perfil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/cine">Nosotros</a></li>
+                </ul>
+        	</div>
+        	<div class="dropdown 13"><a class="dropdown-toggle text-info"  data-toggle="dropdown" aria-expanded="false"  id="username" 
+         		><em class="fa fa-user-circle-o"></em>&nbsp;</a>
+            	<form th:action="@{/logout}" method="post"><div class="dropdown-menu"><button class="dropdown-item"  type="submit">Cerrar Sesión</button></div></form>
+        	</div>
+        </div>
+    </nav>
+ 	
+ 	
+	<div class="text-center">
+		<h3>Historial de Pagos <span th:text=${user}></span></h3>
+		<br>	
+	</div>
+	<div class="container">
+		<div class="row text-center">
+			<div class="col-md-8 mx-auto">
+				<table class="table">
+				  <caption>Pagos CINESTAR</caption>
+				  <thead class="thead-dark">
+				    <tr>
+				      <th scope="col">ID</th>
+				      <th scope="col">Decripcion</th>
+				      <th scope="col">Fecha</th>
+				      <th scope="col">Monto</th>
+				      <th scope="col">Comentarios</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				    <tr th:each="pago: ${pagos}">
+				    
+				    
+				    
+					<form th:action="@{/comentar}" method="get">
+				      <th scope="col" th:text="${pago.id}"></th>
+				      <th scope="col" th:text="${pago.descripcion}" ></th>
+				      <th scope="col" th:text="${pago.hora}" ></th>
+				      <th scope="col" >S/.<span th:text="${pago.monto}" ></span>0</th>
+				      <th scope="col">
+				      	<a type="button" data-toggle="modal"  th:attr="data-target=${#strings.concat('#pago',pago.id)}">
+				      	<i class="fa fa-commenting-o" aria-hidden="true"></i>
+				      	</a>
+				      </th>
+				      
+				      <div class="modal fade" th:attr="id=${#strings.concat('pago',pago.id)}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					  <div class="modal-dialog">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h5 class="modal-title" id="exampleModalLabel">Comentario <span th:text="${pago.id}"></span></h5>
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          <span aria-hidden="true">&times;</span>
+					        </button>
+					      </div>
+					      <div class="modal-body">
+					      		  
+					      		  <div class="form-group">
+						            <label for="message-text" class="col-form-label">ID Pago:</label>
+						            <input type="text" class="form-control" name="id"
+						            th:attr="value=${pago.id}" readonly>
+						          </div>
+						          
+						          <div class="form-group">
+						            <label for="message-text" class="col-form-label">Comentario:</label>
+						            <input type="text" class="form-control" name="comentario">
+						          </div>
+						          
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+					        <button type="submit" class="btn btn-primary">Enviar comentario</button>
+					      </div>
+					    </div>
+					  </div>
+					  </div>
+				    </form>  
+				    
+				    
+				    
+				    </tr>
+				  </tbody>
+				</table>
+				
+				
+				
+				
+			</div>
+			<div class="col-md-5 mx-auto">
+				<a class="btn btn-primary btn-lg" href="/perfil" role="button">Volver</a>
+			</div>
+		</div>
+	</div>
+	
+	<footer>
+		<div id="footer13"></div>
+	</footer>
+	<script> 
+    $(function(){
+      $("#footer13").load("../components/footer.html"); 
+    });
+    </script>	
+	
+    <script src="js/jquery.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+    var sonarqube = "duplications";
+    var user = "[[${#httpServletRequest.remoteUser}]]";
+    if (user == ""){
+    	user = "Iniciar Sesión";
+    	$("#username").attr('data-toggle','');
+    	document.getElementById("username").href="/login";
+    }
+    document.getElementById("username").innerHTML=user;
+    </script>
+</body>
+
+</html>

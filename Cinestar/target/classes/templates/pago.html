@@ -1,0 +1,117 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+<title>Pagar</title>
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css"
+	th:href="@{/bootstrap/css/bootstrap.min.css}">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Cookie">
+<link rel="stylesheet" href="/fonts/font-awesome.min.css"
+	th:href="@{/fonts/font-awesome.min.css}">
+<link rel="stylesheet" href="/css/Pretty-Footer.css"
+	th:href="@{/css/Pretty-Footer.css}">
+<link rel="stylesheet" href="/css/styles.css"
+	th:href="@{/css/styles.css}">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+	
+	<nav class="navbar navbar-light navbar-expand-md navbar-default 8">
+        <div class="container-fluid"><a class="navbar-brand" href="/index"><img id="logo" src="/img/logo.jpeg" alt="cinestar.jpg"></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div
+                class="collapse navbar-collapse 8" id="navcol-1">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item" ><a class="nav-link" href="/index">Cartelera</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/sedes">Sedes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/tarifario">Tarifario</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/perfil">Perfil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/cine">Nosotros</a></li>
+                </ul>
+        	</div>
+        	<div class="dropdown 8"><a class="dropdown-toggle text-info"  data-toggle="dropdown" aria-expanded="false"  id="username" 
+         		><em class="fa fa-user-circle-o"></em>&nbsp;</a>
+            	<form th:action="@{/logout}" method="post"><div class="dropdown-menu"><button class="dropdown-item"  type="submit">Cerrar Sesión</button></div></form>
+        	</div>
+        </div>
+    </nav>
+	
+	<form th:action="@{'/pago/'+ ${id} + '/' + ${id1}}" method="post">
+
+		<div id="pago">
+			<h2 class="text-center text-white bg-danger border-danger">Tu
+				Compra</h2>
+			<div class="container">
+				<div class="table-responsive border-danger shadow" id="tarjeta">
+					<table class="table">
+					  	<caption>Pagos CINESTAR</caption>
+						<thead
+							class="text-uppercase text-center text-white bg-danger shadow">
+							<tr class="text-monospace"><th scope="row"></th><th scope="row"></th></tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="text-center">Número de Tarjeta:</td>
+								<td><input class="form-control-sm" type="text"
+									pattern="[0-9]{16}" maxlength=16 name="numeroTarjeta" required></td>
+							</tr>
+							<tr>
+								<td class="text-center">Fecha de Vencimiento:</td>
+								<td><input class="form-control-sm" type="month"
+									name="fechaVenc" required></td>
+							</tr>
+							<tr>
+								<td class="text-center">CVC:</td>
+								<td><input class="form-control-sm" type="text"
+									pattern="[0-9]{3}" maxlength=3 name="cvc" required></td>
+							</tr>
+							<tr></tr>
+							<tr></tr>
+							<tr></tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div id="opcion">
+			<div class="container" id="botones">
+				<div class="row">
+					<div class="col text-center" id="cancelar">
+						<a class="btn btn-secondary" id="bcancelar" type="button" href="/sedes">Cancelar</a>
+					</div>
+					<div class="col text-center" id="comprar">
+						<button class="btn btn-secondary" id="bcomprar" type="submit">Comprar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	</form>
+	<footer>
+		<div id="footer8"></div>
+	</footer>
+	<script> 
+    $(function(){
+      $("#footer8").load("../../../../components/footer.html"); 
+    });
+    </script>
+	
+	<script src="/js/jquery.min.js"></script>
+	<script type="text/javascript">
+		var user = "[[${#httpServletRequest.remoteUser}]]";
+		if (user == "") {
+			user = "Iniciar Sesión";
+			$("#username").attr('data-toggle', '');
+			document.getElementById("username").href = "/login";
+		}
+		document.getElementById("username").innerHTML = user;
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.cinestar.application.service.ComentarioServiceTest
+-------------------------------------------------------------------------------
+Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.134 s - in com.cinestar.application.service.ComentarioServiceTest

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Funcion.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Cinestar</a> &gt; <a href="index.source.html" class="el_package">com.cinestar.application.entity</a> &gt; <span class="el_source">Funcion.java</span></div><h1>Funcion.java</h1><pre class="source lang-java linenums">package com.cinestar.application.entity;
+
+import java.io.Serializable;
+import java.sql.Date;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
+<span class="fc" id="L21">public class Funcion implements Serializable {</span>
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3864507835066720080L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = &quot;native&quot;)
+	@GenericGenerator(name = &quot;native&quot;, strategy = &quot;native&quot;)
+	private Long id;
+	
+
+	@Column (nullable=false)
+	private String tipo;
+	@Column(nullable=false)
+	private String hora;
+	@Column(length=1, nullable=false)
+	private java.sql.Date dia;
+	@Column(nullable=false)
+	private Float precio;
+	
+	@OneToMany(
+	        mappedBy = &quot;funcion&quot;,
+	        cascade = CascadeType.PERSIST,
+	        fetch = FetchType.EAGER
+	    )
+	private Set&lt;Asiento&gt; asientos;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = &quot;idSala&quot;, referencedColumnName = &quot;id&quot;)
+    private Sala sala;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = &quot;idPelicula&quot;, referencedColumnName = &quot;id&quot;)
+    private Pelicula pelicula;
+
+	public Long getId() {
+<span class="fc" id="L58">		return id;</span>
+	}
+
+	public void setId(Long id) {
+<span class="fc" id="L62">		this.id = id;</span>
+<span class="fc" id="L63">	}</span>
+
+	public String getTipo() {
+<span class="fc" id="L66">		return tipo;</span>
+	}
+
+	public void setTipo(String tipo) {
+<span class="fc" id="L70">		this.tipo = tipo;</span>
+<span class="fc" id="L71">	}</span>
+
+	public String getHora() {
+<span class="fc" id="L74">		return hora;</span>
+	}
+
+	public void setHora(String hora) {
+<span class="fc" id="L78">		this.hora = hora;</span>
+<span class="fc" id="L79">	}</span>
+
+	public Date getDia() {
+<span class="fc" id="L82">		return dia;</span>
+	}
+
+	public void setDia(Date dia) {
+<span class="fc" id="L86">		this.dia = dia;</span>
+<span class="fc" id="L87">	}</span>
+
+	public Float getPrecio() {
+<span class="fc" id="L90">		return precio;</span>
+	}
+
+	public void setPrecio(Float precio) {
+<span class="fc" id="L94">		this.precio = precio;</span>
+<span class="fc" id="L95">	}</span>
+
+	public Set&lt;Asiento&gt; getAsientos() {
+<span class="fc" id="L98">		return asientos;</span>
+	}
+
+	public void setAsientos(Set&lt;Asiento&gt; asientos) {
+<span class="fc" id="L102">		this.asientos = asientos;</span>
+<span class="fc" id="L103">	}</span>
+
+	public Sala getSala() {
+<span class="fc" id="L106">		return sala;</span>
+	}
+
+	public void setSala(Sala sala) {
+<span class="fc" id="L110">		this.sala = sala;</span>
+<span class="fc" id="L111">	}</span>
+
+	public Pelicula getPelicula() {
+<span class="fc" id="L114">		return pelicula;</span>
+	}
+
+	public void setPelicula(Pelicula pelicula) {
+<span class="fc" id="L118">		this.pelicula = pelicula;</span>
+<span class="fc" id="L119">	}</span>
+	
+	
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

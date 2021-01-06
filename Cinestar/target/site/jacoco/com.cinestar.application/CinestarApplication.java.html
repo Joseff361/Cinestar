@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CinestarApplication.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Cinestar</a> &gt; <a href="index.source.html" class="el_package">com.cinestar.application</a> &gt; <span class="el_source">CinestarApplication.java</span></div><h1>CinestarApplication.java</h1><pre class="source lang-java linenums">package com.cinestar.application;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import java.util.logging.Level;
+import java.util.logging.Logger; 
+
+@SpringBootApplication
+<span class="fc" id="L13">public class CinestarApplication implements CommandLineRunner {</span>
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
+<span class="fc" id="L16">	Logger logger = Logger.getLogger(CinestarApplication.class.getName());</span>
+
+	public static void main(String[] args) {
+<span class="nc" id="L19">		SpringApplication.run(CinestarApplication.class, args);</span>
+<span class="nc" id="L20">	}</span>
+
+	@Override
+	public void run(String... args) throws Exception {
+<span class="fc" id="L24">		String passwordBcrypt = passwordEncoder.encode(&quot;12345&quot;);</span>
+<span class="fc" id="L25">		logger.log(Level.INFO, passwordBcrypt);</span>
+<span class="fc" id="L26">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

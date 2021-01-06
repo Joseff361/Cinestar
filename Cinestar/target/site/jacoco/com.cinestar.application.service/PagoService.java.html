@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PagoService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Cinestar</a> &gt; <a href="index.source.html" class="el_package">com.cinestar.application.service</a> &gt; <span class="el_source">PagoService.java</span></div><h1>PagoService.java</h1><pre class="source lang-java linenums">package com.cinestar.application.service;
+
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.cinestar.application.controller.MastercardPagoStrategy;
+import com.cinestar.application.controller.PagoStrategy;
+import com.cinestar.application.controller.VisaPagoStrategy;
+import com.cinestar.application.entity.Asiento;
+import com.cinestar.application.entity.Funcion;
+import com.cinestar.application.entity.Pago;
+import com.cinestar.application.entity.Usuario;
+import com.cinestar.application.repository.AsientoRepository;
+import com.cinestar.application.repository.PagoRepository;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+@Service
+<span class="fc" id="L28">public class PagoService {</span>
+	@Autowired
+	PagoRepository repository;
+	@Autowired
+	AsientoRepository arepository;
+	@Autowired
+	UsuarioService usuarioService;
+	@Autowired
+	AsientoService asientoService;
+	
+<span class="fc" id="L38">	Logger logger = Logger.getLogger(PagoService.class.getName()); </span>
+	
+	
+	
+	public Pago getPago(Long id) {
+<span class="fc" id="L43">		Optional&lt;Pago&gt; optional=repository.findById(id);</span>
+<span class="fc bfc" id="L44" title="All 2 branches covered.">		if(optional.isPresent())</span>
+<span class="fc" id="L45">			return  optional.get();</span>
+		else
+<span class="fc" id="L47">			return new Pago();</span>
+	}
+	public Pago previoPago(Funcion funcion, String asientos,String adulto, String nino, String adultoMayor,String user) {
+<span class="fc" id="L50">		Set&lt;Asiento&gt; asientoLista = new HashSet&lt;&gt;();</span>
+<span class="fc bfc" id="L51" title="All 2 branches covered.">		for (String colufila : asientos.split(&quot;-&quot;)) {</span>
+<span class="fc" id="L52">			asientoLista.addAll((Collection&lt;Asiento&gt;) asientoService.findByColumnaAndByFilaAndByFuncion(</span>
+<span class="fc" id="L53">					colufila.substring(0, 1), Integer.parseInt(colufila.substring(1)), funcion));</span>
+		}
+	
+<span class="fc" id="L56">		logger.log(Level.INFO, adulto);</span>
+<span class="fc" id="L57">		logger.log(Level.INFO, nino);</span>
+<span class="fc" id="L58">		logger.log(Level.INFO, user);</span>
+<span class="fc" id="L59">		logger.log(Level.INFO, adultoMayor);</span>
+<span class="fc" id="L60">		logger.log(Level.INFO, asientos);</span>
+<span class="fc" id="L61">		return realizarPago(funcion, usuarioService.getUserByUsername(user), asientoLista,</span>
+				adulto + &quot;-&quot; + nino + &quot;-&quot; + adultoMayor);
+
+	
+	}
+	private Pago realizarPago(Funcion funcion, Usuario user, Set&lt;Asiento&gt; asientos, String descripcion) {
+<span class="fc" id="L67">		Pago pago = new Pago();</span>
+		
+<span class="fc" id="L69">		pago.setHora(new Timestamp(System.currentTimeMillis()));</span>
+
+<span class="fc" id="L71">		pago.setDescripcion(descripcion);</span>
+<span class="fc" id="L72">		pago.setMonto(calculoCostoTotal(funcion,descripcion));// Ver costo si es variable por niños o no? La tarjeta y es mamada</span>
+<span class="fc" id="L73">		pago.setUser(user);</span>
+<span class="fc" id="L74">		pago.setEstado(&quot;0&quot;);//Estado 0 =  Incompleto el pago</span>
+<span class="fc" id="L75">		pago = repository.save(pago);</span>
+<span class="fc bfc" id="L76" title="All 2 branches covered.">		for(Asiento a:asientos) {</span>
+<span class="fc" id="L77">			a.setPago(pago);</span>
+<span class="fc" id="L78">			arepository.save(a);</span>
+<span class="fc" id="L79">		}</span>
+<span class="fc" id="L80">		return pago;</span>
+	}
+	public Integer obtenerFechaFuncion(Pago pago) {
+<span class="fc" id="L83">		Calendar cal= Calendar.getInstance();</span>
+<span class="fc" id="L84">		cal.setTime(pago.getAsientos().iterator().next().getFuncion().getDia());</span>
+<span class="fc" id="L85">		return cal.get(Calendar.DAY_OF_WEEK)-1;</span>
+	}
+	public String generarStringAsientos(Pago pago) {
+<span class="fc" id="L88">		StringBuilder result = new StringBuilder();</span>
+		
+		
+<span class="fc bfc" id="L91" title="All 2 branches covered.">		for(Asiento a: arepository.findByPagoOrderById(pago)) {</span>
+<span class="fc" id="L92">			result.append(&quot;-&quot;);</span>
+<span class="fc" id="L93">			result.append(a.getIdFila());</span>
+<span class="fc" id="L94">			result.append(a.getIdColumna().toString());	</span>
+			
+<span class="fc" id="L96">		}</span>
+	
+<span class="fc" id="L98">		return result.toString().substring(1);</span>
+	}
+	public void cancelarPago(long id) {
+		
+<span class="fc" id="L102">		Pago pago = getPago(id);</span>
+<span class="fc bfc" id="L103" title="All 2 branches covered.">		for(Asiento a:pago.getAsientos()) {</span>
+<span class="fc" id="L104">			a.setPago(null);</span>
+<span class="fc" id="L105">			arepository.save(a);</span>
+<span class="fc" id="L106">		}</span>
+<span class="fc" id="L107">		repository.delete(pago);</span>
+		
+<span class="fc" id="L109">	}</span>
+	
+	private Pago realizarPagoOficial(long id ,PagoStrategy estrategiaPago) {
+<span class="fc" id="L112">		Pago pago = getPago(id);</span>
+<span class="fc" id="L113">		estrategiaPago.realizarPago(pago,LocalDate.now());</span>
+<span class="fc" id="L114">		return pago;</span>
+	}
+	
+	private void confirmarPago(long id ) {
+<span class="fc" id="L118">		Pago pago = getPago(id);</span>
+<span class="fc" id="L119">		repository.save(pago);</span>
+<span class="fc" id="L120">	}</span>
+	
+	public void accionPago(String fechaVenc, String numeroTarjeta, String cvc, String id, String id1) {
+		// Aceptar
+<span class="fc" id="L124">		Pago pago =null;</span>
+<span class="fc bfc" id="L125" title="All 2 branches covered.">		if(id1.equals(&quot;0&quot;))</span>
+<span class="fc" id="L126">			pago = realizarPagoOficial(Long.parseLong(id), new VisaPagoStrategy());</span>
+<span class="pc bpc" id="L127" title="1 of 2 branches missed.">		else if(id1.equals(&quot;1&quot;))</span>
+<span class="fc" id="L128">			pago = realizarPagoOficial(Long.parseLong(id), new MastercardPagoStrategy());</span>
+<span class="pc bpc" id="L129" title="1 of 2 branches missed.">		if(pago!=null) {</span>
+<span class="pc bpc" id="L130" title="1 of 2 branches missed.">			if (pago.getEstado().equals(&quot;1&quot;)) {</span>
+<span class="fc" id="L131">				repository.save(pago);</span>
+<span class="fc" id="L132">				confirmarPago(Long.parseLong(id));</span>
+			}
+	
+			else {
+<span class="nc" id="L136">				cancelarPago(Long.parseLong(id));</span>
+<span class="nc" id="L137">				logger.log(Level.INFO, &quot;Cancelado&quot;);</span>
+			}
+		}
+		
+<span class="fc" id="L141">		logger.log(Level.INFO, fechaVenc);</span>
+<span class="fc" id="L142">		logger.log(Level.INFO, numeroTarjeta);</span>
+<span class="fc" id="L143">		logger.log(Level.INFO, cvc);</span>
+		
+<span class="fc" id="L145">	}</span>
+	protected float calculoCostoTotal(Funcion funcion,String descripcion) {
+<span class="fc" id="L147">		String [] valores= descripcion.split(&quot;-&quot;);</span>
+<span class="fc" id="L148">		Calendar cal= Calendar.getInstance();</span>
+<span class="fc" id="L149">		float monto=(float) 0;</span>
+<span class="fc" id="L150">		cal.setTime(funcion.getDia());</span>
+<span class="fc" id="L151">		 int diaSemana=cal.get(Calendar.DAY_OF_WEEK)-1;</span>
+		
+<span class="pc bpc" id="L153" title="1 of 4 branches missed.">		if(diaSemana==1|| diaSemana==2) {</span>
+<span class="fc" id="L154">			monto+=Integer.parseInt(valores[0])*9;</span>
+<span class="fc" id="L155">			monto+=Integer.parseInt(valores[1])*6;</span>
+<span class="fc" id="L156">			monto+=Integer.parseInt(valores[2])*7.5;</span>
+		}
+
+<span class="fc bfc" id="L159" title="All 2 branches covered.">		else if (diaSemana==3) {</span>
+<span class="fc" id="L160">			monto+=Integer.parseInt(valores[0])*10;</span>
+<span class="fc" id="L161">			monto+=Integer.parseInt(valores[1])*6.5;</span>
+<span class="fc" id="L162">			monto+=Integer.parseInt(valores[2])*8;			</span>
+		}
+
+		else {//THURSDAY -SUNDAY
+<span class="fc" id="L166">			monto+=Integer.parseInt(valores[0])*15;</span>
+<span class="fc" id="L167">			monto+=Integer.parseInt(valores[1])*10;</span>
+<span class="fc" id="L168">			monto+=Integer.parseInt(valores[2])*11.5;			</span>
+		}
+		
+<span class="fc" id="L171">		return  monto;</span>
+	}
+
+	
+	public Iterable&lt;Pago&gt; getPagosUsuario(Usuario usuario) {
+<span class="fc" id="L176">		return repository.findAllByUserOrderByHoraAsc(usuario);</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

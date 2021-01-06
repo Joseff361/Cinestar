@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>FuncionService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Cinestar</a> &gt; <a href="index.source.html" class="el_package">com.cinestar.application.service</a> &gt; <span class="el_source">FuncionService.java</span></div><h1>FuncionService.java</h1><pre class="source lang-java linenums">package com.cinestar.application.service;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.LinkedHashSet;
+import java.util.Optional;
+import java.util.Set;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.cinestar.application.entity.Funcion;
+import com.cinestar.application.entity.Pelicula;
+import com.cinestar.application.entity.Sala;
+import com.cinestar.application.repository.FuncionRepository;
+
+@Service
+<span class="fc" id="L19">public class FuncionService {</span>
+	@Autowired
+	FuncionRepository repository;
+	@Autowired
+	PeliculaService peliculaService;
+	@Autowired
+	SedeService sedeService;
+
+	public Iterable&lt;Funcion&gt; getFunciones() {
+<span class="fc" id="L28">		Set&lt;Funcion&gt; result = new LinkedHashSet&lt;&gt;();</span>
+<span class="fc" id="L29">		Calendar cal= Calendar.getInstance();</span>
+<span class="fc bfc" id="L30" title="All 2 branches covered.">		for (Funcion func : repository.findAllByOrderByDiaAsc()) {</span>
+<span class="fc" id="L31">			cal.setTime(func.getDia());	</span>
+<span class="fc bfc" id="L32" title="All 2 branches covered.">			if (cal.get(Calendar.DAY_OF_MONTH)&lt;=26)			</span>
+<span class="fc" id="L33">				result.add(func);</span>
+<span class="fc" id="L34">		}				</span>
+<span class="fc" id="L35">		return result;</span>
+	}
+
+	public Funcion getFuncion(Long id) {
+<span class="fc" id="L39">		Optional&lt;Funcion&gt; optional=repository.findById(id);</span>
+<span class="fc bfc" id="L40" title="All 2 branches covered.">		if(optional.isPresent())</span>
+<span class="fc" id="L41">			return  optional.get();</span>
+		else
+<span class="fc" id="L43">			return null; </span>
+	}
+	public Iterable&lt;Funcion&gt; getFuncionesPeliSede(Long idSede,Long idPelicula){
+<span class="fc" id="L46">		ArrayList&lt;Funcion&gt; funcionesDeSede = new ArrayList&lt;&gt;() ;</span>
+<span class="fc bfc" id="L47" title="All 2 branches covered.">		for(Sala sala: sedeService.getSede(idSede).getSalas()) {</span>
+<span class="fc" id="L48">				funcionesDeSede.addAll(</span>
+<span class="fc" id="L49">					(Collection&lt;? extends Funcion&gt;) getFuncionesPeliSala( peliculaService.getPelicula(idPelicula),sala));</span>
+<span class="fc" id="L50">		}</span>
+<span class="fc" id="L51">		return funcionesDeSede;</span>
+		
+	}
+	private Iterable&lt;Funcion&gt; getFuncionesPeliSala(Pelicula pelicula, Sala sala) {
+<span class="fc" id="L55">		Set&lt;Funcion&gt; result = new LinkedHashSet&lt;&gt;();</span>
+<span class="fc" id="L56">		Calendar cal= Calendar.getInstance();</span>
+<span class="fc bfc" id="L57" title="All 2 branches covered.">		for (Funcion func : repository.findByPeliculaAndSalaOrderByDia(pelicula, sala)) {</span>
+<span class="fc" id="L58">			cal.setTime(func.getDia());</span>
+<span class="fc bfc" id="L59" title="All 2 branches covered.">			if (cal.get(Calendar.DAY_OF_MONTH)&lt;=26)</span>
+<span class="fc" id="L60">				result.add(func);</span>
+<span class="fc" id="L61">		}</span>
+<span class="fc" id="L62">		return result;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Usuario.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Cinestar</a> &gt; <a href="index.source.html" class="el_package">com.cinestar.application.entity</a> &gt; <span class="el_source">Usuario.java</span></div><h1>Usuario.java</h1><pre class="source lang-java linenums">package com.cinestar.application.entity;
+
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+<span class="fc" id="L12">public class Usuario implements Serializable{</span>
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
+	@Column(unique = true, length = 30)
+	private String username;
+
+	@Column(unique = true, length = 30)
+	private String firstName;
+
+	public String getFirstName() {
+<span class="fc" id="L25">		return firstName;</span>
+	}
+
+	public void setFirstName(String firstName) {
+<span class="fc" id="L29">		this.firstName = firstName;</span>
+<span class="fc" id="L30">	}</span>
+
+	public String getLastName() {
+<span class="fc" id="L33">		return lastName;</span>
+	}
+
+	public void setLastName(String lastName) {
+<span class="fc" id="L37">		this.lastName = lastName;</span>
+<span class="fc" id="L38">	}</span>
+
+	public String getEmail() {
+<span class="fc" id="L41">		return email;</span>
+	}
+
+	public void setEmail(String email) {
+<span class="fc" id="L45">		this.email = email;</span>
+<span class="fc" id="L46">	}</span>
+
+
+
+	@Column(unique = true, length = 30)
+	private String lastName;
+	
+	@Column(unique = true, length = 30)
+	private String email;
+	
+	@Column(length = 60)
+	private String password;
+
+
+
+	public Long getId() {
+<span class="fc" id="L62">		return id;</span>
+	}
+
+	public void setId(Long id) {
+<span class="fc" id="L66">		this.id = id;</span>
+<span class="fc" id="L67">	}</span>
+
+	public String getUsername() {
+<span class="fc" id="L70">		return username;</span>
+	}
+
+	public void setUsername(String username) {
+<span class="fc" id="L74">		this.username = username;</span>
+<span class="fc" id="L75">	}</span>
+
+	public String getPassword() {
+<span class="fc" id="L78">		return password;</span>
+	}
+
+	public void setPassword(String password) {
+<span class="fc" id="L82">		this.password = password;</span>
+<span class="fc" id="L83">	}</span>
+
+
+
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+
+
+
+
+
+
+
+
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>
