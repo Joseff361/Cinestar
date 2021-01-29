@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </head>
 
 <body>
@@ -59,7 +60,7 @@
 				    
 				    
 				    
-					<form th:action="@{/comentar}" method="get">
+					<form th:action="@{/comentar}" method="get"  th:attr="id=${#strings.concat('#form',pago.id)}">
 				      <th scope="col" th:text="${pago.id}"></th>
 				      <th scope="col" th:text="${pago.descripcion}" ></th>
 				      <th scope="col" th:text="${pago.hora}" ></th>
@@ -89,13 +90,16 @@
 						          
 						          <div class="form-group">
 						            <label for="message-text" class="col-form-label">Comentario:</label>
-						            <input type="text" class="form-control" name="comentario">
+						            <input type="text" class="form-control"  name="comentario"  th:attr="id=${#strings.concat('#comment',pago.id)}" required>
 						          </div>
 						          
 					      </div>
 					      <div class="modal-footer">
 					        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-					        <button type="submit" class="btn btn-primary">Enviar comentario</button>
+					        <button type="button" 
+					        class="btn btn-primary" 
+					        th:attr="data-formulario=${#strings.concat('',pago.id)}"
+					        onclick="verificar(event)">Enviar comentario</button>
 					      </div>
 					    </div>
 					  </div>
@@ -125,6 +129,21 @@
     $(function(){
       $("#footer13").load("../components/footer.html"); 
     });
+    
+    verificar = (event) => {
+        console.log(event.target.getAttribute('data-formulario'))
+        comentario = document.getElementById("#comment" + event.target.getAttribute('data-formulario'))
+        formulario = document.getElementById("#form" + event.target.getAttribute('data-formulario'))
+        console.log(comentario.value)
+        console.log(formulario)
+        if ( comentario.value.trim().length > 0 ) {
+    		  formulario.submit();
+	   	}
+	   	else {
+	   	    alert("El campo contiene espacios o está vacío");
+	   	}
+     }
+     
     </script>	
 	
     <script src="js/jquery.min.js"></script>

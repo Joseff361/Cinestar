@@ -75,15 +75,67 @@
 			</div>
 			<div class="form-group">
 				<button class="btn btn-primary btn-block" type="submit">Ingresar</button>
+				<a class="btn btn-primary btn-block" data-toggle="modal" data-target="#exampleModal">Registrar</a>
 			</div>
-			<a class="forgot" href="#">Registrar</a>
 		</form>
 		<div th:if="${param.error}" class="alert alert-danger" role="alert">
 			Invalid username and password.</div>
 		<div th:if="${param.logout}" class="alert alert-success" role="alert">
 			You have been logged out.</div>
 	</div>
+	
+	
 	<div></div>
+	
+		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		    <form id="registrar-usuario" th:action="@{/registrar-usuario}" method="post">
+		   
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      
+		      <div class="modal-body">			      
+		          <div class="form-group">
+				    <label for="exampleInputName">Name</label>
+				    <input type="text" class="form-control" name="name" id="exampleInputName" aria-describedby="emailHelp" placeholder="Enter name">
+				  </div>
+				  <div class="form-group">
+				    <label for="exampleInputName">Last Name</label>
+				    <input type="text" class="form-control" name="lastname" id="exampleInputLastName" aria-describedby="emailHelp" placeholder="Enter last name">
+				  </div>
+				  <div class="form-group">
+				    <label for="exampleInputEmail1">Email address</label>
+				    <input type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+				  </div>
+				  <div class="form-group">
+				    <label for="exampleUsername">Username</label>
+				    <input type="text" class="form-control" name="username" id="exampleInputUsername" aria-describedby="emailHelp" placeholder="Enter username">
+				  </div>
+				  <div class="form-group">
+				    <label for="exampleInputPassword1">Password</label>
+				    <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="Password">
+				  </div>
+		      </div>
+		      
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		        <button type="button" class="btn btn-primary" onclick="verificar()">Sign Up</button>
+		      </div>
+		      
+		    </form>
+		    </div>
+		  </div>
+		</div>
+
+	
+	
+	
+	
 	<footer>
 		<div id="footer7"></div>
 	</footer>
@@ -91,6 +143,27 @@
     $(function(){
       $("#footer7").load("../components/footer.html"); 
     });
+    
+    verificar = (event) => {
+        name = document.getElementById("exampleInputName").value
+        lastname = document.getElementById("exampleInputLastName").value
+        email = document.getElementById("exampleInputEmail1").value
+        username = document.getElementById("exampleInputUsername").value
+        password = document.getElementById("exampleInputPassword1").value
+        console.log(name + lastname + email + username + password)
+        
+        formulario = document.getElementById("registrar-usuario")
+        console.log(formulario)
+        
+        if ( name.trim().length > 0 && lastname.trim().length > 0  && email.trim().length > 0 && username.trim().length > 0 && password.trim().length > 0 ) {
+        	alert("Registro exitoso!")
+        	formulario.submit();
+	   	}
+	   	else {
+	   	    alert("El fomulario contiene campos con espacios vacios o vacios su totalidad");
+	   	}
+     }
+    
     </script>
 	<div th:if="${param.logout}" class="alert alert-success" role="alert">
 		You have been logged out.</div>

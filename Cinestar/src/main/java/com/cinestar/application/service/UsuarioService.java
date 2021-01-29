@@ -8,6 +8,7 @@ import static java.util.Collections.emptyList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
@@ -36,7 +37,16 @@ public class UsuarioService implements UserDetailsService{
 	}
 
 
-
+	public void insertUsuario(String name, String lastname, String email, String username, String password) {
+		Usuario joseff = new Usuario();
+		joseff.setFirstName(name);
+		joseff.setLastName(lastname);
+		joseff.setEmail(email);
+		joseff.setUsername(username);
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder() ;
+		joseff.setPassword(passwordEncoder.encode(password));
+		userRepository.save(joseff);
+	}
 
 
 

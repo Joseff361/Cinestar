@@ -301,7 +301,7 @@
 						<a class="btn btn-secondary" id="cancelar" type="button" href="/sedes">Cancelar</a>
 					</div>
 					<div class="col text-center" id="botsig">
-						<button class="btn btn-secondary" id="siguiente" type="submit">Siguiente</button>
+						<button class="btn btn-secondary" id="siguiente" type="submit" onclick="advertencia()">Siguiente</button>
 					</div>
 				</div>
 			</div>
@@ -427,6 +427,16 @@
 	    	return false;
 	    }
 		return true;
+	}
+	
+	
+	function advertencia(){
+		var r = confirm("¿Estar seguro del asiento seleccionado?");
+		if (r == true) {
+		  
+		} else {
+			location.reload();
+		}
 	}
 	
 </script>
