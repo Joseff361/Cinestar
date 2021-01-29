@@ -28,5 +28,14 @@ class UsuarioServiceTest {
 		User user = (User) usuarioService.loadUserByUsername("kstrauss0");
 		assertEquals("kstrauss0",user.getUsername());
 	}
+	@Test
+	void test_insertUsuario() {
+		usuarioService.insertUsuario("nombre", "appellido","email@", "NombreAp", "12345");
+		Usuario user= (Usuario) usuarioService.getUserByUsername("NombreAp");
+		assertEquals("NombreAp",user.getUsername());
+		assertEquals("nombre",user.getFirstName());
+		assertEquals("appellido",user.getLastName());
+		usuarioService.eliminarUsuario(user);
+	}
 
 }

@@ -24,7 +24,7 @@ import com.cinestar.application.service.UsuarioService;
 <span class="fc" id="L24">		http.authorizeRequests()</span>
 <span class="fc" id="L25">		.antMatchers(resources).permitAll()</span>
 <span class="fc" id="L26">		.antMatchers(&quot;/&quot;, &quot;/login&quot;,&quot;/peliculas&quot;,&quot;/peliculas/categoria&quot;,&quot;/peliculas/{id}&quot;,&quot;/sedes&quot;,&quot;/sedes/{id}&quot;, </span>
-<span class="fc" id="L27">				&quot;/sedes/{id}/categoria&quot;,&quot;/peliculas/{id}/sedes/{id}/funciones&quot;,&quot;/index&quot;).permitAll()</span>
+<span class="fc" id="L27">				&quot;/sedes/{id}/categoria&quot;,&quot;/peliculas/{id}/sedes/{id}/funciones&quot;,&quot;/index&quot;, &quot;/registrar-usuario&quot;).permitAll()</span>
 <span class="fc" id="L28">		.anyRequest().authenticated()</span>
 <span class="fc" id="L29">		.and().formLogin().loginPage(&quot;/login&quot;).permitAll().defaultSuccessUrl(&quot;/perfil&quot;)</span>
 <span class="fc" id="L30">				.failureUrl(&quot;/login?error=true&quot;).usernameParameter(&quot;username&quot;).passwordParameter(&quot;password&quot;)</span>

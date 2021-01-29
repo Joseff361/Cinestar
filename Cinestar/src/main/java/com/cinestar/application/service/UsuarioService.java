@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
+
 import com.cinestar.application.entity.Usuario;
 import com.cinestar.application.repository.UsuarioRepository;
 
@@ -46,6 +47,9 @@ public class UsuarioService implements UserDetailsService{
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder() ;
 		joseff.setPassword(passwordEncoder.encode(password));
 		userRepository.save(joseff);
+	}
+	public void eliminarUsuario(Usuario usuario) {
+		userRepository.delete(usuario);
 	}
 
 

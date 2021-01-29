@@ -8,35 +8,49 @@ import static java.util.Collections.emptyList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
+
 
 import com.cinestar.application.entity.Usuario;
 import com.cinestar.application.repository.UsuarioRepository;
 
 @Service
-<span class="fc" id="L19">public class UsuarioService implements UserDetailsService{</span>
+<span class="fc" id="L21">public class UsuarioService implements UserDetailsService{</span>
 	@Autowired
     UsuarioRepository userRepository;
 
     @Override
      public UserDetails loadUserByUsername(String username){
     	//Buscar el usuario con el repositorio y si no existe lanzar una exepcion
-<span class="fc" id="L26">    	Usuario appUser =  userRepository.findByUsername(username);</span>
-<span class="pc bpc" id="L27" title="1 of 2 branches missed.">		if(appUser == null) {</span>
-<span class="nc" id="L28">			throw new UsernameNotFoundException(&quot;Error en el login: no existe el usuario '&quot;+username+&quot;' en el sistema!&quot;);</span>
+<span class="fc" id="L28">    	Usuario appUser =  userRepository.findByUsername(username);</span>
+<span class="pc bpc" id="L29" title="1 of 2 branches missed.">		if(appUser == null) {</span>
+<span class="nc" id="L30">			throw new UsernameNotFoundException(&quot;Error en el login: no existe el usuario '&quot;+username+&quot;' en el sistema!&quot;);</span>
 		}
 		//Crear El objeto UserDetails que va a ir en sesion y retornarlo.
-<span class="fc" id="L31">		return new User(appUser.getUsername(), appUser.getPassword(), emptyList());</span>
+<span class="fc" id="L33">		return new User(appUser.getUsername(), appUser.getPassword(), emptyList());</span>
     }
 
 	public Usuario getUserByUsername(String username){
-<span class="fc" id="L35">		return (userRepository.findByUsername(username));</span>
+<span class="fc" id="L37">		return (userRepository.findByUsername(username));</span>
 	}
 
 
-
+	public void insertUsuario(String name, String lastname, String email, String username, String password) {
+<span class="fc" id="L42">		Usuario joseff = new Usuario();</span>
+<span class="fc" id="L43">		joseff.setFirstName(name);</span>
+<span class="fc" id="L44">		joseff.setLastName(lastname);</span>
+<span class="fc" id="L45">		joseff.setEmail(email);</span>
+<span class="fc" id="L46">		joseff.setUsername(username);</span>
+<span class="fc" id="L47">		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder() ;</span>
+<span class="fc" id="L48">		joseff.setPassword(passwordEncoder.encode(password));</span>
+<span class="fc" id="L49">		userRepository.save(joseff);</span>
+<span class="fc" id="L50">	}</span>
+	public void eliminarUsuario(Usuario usuario) {
+<span class="fc" id="L52">		userRepository.delete(usuario);</span>
+<span class="fc" id="L53">	}</span>
 
 
 
